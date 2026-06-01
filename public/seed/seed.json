@@ -1,0 +1,3408 @@
+{
+  "version": 1,
+  "generatedAt": 1780310079501,
+  "questions": [
+    {
+      "id": "1e7338fb-c017-413a-9bb6-433ecc18e9f8",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Walk me through your career so far",
+      "body": "Common opening question. Expected length: ~2 minutes. Cover arc from start to now and end on why you're moving toward this role.",
+      "answer": "PLAYBOOK: 2 minutes max. Arc: TCS (foundations, Verizon kiosk app) → Publicis Sapient Lloyds (digitization, 25 paper forms → digital, +20% revenue, 700ms→150ms perf) → Wowcher (multi-brand architecture for 4 brands, AI-first delivery at Ticketmaster). End on: \"And what's pulling me toward AI product engineering is the chance to combine my consumer-scale frontend experience with the AI-first workflow I've already shipped — at a company building the underlying tech.\"",
+      "difficulty": "easy",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Apple",
+        "Meta",
+        "Monzo",
+        "Revolut"
+      ],
+      "tags": [
+        "behavioral",
+        "opening",
+        "narrative"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "4e379544-7bcf-4346-8b8c-cff6a3f878cc",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Why are you looking to leave your current company?",
+      "body": "Asked by every recruiter. Sensitive — frame positively.",
+      "answer": "PLAYBOOK: Frame around growth, not grievance. \"I've delivered the multi-brand migration architecture I was hired to lead — POC live at 50/50 on next.wowcher.ie, June 2026 parity target. The next problems I want to work on are at the intersection of AI and consumer products at scale, which is where companies like [theirs] are operating right now.\" Never trash the current employer, never mention compensation as the primary reason.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "recruiter"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f6692691-7f28-448f-a76a-3c2ac31c24f4",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Why this company specifically?",
+      "body": "Asked in every loop. Generic answers (\"I love your mission\") are graded down. They want specifics tied to your experience.",
+      "answer": "PLAYBOOK: Three concrete things tied to your experience. Template: \"Your [specific product/feature] is solving the exact ergonomic problem I hit on the [your project] — getting [thing] reliable enough for [user type] — and I want to take what I learned there and apply it at your scale.\" Have a different version of this prepared per target company.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "preparation",
+        "company-specific"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "acfbbbd5-af54-41ba-9d64-a9a962cae94f",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Walk me through your most impactful project",
+      "body": "Standard senior-level prompt. They're listening for: scale, stakes, complexity, your contribution, business outcome.",
+      "answer": "PLAYBOOK: Use the Wowcher multi-brand migration. Structure: SCALE (1,056 divergent files across 4 brands), STAKES (CEO presentation, 8-phase canary, June 2026 parity target, revenue protection), TECHNICAL DEPTH (Cloudflare Worker for cookie-based canary assignment, blue/green deployment with 2-3 week warm period, normalised revenue ratio for monitoring (MB rev/MB sessions ÷ WUK rev/WUK sessions), brand config folder system replacing env-based resolution), YOUR CONTRIBUTION (architecture design, audit tooling — compare.sh + analyze_diff.py, presented strategy to CEO/CTO), OUTCOME (POC live at 50/50, 50% code duplication cut, new brand launch time 6 months → <1 week).",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "story-bank",
+        "leadership",
+        "architecture"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "4ffa01f9-4902-4b33-b280-e441674913a6",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Tell me about a time you used AI to ship something you couldn't have shipped otherwise",
+      "body": "AI-roles favorite. Probes for production AI experience, judgment, and ownership.",
+      "answer": "PLAYBOOK: Ticketmaster 3D Map Review. SITUATION: stakeholders needed 3D venue review app, traditional timeline 3+ months. TASK: ship on compressed timeline. ACTION: AI-first workflow, ~90% code AI-generated, my contributions: Three.js + React architecture, prompt iteration, every line code-reviewed, rejected ~20% of AI suggestions, comprehensive test suite, explicit prompt for 'don't invent APIs', verified against docs. RESULT: ~90% faster delivery vs baseline, quality maintained, set template for team. Always emphasize: the AI was a typist, not a thinker. I owned every decision.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Synthesia",
+        "Cohere"
+      ],
+      "tags": [
+        "behavioral",
+        "AI",
+        "story-bank",
+        "ownership"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "4dc16150-d9eb-4b0a-bf6e-8b934640f1d1",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "What's the most senior engineering decision you've made?",
+      "body": "Probes for Staff-level signal: did you make a call that affected scope, risk, or strategy?",
+      "answer": "PLAYBOOK: The blue/green deployment with 2-3 week Wowcher warm period during multi-brand cutover. Hit: ALTERNATIVE (hard cutover, faster, riskier), YOUR RECOMMENDATION (warm period for fast rollback if revenue regresses), TRADE-OFF (infrastructure cost vs revenue protection), HOW YOU CONVINCED (presented to CEO with normalised revenue ratio for monitoring, defined kill criteria), OUTCOME (accepted, set the standard for major rollouts).",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "leadership",
+        "risk-management"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "e09f91db-24a7-4e25-8e03-da996b85838e",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Describe a time you disagreed with a senior leader",
+      "body": "Probes for: ability to disagree without being abrasive, courage of conviction, ability to find middle ground.",
+      "answer": "PLAYBOOK: Real story required. Possibilities: architecture disagreement with Rey, canary threshold conversation with CEO, prioritization debate. Structure: THEIR POSITION, YOUR POSITION, EVIDENCE you brought (data, prior incidents, customer impact), OUTCOME (compromise is fine — \"I won\" is not required), what you'd DO DIFFERENTLY. Show calibrated disagreement.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "conflict",
+        "communication"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "5cbc08af-65ed-45aa-a209-f7345598d419",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "How do you stay current with frontend in 2026?",
+      "body": "Probes for genuine curiosity and self-directed learning. \"I read Twitter\" fails.",
+      "answer": "PLAYBOOK: Concrete sources, not abstract claims. \"I read the Next.js and React core team blogs, follow Anthropic and OpenAI engineering blogs for AI integration patterns, work through Josh Comeau's rendering deep dives, do a question a day from GreatFrontEnd. Most importantly I use new tools in side projects — recently built a CV rewriter with the Claude API and an interview prep PWA. Side projects are where real learning happens.\"",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "learning",
+        "growth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "877bce0a-c645-4fbb-8ef5-f5e8e5f0edbd",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Tell me about a time you mentored someone",
+      "body": "Probes for leadership and the ability to multiply yourself.",
+      "answer": "PLAYBOOK: The offshore team of 15 at Wowcher. Hit: SCOPE (15 devs across multiple workstreams), WHAT YOU DID (coding standards doc, structured review process with checklists, upgrade tasks tracked in SharePoint worklog, enforced PRs-only-after-worklog policy, pairing sessions), OUTCOME (consistent delivery quality, reduced review thrash). If asked to go deeper: pick ONE person and ONE specific moment where you saw them level up.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "leadership",
+        "mentoring"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "cdc0a2ef-1848-49d2-b0d6-53a65a60fb12",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "What's a technical opinion you hold strongly but most people disagree with?",
+      "body": "Probes for first-principles thinking. They want to see how you defend a position.",
+      "answer": "PLAYBOOK: Have one ready. Examples: \"Most teams over-invest in state management libraries — Zustand or useReducer+context wins 80% of the time over Redux.\" Or: \"AI-generated code without an eval suite is a liability, not an asset.\" Or: \"Most React perf problems are state-architecture problems, not memoization problems.\" Be ready to defend with concrete examples.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "opinions",
+        "depth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ce9286ea-406b-49ec-a80a-971977661406",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Where do you see yourself in 3 years?",
+      "body": "Probes for ambition, self-awareness, fit.",
+      "answer": "PLAYBOOK: Show ambition without saying \"your job.\" \"Either Staff Engineer leading AI product surface area, or having co-founded something in the AI tooling space. Either way, deep in production AI — not adjacent to it.\" Tie to their company's progression.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "goals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dd2a1433-2576-43b0-ad7a-d222be21ab81",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "What's your salary expectation?",
+      "body": "Negotiation moment, often happens early. Anchor high, defend with research.",
+      "answer": "PLAYBOOK: Research first. Senior AI Product Engineer London May 2026: £110-160k base + equity is the band; £140-200k+ at frontier labs (Anthropic, OpenAI, DeepMind). Anchor at the top of your band: \"Based on my research and what I'm seeing for senior frontend engineers with shipped AI experience in London, I'm targeting £150k base. Total comp matters more than base, so I'm flexible on the mix.\" Don't give a range — give a number. Ranges become floors.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "negotiation",
+        "compensation"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dbd0c7dd-a3e3-4080-b5d7-43e82fed864e",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Why should we hire you over another senior frontend engineer?",
+      "body": "Hardest version of \"why you.\" Three differentiators max.",
+      "answer": "PLAYBOOK: (1) Shipped AI product end-to-end (Ticketmaster), not just experimented; (2) Led a high-stakes multi-brand migration with CEO visibility; (3) Work across the frontend/infra boundary (canary, Cloudflare Workers, performance, monitoring strategy). End: \"You're not just hiring a frontend engineer — you're hiring someone who can own an AI product surface from architecture to deployment.\"",
+      "difficulty": "hard",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "differentiation",
+        "pitch"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "61243a8a-b145-4f6e-bbe0-966ae1e0c704",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "What questions do you have for me?",
+      "body": "Always asked. Always have 5 ready. Bad questions lose offers; great questions win them.",
+      "answer": "PLAYBOOK: Strong questions: (1) \"What does success look like for someone in this role in their first 90 days?\" (2) \"What's the biggest technical debt the team is carrying right now?\" (3) \"How do you decide what to build with AI vs what to keep deterministic?\" (4) \"What's the team's eval philosophy?\" (5) \"How does the team work with product / design / research?\" (6) \"What would make you not extend an offer to a candidate after a strong technical loop?\" Bad questions: anything answerable on the website; \"how's WLB\" (too early); \"what tech stack do you use\" (too shallow).",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "questions",
+        "preparation"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "60767836-bd1c-4c68-9a4e-af928453f907",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Tell me about a time you failed",
+      "body": "Probes for self-awareness. \"I work too hard\" is a disqualifier.",
+      "answer": "PLAYBOOK: Real story, real lesson, no humble-brag. Example shape: deployment that broke production, a project that didn't ship, a hire that didn't work out. Structure: WHAT HAPPENED, WHY (root cause analysis, not blame), WHAT YOU LEARNED, HOW YOU CHANGED YOUR PROCESS. The lesson should be transferable, not specific to that one situation.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "self-awareness",
+        "growth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "745ef26e-d8ea-4f24-a216-aaa7f9763e48",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "How do you handle ambiguity?",
+      "body": "Senior+ filter. Junior engineers want clear specs; senior engineers create clarity.",
+      "answer": "PLAYBOOK: Concrete story. The Wowcher multi-brand audit fits: \"When I started on the migration, no one had a clean answer to which files were truly divergent across the 4 brand codebases. So my first move was to build compare.sh and analyze_diff.py — tools to make the ambiguity tractable. Once we could see the 1,056 divergent files categorized by feature-flag vs code-change, the conversation went from speculation to planning.\" Principle: \"When the problem isn't clear, my first move is to build a tool to make it visible.\"",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "leadership",
+        "tooling"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "38903dc8-4f27-4363-8b38-b608c9ce652e",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "How do you give feedback to a peer whose code you think is weak?",
+      "body": "Probes for code review style and team health.",
+      "answer": "PLAYBOOK: Process not personality. \"PR comments focused on specific lines with 'here's what I'd consider' framing. If it's a pattern I keep seeing, I'll DM them and offer a quick pairing session — usually framed as 'I want to understand your thinking', not 'let me correct you'. I never make code review personal, and I always praise good code as visibly as I critique weak code.\"",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "collaboration",
+        "code-review"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dc100bc6-6956-48c2-9ca6-6f1c01302d06",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "How do you decide what to prioritize when everything is urgent?",
+      "body": "Probes for executive function and the ability to say no.",
+      "answer": "PLAYBOOK: Framework. \"I separate urgent from important using two axes: blocking revenue, blocking other people, blocking learning. Then I pick the top two and TELL my manager what I'm explicitly deferring — saying no is part of prioritization. If everything is truly urgent, that's a sign of a planning failure earlier in the cycle, and I'll surface that too.\"",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "prioritization"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "5a087f05-8720-486e-ae14-457286cc03ad",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "What's the difference between a senior and a staff engineer to you?",
+      "body": "Tests calibration of your level.",
+      "answer": "PLAYBOOK: \"Seniors deliver excellent work on assigned problems. Staff engineers identify which problems are worth solving. Staff multiply other engineers — through architecture decisions that age well, through writing that propagates good thinking, through mentorship that lifts the team's floor. The shift is from execution to leverage.\"",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "leveling",
+        "self-awareness"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "36e8f124-9d56-49ca-b51d-6c2484ffba35",
+      "roundType": "BEHAVIORAL_BAR_RAISER",
+      "title": "Describe your ideal team culture",
+      "body": "Probes for fit. Be honest but compatible with their culture.",
+      "answer": "PLAYBOOK: \"Direct, written-first communication. Low ego in code review. Strong opinions held loosely. Bias toward shipping over polishing. Async-friendly so deep work is possible. Senior engineers who teach, not protect knowledge.\" Adapt one or two points to the company's published values.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "behavioral",
+        "culture-fit"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "48bf9fd4-d5bc-41eb-95e4-59e6f850801a",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement debounce(fn, delay)",
+      "body": "Classic. Often the warm-up question. Follow-ups: leading edge? cancel method? max wait time?",
+      "answer": "```js\nfunction debounce(fn, delay) {\n  let timer;\n  function debounced(...args) {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn.apply(this, args), delay);\n  }\n  debounced.cancel = () => clearTimeout(timer);\n  return debounced;\n}\n```\nWith leading edge:\n```js\nfunction debounce(fn, delay, { leading = false } = {}) {\n  let timer;\n  return function(...args) {\n    const callNow = leading && !timer;\n    clearTimeout(timer);\n    timer = setTimeout(() => {\n      timer = null;\n      if (!leading) fn.apply(this, args);\n    }, delay);\n    if (callNow) fn.apply(this, args);\n  };\n}\n```",
+      "difficulty": "easy",
+      "company": [
+        "Apple",
+        "Meta",
+        "OpenAI",
+        "Stripe"
+      ],
+      "tags": [
+        "polyfill",
+        "closure",
+        "timing"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "46d1f675-7f21-4638-bf37-27a5ac1b9fee",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement throttle(fn, limit)",
+      "body": "Pairs with debounce. Often follow-up: difference between debounce and throttle? When use which?",
+      "answer": "```js\nfunction throttle(fn, limit) {\n  let lastCall = 0;\n  let timer;\n  return function(...args) {\n    const now = Date.now();\n    const remaining = limit - (now - lastCall);\n    if (remaining <= 0) {\n      lastCall = now;\n      fn.apply(this, args);\n    } else {\n      clearTimeout(timer);\n      timer = setTimeout(() => {\n        lastCall = Date.now();\n        fn.apply(this, args);\n      }, remaining);\n    }\n  };\n}\n```\nDifference: debounce delays until N ms after last call; throttle calls at most once per N ms. Use debounce for search input; throttle for scroll/resize.",
+      "difficulty": "easy",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "polyfill",
+        "closure",
+        "timing"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "798c061f-2f0d-44ed-ac5f-d53a4b36f524",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement Promise.all",
+      "body": "Tests Promise internals.",
+      "answer": "```js\nfunction promiseAll(promises) {\n  return new Promise((resolve, reject) => {\n    const results = new Array(promises.length);\n    let completed = 0;\n    if (promises.length === 0) return resolve([]);\n    promises.forEach((p, i) => {\n      Promise.resolve(p).then(value => {\n        results[i] = value;\n        completed++;\n        if (completed === promises.length) resolve(results);\n      }, reject);\n    });\n  });\n}\n```\nKey points: handle empty array, wrap non-promises with Promise.resolve, fail-fast on first rejection.",
+      "difficulty": "medium",
+      "company": [
+        "OpenAI",
+        "Meta"
+      ],
+      "tags": [
+        "polyfill",
+        "promises",
+        "async"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "66cb216d-e141-48f6-b558-64829313c696",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement Promise.allSettled",
+      "body": "Like Promise.all but never rejects.",
+      "answer": "```js\nfunction promiseAllSettled(promises) {\n  return Promise.all(promises.map(p =>\n    Promise.resolve(p).then(\n      value => ({ status: 'fulfilled', value }),\n      reason => ({ status: 'rejected', reason })\n    )\n  ));\n}\n```",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "polyfill",
+        "promises"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "66c04f90-8536-4067-a4f6-c9a8fea4cdc8",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement a Promise pool with concurrency n",
+      "body": "Common in AI/streaming work — limit concurrent API calls.",
+      "answer": "```js\nasync function promisePool(tasks, concurrency) {\n  const results = new Array(tasks.length);\n  let cursor = 0;\n  async function worker() {\n    while (cursor < tasks.length) {\n      const i = cursor++;\n      results[i] = await tasks[i]();\n    }\n  }\n  const workers = Array.from({ length: Math.min(concurrency, tasks.length) }, worker);\n  await Promise.all(workers);\n  return results;\n}\n```\n`tasks` is an array of thunks `() => Promise`. Cursor pattern ensures fair distribution.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "polyfill",
+        "concurrency",
+        "AI-relevant"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "9f8ec47a-1035-48cb-ae3e-e41c6c6686d4",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement curry(fn)",
+      "body": "Tests closures and function arity awareness.",
+      "answer": "```js\nfunction curry(fn) {\n  return function curried(...args) {\n    if (args.length >= fn.length) return fn.apply(this, args);\n    return (...more) => curried.apply(this, [...args, ...more]);\n  };\n}\n```",
+      "difficulty": "medium",
+      "company": [
+        "Apple"
+      ],
+      "tags": [
+        "polyfill",
+        "closure",
+        "functional"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "348d32c2-0bea-4186-8bf5-abd64391413e",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement deep clone (handle Date, Map, Set, RegExp, cycles)",
+      "body": "Tests recursive thinking and type awareness. Most candidates miss cycles.",
+      "answer": "```js\nfunction deepClone(value, seen = new WeakMap()) {\n  if (value === null || typeof value !== 'object') return value;\n  if (seen.has(value)) return seen.get(value);\n  if (value instanceof Date) return new Date(value);\n  if (value instanceof RegExp) return new RegExp(value.source, value.flags);\n  if (value instanceof Map) {\n    const result = new Map();\n    seen.set(value, result);\n    for (const [k, v] of value) result.set(deepClone(k, seen), deepClone(v, seen));\n    return result;\n  }\n  if (value instanceof Set) {\n    const result = new Set();\n    seen.set(value, result);\n    for (const v of value) result.add(deepClone(v, seen));\n    return result;\n  }\n  const result = Array.isArray(value) ? [] : {};\n  seen.set(value, result);\n  for (const k of Object.keys(value)) result[k] = deepClone(value[k], seen);\n  return result;\n}\n```\nNote: doesn't handle functions, Symbols, getters/setters — flag this if asked.",
+      "difficulty": "hard",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "polyfill",
+        "recursion",
+        "edge-cases"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8ec624b4-a99f-4f08-8077-acd3a5f448e5",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement EventEmitter (on, off, emit, once)",
+      "body": "Common system-design building block.",
+      "answer": "```js\nclass EventEmitter {\n  constructor() { this.events = new Map(); }\n  on(event, fn) {\n    if (!this.events.has(event)) this.events.set(event, new Set());\n    this.events.get(event).add(fn);\n    return () => this.off(event, fn);  // return unsubscribe\n  }\n  off(event, fn) {\n    this.events.get(event)?.delete(fn);\n  }\n  emit(event, ...args) {\n    this.events.get(event)?.forEach(fn => fn(...args));\n  }\n  once(event, fn) {\n    const wrapper = (...args) => { fn(...args); this.off(event, wrapper); };\n    this.on(event, wrapper);\n  }\n}\n```",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "polyfill",
+        "pubsub",
+        "system-building"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f2759d48-d1d6-4690-ab0e-fc6ec1abd4d0",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement memoize(fn, keyFn?)",
+      "body": "Closure + caching.",
+      "answer": "```js\nfunction memoize(fn, keyFn = (...args) => JSON.stringify(args)) {\n  const cache = new Map();\n  return function(...args) {\n    const key = keyFn(...args);\n    if (!cache.has(key)) cache.set(key, fn.apply(this, args));\n    return cache.get(key);\n  };\n}\n```\nCaveats: JSON.stringify breaks on circular refs and doesn't distinguish e.g. `undefined` from missing. Use a custom keyFn for production.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "polyfill",
+        "closure",
+        "caching"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "76be6176-5197-450a-80c2-a4f1653c1db3",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement an LRU cache",
+      "body": "Classic. Uses Map's insertion-order property.",
+      "answer": "```js\nclass LRUCache {\n  constructor(max) {\n    this.max = max;\n    this.cache = new Map();\n  }\n  get(key) {\n    if (!this.cache.has(key)) return undefined;\n    const value = this.cache.get(key);\n    this.cache.delete(key);\n    this.cache.set(key, value);  // re-insert as most recent\n    return value;\n  }\n  set(key, value) {\n    if (this.cache.has(key)) this.cache.delete(key);\n    else if (this.cache.size >= this.max) {\n      this.cache.delete(this.cache.keys().next().value);  // evict oldest\n    }\n    this.cache.set(key, value);\n  }\n}\n```\nO(1) get and set. Trick: Map preserves insertion order, so the first key is the oldest.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Apple",
+        "OpenAI"
+      ],
+      "tags": [
+        "data-structure",
+        "caching"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "77e338e0-050a-4ed4-bfef-1f52683a86c4",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Explain the event loop: macrotasks, microtasks, animation frames",
+      "body": "Crucial fundamental. Senior interviews go deep.",
+      "answer": "ANSWER: Stack runs to empty → drain ALL microtasks (Promise callbacks, queueMicrotask, MutationObserver) → render phase (rAF callbacks, style/layout/paint) → ONE macrotask (setTimeout, setInterval, I/O, message events). Then repeat.\n\nKey implications:\n- Promise resolves before setTimeout(0) — Promises are microtasks, setTimeout is a macrotask\n- A long-running microtask chain can starve rendering (microtask starvation)\n- rAF fires before paint, useful for read-then-write DOM patterns\n- Event handlers (click, etc.) run their handler, then drain microtasks, THEN the next event\n- In React 18+, automatic batching defers state updates until the next microtask\n\nPitfall: `await` inside a `for` loop with side effects creates a microtask chain that can block rendering.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta",
+        "OpenAI"
+      ],
+      "tags": [
+        "event-loop",
+        "concepts",
+        "depth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "40d037c8-aaeb-4a50-9044-c078fb65d9e1",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "What's the difference between let, const, var? Explain hoisting.",
+      "body": "Foundational.",
+      "answer": "ANSWER: `var` is function-scoped, hoisted with `undefined` initial value. `let` and `const` are block-scoped, hoisted to the top of the block but in the Temporal Dead Zone (TDZ) — accessing them before declaration throws ReferenceError. `const` adds: cannot be reassigned (but the value can still be mutated if it's an object). Function declarations are fully hoisted (name + body); function expressions only the variable.",
+      "difficulty": "easy",
+      "company": [
+        "Apple",
+        "Monzo"
+      ],
+      "tags": [
+        "language-basics",
+        "scope"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dd0fed4f-5708-45cb-a9ec-b19652a660d1",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Explain closures with a practical example",
+      "body": "Foundational.",
+      "answer": "ANSWER: A closure is a function that retains access to its lexical scope even when invoked outside that scope. The function 'closes over' the variables it referenced when defined. Example: `debounce` — the `timer` variable lives in the outer function's scope but the inner function continues to access and mutate it across calls. Practical uses: encapsulation (private state via factory functions), memoization, currying, event handlers that need to remember which item they belong to.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "language-basics",
+        "closure"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dc5d1a84-6ce3-4793-a03a-8b16ba780202",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement Array.prototype.reduce from scratch",
+      "body": "Tests understanding of iteration and accumulator pattern.",
+      "answer": "```js\nArray.prototype.myReduce = function(callback, initialValue) {\n  let acc;\n  let startIndex = 0;\n  if (arguments.length >= 2) {\n    acc = initialValue;\n  } else {\n    if (this.length === 0) throw new TypeError('Reduce of empty array with no initial value');\n    acc = this[0];\n    startIndex = 1;\n  }\n  for (let i = startIndex; i < this.length; i++) {\n    if (i in this) acc = callback(acc, this[i], i, this);\n  }\n  return acc;\n};\n```\nSubtle: `i in this` handles sparse arrays. No initial value + empty array throws.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "polyfill",
+        "iteration"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d1739f1e-42b8-4e31-bf59-195d58a5e13b",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement a basic observable / pub-sub (basic RxJS subject)",
+      "body": "Useful pattern for state libraries and AI streaming.",
+      "answer": "```js\nclass Subject {\n  constructor() { this.observers = new Set(); }\n  subscribe(observer) {\n    this.observers.add(observer);\n    return () => this.observers.delete(observer);\n  }\n  next(value) { this.observers.forEach(o => o.next?.(value)); }\n  error(err) { this.observers.forEach(o => o.error?.(err)); }\n  complete() {\n    this.observers.forEach(o => o.complete?.());\n    this.observers.clear();\n  }\n}\n```\nObserver shape: `{ next?, error?, complete? }`. Cold vs hot observables: hot starts emitting regardless of subscription; cold starts per subscription.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "pubsub",
+        "streaming",
+        "AI-relevant"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "57a5557f-5406-412c-993f-3f2491b2959e",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "What happens when you JSON.stringify an object with a circular reference?",
+      "body": "Common gotcha.",
+      "answer": "ANSWER: Throws `TypeError: Converting circular structure to JSON`. Workaround: pass a replacer function with a WeakSet to track seen objects and emit `[Circular]` placeholders.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "gotcha",
+        "serialization"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "5b8c5883-61c4-4392-af5c-3931bd637f75",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Explain async/await in terms of Promises",
+      "body": "Common follow-up to Promise questions.",
+      "answer": "ANSWER: `async` functions always return a Promise. `await expr` pauses the function, schedules the rest as a microtask continuation when `expr` resolves. Mechanically, async/await is sugar over `.then()` chains. Errors in async functions become rejected promises; `try/catch` around `await` catches them.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "promises",
+        "async",
+        "concepts"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "716b58e4-c313-45aa-9c87-38731ce64b37",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Implement compose(...fns) and pipe(...fns)",
+      "body": "Functional composition. `compose(f, g, h)(x) === f(g(h(x)))`. `pipe` is left-to-right.",
+      "answer": "```js\nconst compose = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);\nconst pipe = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x);\n```",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "polyfill",
+        "functional"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dc5d5938-7463-46f6-a138-4c52db7ad254",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "What's the difference between Map and Object? When use which?",
+      "body": "Foundational.",
+      "answer": "ANSWER: Map: any key type (object, function), preserves insertion order, has size property, optimized for frequent add/remove, no prototype keys to worry about. Object: string/symbol keys only, JSON-serializable, integrates with prototype chain. Use Map when keys aren't strings, when ordering matters, or when you'll do many add/remove ops. Use Object for static configuration, JSON shapes, and prototypal patterns.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "data-structure",
+        "concepts"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "077ffd4f-c879-4045-8e16-f6c8bb3cbe32",
+      "roundType": "JS_FUNDAMENTALS",
+      "title": "Explain microtask starvation with an example",
+      "body": "Senior-level depth question.",
+      "answer": "ANSWER: When microtasks queue more microtasks indefinitely, rendering and macrotasks never get a chance to run. Example:\n```js\nfunction spin() {\n  Promise.resolve().then(spin);\n}\nspin();  // UI freezes, no rendering, setTimeout never fires\n```\nThis is microtask starvation. Mitigation: yield to the event loop with `setTimeout(0)` or `scheduler.yield()` periodically.",
+      "difficulty": "hard",
+      "company": [
+        "Apple"
+      ],
+      "tags": [
+        "event-loop",
+        "performance",
+        "depth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "641fd6e2-0550-485c-b8cf-e04559c522b9",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Explain the React rendering pipeline: render phase vs commit phase",
+      "body": "Senior React knowledge.",
+      "answer": "ANSWER: Render phase: React calls your function components, builds a new fiber tree by diffing against the current tree. Pure, idempotent, interruptible (Concurrent mode can pause/resume/discard). Commit phase: React applies DOM mutations, runs layout effects (useLayoutEffect), then paint, then passive effects (useEffect). Not interruptible. Strict mode in React 18+ double-invokes the render phase in dev to catch impurity.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "React",
+        "internals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "09fdfa86-8ffc-4be2-bcbd-4995190f1825",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Difference between useMemo and useCallback. When does each help?",
+      "body": "Common interview filter — many devs misuse both.",
+      "answer": "ANSWER: `useMemo` memoizes a value, `useCallback` memoizes a function (sugar over `useMemo(() => fn, deps)`). They help in two cases: (1) the computation is genuinely expensive (rare); (2) the result is a referential dep of `useEffect` or `React.memo` child — if you don't memo, the dep changes every render. Premature use is noise: with shallow comparisons, you pay the cost of memoization on every render whether or not the value changed. The React 19 compiler auto-memoizes — making manual use largely unnecessary in compiler-enabled code.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "OpenAI",
+        "Apple"
+      ],
+      "tags": [
+        "React",
+        "performance",
+        "hooks"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "a7945ea3-9fec-4ba6-a252-f0c0cabdcaa8",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "What is useTransition and when do you use it?",
+      "body": "React 18+ concurrent features.",
+      "answer": "ANSWER: `useTransition` marks a state update as non-urgent. The previous UI stays interactive while React works on the new one. Use case: filtering a large list while keeping the input responsive. `const [isPending, startTransition] = useTransition(); startTransition(() => setFilter(value));` Compare to `useDeferredValue` which defers a VALUE instead of marking an update.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "React",
+        "concurrent",
+        "performance"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f111d00a-0b4b-426b-bcac-956e7a52c1b1",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Server Components vs Client Components in Next.js 15. When use which?",
+      "body": "Modern Next.js essential.",
+      "answer": "ANSWER: Server Components render on the server only, can be async, can directly access data sources, ZERO JS shipped to the client. Client Components hydrate, use hooks, handle events. Use Server by default; opt into Client with `'use client'` only when needed (interactivity, browser APIs, hooks). Server can render Client; Client cannot render Server (only pass as children). Practical: data fetching, layouts, static content → Server. Forms, modals, interactivity → Client.",
+      "difficulty": "hard",
+      "company": [
+        "OpenAI",
+        "Anthropic"
+      ],
+      "tags": [
+        "React",
+        "Next.js",
+        "RSC"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "087e91d1-987d-4bf6-b9ec-be390bc3dae6",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "You have a list of 10,000 items and the page is janky. Walk through diagnosis.",
+      "body": "Performance debugging.",
+      "answer": "PLAYBOOK: (1) Measure with React DevTools Profiler — identify which component is slow. (2) Decide: is it render count (something causing re-renders) or render cost (each render is expensive)? (3) For render count: investigate referential equality, key stability, parent re-renders. (4) For render cost: virtualization (react-virtuoso, tanstack-virtual). (5) Re-evaluate data: do we need 10k in the DOM at all? Server-side filter? Pagination? (6) If still slow, look at memoization, then offload heavy work to Web Worker.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Apple"
+      ],
+      "tags": [
+        "React",
+        "performance",
+        "virtualization"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "db013018-0c2c-4914-a93c-0d28d5f35605",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "How does React reconciliation handle keys? What goes wrong with index-as-key?",
+      "body": "Classic.",
+      "answer": "ANSWER: React uses keys to match elements between renders. Same key = same element (preserve state, DOM nodes, refs). Different key = unmount old, mount new. Index-as-key breaks when the list reorders or items are inserted/removed: existing items get reassigned to new positions, their internal state (input values, focus, scroll position) follows the key not the data. Use stable IDs from the data.",
+      "difficulty": "easy",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "React",
+        "reconciliation"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "6f3b563a-8668-49cf-8e66-2a795bea7264",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "How do you handle race conditions in useEffect that fires fetches?",
+      "body": "Common gotcha.",
+      "answer": "ANSWER: Effects can fire out of order if the user changes the dep quickly. Two patterns:\n\n```js\n// Pattern 1: ignore flag\nuseEffect(() => {\n  let ignore = false;\n  fetch(url).then(r => r.json()).then(data => {\n    if (!ignore) setData(data);\n  });\n  return () => { ignore = true; };\n}, [url]);\n\n// Pattern 2: AbortController (cancels the fetch itself)\nuseEffect(() => {\n  const ctrl = new AbortController();\n  fetch(url, { signal: ctrl.signal }).then(r => r.json()).then(setData)\n    .catch(err => { if (err.name !== 'AbortError') throw err; });\n  return () => ctrl.abort();\n}, [url]);\n```",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "React",
+        "race-conditions",
+        "hooks"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d1bf19a0-b848-45e8-8a3f-5acce1536c6b",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "What's wrong with this Search component?",
+      "body": "```jsx\nfunction Search() {\n  const [query, setQuery] = useState('');\n  const [results, setResults] = useState([]);\n  useEffect(() => {\n    fetch(`/api?q=${query}`).then(r => r.json()).then(setResults);\n  }, [query]);\n  return <input value={query} onChange={e => setQuery(e.target.value)} />;\n}\n```",
+      "answer": "ANSWER: (1) No debounce — fires on every keystroke, hammers the API. (2) No abort — out-of-order responses race; user types 'react', responses come back in order 'r', 're', 'react' but in arbitrary order. (3) No loading state. (4) No error handling. (5) No empty-query guard — fetches with `?q=`. (6) Template string URL-encoding issue if query has special chars (use URL/URLSearchParams). (7) Results not rendered — bug or stub?",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta",
+        "Stripe"
+      ],
+      "tags": [
+        "React",
+        "code-review",
+        "race-conditions"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "9ff3bb65-573e-4f50-9f6e-a65a5db1e082",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "You're upgrading React 17 to React 18. What do you check for breaking changes?",
+      "body": "Your direct story — Wowcher migration.",
+      "answer": "PLAYBOOK (YOUR STORY): (1) `ReactDOM.render` → `createRoot` — affects every entry point. (2) Automatic batching now batches updates in promises, setTimeout, native events — tests that asserted on intermediate states may break. (3) StrictMode double-invokes in dev — flushes out effects that mutate during render. (4) Removed `react-dom/test-utils` paths — affects testing setup. (5) Removed string refs. (6) Suspense semantics changed. (7) Concurrent rendering can introduce subtle render order issues. Your real-world story: ESM/CJS conflicts during the move, SSR edge cases, build performance regressions.",
+      "difficulty": "hard",
+      "company": [],
+      "tags": [
+        "React",
+        "migration",
+        "story-bank"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f709b79b-8f43-471a-92b5-55a69fc0ef83",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "You're upgrading Next.js 12 to 15. Walk through your strategy.",
+      "body": "Your direct story.",
+      "answer": "PLAYBOOK (YOUR STORY): (1) Inventory features used — Pages Router vs App Router, middleware, Image, Font, Link API changes. (2) Incremental App Router adoption — page by page, hybrid is supported. (3) ESM/CJS conflicts — major pain point in your real migration. (4) Image component API changes — `layout` prop removed, sizes/srcset model changed. (5) Middleware: Edge runtime, no Node APIs. (6) `next/font` replaces self-hosted fonts. (7) Build perf: turbopack consideration. (8) Test in staging behind a flag before cutover. Mention your normalised revenue ratio monitoring approach.",
+      "difficulty": "hard",
+      "company": [],
+      "tags": [
+        "Next.js",
+        "migration",
+        "story-bank"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "7e509f40-c402-4a0a-b7e4-0e042ade96f9",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "What is Suspense and how does it work with data fetching?",
+      "body": "Modern React data pattern.",
+      "answer": "ANSWER: Suspense lets components 'wait' for something before rendering, showing a fallback while waiting. Mechanism: a child component throws a Promise during render; the nearest Suspense boundary catches it and renders the fallback. When the Promise resolves, React retries the render. With Server Components + frameworks like Next.js App Router, async components and `use()` make data fetching declarative. The key shift: data fetching co-located with the component instead of fetching-then-rendering.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "OpenAI"
+      ],
+      "tags": [
+        "React",
+        "data-fetching",
+        "concurrent"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "cdfcb7a9-b5d4-4603-837c-f2de8db3d272",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "What's hydration mismatch and how do you debug it?",
+      "body": "Common SSR gotcha.",
+      "answer": "ANSWER: Server renders one DOM tree, client expects a different one — React errors and falls back to client render. Common causes: rendering `Date.now()` or `Math.random()` (different between server and client), reading localStorage/window (undefined on server), browser-extension DOM injection, locale-dependent formatting, conditional rendering based on `typeof window`. Debug: enable React's hydration error overlay, narrow down by isolating components, use `suppressHydrationWarning` sparingly for known-OK cases.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "React",
+        "SSR",
+        "debugging"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8d9a5715-3c66-4d64-b95a-64957231c337",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Implement useDebounce custom hook",
+      "body": "Common machine-coding starter.",
+      "answer": "```js\nfunction useDebounce(value, delay) {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n  useEffect(() => {\n    const timer = setTimeout(() => setDebouncedValue(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n  return debouncedValue;\n}\n```",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "React",
+        "hooks",
+        "polyfill"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ca1c0139-f88f-4d02-ac6c-889a48d817a9",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Implement useOnClickOutside",
+      "body": "Common.",
+      "answer": "```js\nfunction useOnClickOutside(ref, handler) {\n  useEffect(() => {\n    function listener(e) {\n      if (!ref.current || ref.current.contains(e.target)) return;\n      handler(e);\n    }\n    document.addEventListener('mousedown', listener);\n    document.addEventListener('touchstart', listener);\n    return () => {\n      document.removeEventListener('mousedown', listener);\n      document.removeEventListener('touchstart', listener);\n    };\n  }, [ref, handler]);\n}\n```\nEdge case: portals render outside the ref's DOM tree — they'll register as 'outside'. Handle with a closer ref or a class-based check.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "React",
+        "hooks",
+        "DOM"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f024b018-b1ad-4580-a31f-8b8e721cd4a9",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Implement useIntersectionObserver for lazy loading",
+      "body": "Modern lazy-loading primitive.",
+      "answer": "```js\nfunction useIntersectionObserver(ref, options = {}) {\n  const [isIntersecting, setIsIntersecting] = useState(false);\n  useEffect(() => {\n    if (!ref.current) return;\n    const observer = new IntersectionObserver(\n      ([entry]) => setIsIntersecting(entry.isIntersecting),\n      options\n    );\n    observer.observe(ref.current);\n    return () => observer.disconnect();\n  }, [ref, options.threshold, options.rootMargin, options.root]);\n  return isIntersecting;\n}\n```\nNote: passing `options` object directly causes re-observe on every render. Destructure dep array.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "React",
+        "hooks",
+        "IntersectionObserver",
+        "lazy-loading"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "eeea5fcf-2f00-4cb1-b3c9-dafba129f000",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Next.js: ISR, SSR, SSG, CSR. Pick the right one for these cases.",
+      "body": "Cases: marketing site, dashboard, e-commerce PDP, real-time chat. Pick and justify.",
+      "answer": "ANSWER: Marketing site → SSG (static, SEO, blazing fast). E-commerce PDP → ISR (regenerate on schedule or on-demand for price/stock changes; SEO matters). Dashboard → CSR with auth or SSR with auth (highly dynamic, behind login). Real-time chat → CSR + WebSocket (no SEO need, real-time updates dominate). The decision axes: how dynamic is the data, is SEO required, how often does it change, who's authenticated.",
+      "difficulty": "medium",
+      "company": [
+        "OpenAI",
+        "Anthropic"
+      ],
+      "tags": [
+        "Next.js",
+        "rendering-strategies"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "47e0f407-3c07-4517-9f7a-7d1586b69c01",
+      "roundType": "REACT_FRAMEWORK",
+      "title": "Explain React 19 useOptimistic hook",
+      "body": "New hook.",
+      "answer": "ANSWER: `useOptimistic` lets you immediately show an optimistic state while an async action is in flight. Signature: `const [optimisticState, addOptimistic] = useOptimistic(state, updateFn)`. While a transition runs, the optimistic state shows the predicted result; when the action completes, React reverts to the real state. Example:\n```js\nconst [optimisticMessages, addOptimisticMessage] = useOptimistic(\n  messages,\n  (state, newMessage) => [...state, { ...newMessage, sending: true }]\n);\nasync function send(text) {\n  addOptimisticMessage({ text, id: uuid() });\n  await api.send(text);  // real state updates via parent state\n}\n```",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "React",
+        "React19",
+        "optimistic-ui"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ed4ad96b-83c9-49f7-8252-d9f2d1208d0f",
+      "roundType": "MACHINE_CODING",
+      "title": "Build an Autocomplete component",
+      "body": "Requirements: debounced API calls, keyboard navigation (up/down/enter/escape), ARIA combobox semantics, recent searches, loading state, empty state.",
+      "answer": "PLAYBOOK: State: query, results, loading, highlightedIndex, isOpen. Debounce 300ms. AbortController on each fetch. ARIA: role=\"combobox\", aria-expanded, aria-controls, aria-activedescendant. Each option role=\"option\" with id. Keyboard: ArrowUp/Down moves highlight (wrap or clamp — confirm with interviewer), Enter selects highlighted, Escape closes + restores query. On select, blur input or keep open per spec. Persist recent searches in localStorage (last 5). Edge cases: query of just spaces, no results, error from API, slow response after query cleared (abort).",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta",
+        "OpenAI",
+        "Anthropic"
+      ],
+      "tags": [
+        "component",
+        "a11y",
+        "autocomplete",
+        "system-design-light"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "06ed0ac7-342f-45a7-b647-3d68737414b7",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a Modal with focus trap, ESC to close, click outside, scroll lock, ARIA",
+      "body": "Common 60-min problem.",
+      "answer": "PLAYBOOK: Render in portal (document.body or a designated #modal-root). Trap focus: on open, focus the first focusable inside; on Tab from last → first, Shift+Tab from first → last. Store the trigger element on open, restore focus on close. Scroll lock: `body { overflow: hidden }`, but compensate for scrollbar width to prevent layout shift. ESC: window keydown listener while open. Click outside: backdrop click closes; clicks inside the panel don't bubble. ARIA: role='dialog', aria-modal='true', aria-labelledby pointing to title, aria-describedby pointing to body. Inert the rest of the page (or aria-hidden the siblings).",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Stripe"
+      ],
+      "tags": [
+        "component",
+        "a11y",
+        "modal",
+        "focus-management"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "cec17566-43ed-4953-a8e3-bd2eff08caa2",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a virtualized list of 100,000 rows with real-time filter",
+      "body": "Performance-focused.",
+      "answer": "PLAYBOOK: Container with fixed height and overflow:auto. Inner spacer with total height = rowHeight × totalRows. Compute startIndex = floor(scrollTop / rowHeight), endIndex = startIndex + visibleCount + buffer. Render only [start..end] absolutely positioned. Filter: pre-compute filteredItems on each query change. Use `useDeferredValue` on the query so input stays smooth; the heavy filter work runs as low-priority. For variable row heights: position cache with running sum and binary search to find start.",
+      "difficulty": "hard",
+      "company": [
+        "Meta",
+        "Apple",
+        "Stripe"
+      ],
+      "tags": [
+        "component",
+        "performance",
+        "virtualization"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "569899ad-455e-4497-86e8-1b3d98c01d80",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a streaming chat UI (AI assistant)",
+      "body": "Highly relevant for AI roles. Often the Anthropic/OpenAI frontend interview.",
+      "answer": "PLAYBOOK: State: messages array with role, content, status. Streaming: fetch SSE endpoint, ReadableStream reader, parse `data:` lines, append chunks to the current assistant message's content. UI: virtualized message list (long conversations), autoscroll only when at bottom (sticky behavior), 'New message' chip if user scrolled up. Markdown rendering: re-parse on each chunk (cheap for normal lengths); render code blocks even when ``` is unclosed mid-stream. Stop button: AbortController on the fetch, save partial content to history. Error mid-stream: keep partial, show inline retry. Tool calls: block-based message model — text, tool_use, tool_result are sibling blocks; show tool_use as collapsible cards. Optimistic send: show user message immediately with status='sending'.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "component",
+        "AI",
+        "streaming",
+        "SSE"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f6cc9e39-4720-46c3-80e9-dd0b441b292d",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a Kanban board with drag-and-drop, no external libraries",
+      "body": "Common machine-coding problem.",
+      "answer": "PLAYBOOK: State: columns = Map<columnId, Array<cardId>>; cards = Map<cardId, card>. Native HTML5 drag-and-drop: dragstart (set effectAllowed, dataTransfer), dragover (preventDefault to allow drop, compute insertion index by mouse Y vs card centers), dragenter/dragleave (visual feedback), drop (mutate state). Keyboard a11y: each card focusable, space to 'pick up', arrows to move, space again to drop. Edge cases: drop on empty column, drop on self (no-op), dragging while modal open (block). Optimistic UI: mutate immediately, send to server async.",
+      "difficulty": "hard",
+      "company": [
+        "Meta",
+        "Stripe"
+      ],
+      "tags": [
+        "component",
+        "drag-drop",
+        "a11y"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "e45c52f6-fe5a-4d33-ac55-a963466c8073",
+      "roundType": "MACHINE_CODING",
+      "title": "Build an infinite-scroll feed",
+      "body": "Common.",
+      "answer": "PLAYBOOK: IntersectionObserver on a sentinel div at the bottom; when intersecting, fetch next page. State: pages array, hasMore, loading, error. Cursor-based pagination preferred over offset (consistent under inserts). Scroll restoration on back nav: store scroll position + page index in router state. Empty state, loading skeleton (per row), error retry button at the bottom. Don't re-fetch already-loaded pages on mount unless needed. With React Query / TanStack Query: useInfiniteQuery handles this idiomatically.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Apple"
+      ],
+      "tags": [
+        "component",
+        "pagination",
+        "IntersectionObserver"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "c10262a3-1ac6-4612-a531-9d939cbd6a0c",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a notification toast system",
+      "body": "Cross-cutting concern.",
+      "answer": "PLAYBOOK: API: `toast.success(msg)`, `toast.error(msg)`, `toast.custom(...)`. Implementation: a singleton store (Zustand or context+reducer) with an active toasts array. Top-level `<Toaster />` component subscribes and renders. Each toast has id, message, type, duration, dismissible. Auto-dismiss via setTimeout, cleared on hover (pause on hover). Stack up to N, queue the rest. ARIA: role='status' for info, role='alert' for errors, aria-live='polite'/'assertive'. Animation: framer-motion or CSS transitions on enter/exit.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "component",
+        "a11y",
+        "global-state"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "e7d7667e-c8aa-44ef-a52e-95528a034b65",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a command palette (Cmd+K)",
+      "body": "Trendy. Linear/Raycast style.",
+      "answer": "PLAYBOOK: Modal triggered by Cmd+K (Mac) / Ctrl+K (Win). Items: { id, label, action, keywords, group }. Fuzzy search (fuse.js or implement simple fuzzy match). Keyboard nav: arrows move highlight, Enter executes, Tab moves between groups. Recent items pinned at top. Each group has a heading. Sub-commands: selecting an item with subcommands replaces the list with its children, Esc goes back. Performance: virtualize if many commands. ARIA: combobox + listbox pattern.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "Stripe"
+      ],
+      "tags": [
+        "component",
+        "keyboard-shortcuts",
+        "fuzzy-search"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "4f946ca6-d1e9-41b5-8d99-6d30ff1893e9",
+      "roundType": "MACHINE_CODING",
+      "title": "Build an OTP input (6 separate digit boxes)",
+      "body": "Common interview problem.",
+      "answer": "PLAYBOOK: 6 input refs in an array. On input: if digit entered, advance focus to next. On backspace in empty box, focus previous and clear. On paste: split clipboard text, fill multiple boxes. Only allow digits (input type='tel' or numeric pattern with key filter). Submit when all filled. ARIA: aria-label per input. autoComplete='one-time-code' for iOS to surface SMS codes.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Monzo",
+        "Revolut"
+      ],
+      "tags": [
+        "component",
+        "forms"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "55a951cc-79e4-4be6-8bcf-95c3f0aa8e19",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a chip / token input (type, Enter, becomes chip)",
+      "body": "Common.",
+      "answer": "PLAYBOOK: State: tokens array. Input: on Enter (and optionally comma, tab), add current text as token. On Backspace in empty input, remove last token. Each token has remove button. Validation per token (email format, etc.). Duplicate handling (reject or merge). Paste handling: split by comma/newline.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "component",
+        "forms"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "591c5a86-09d0-40ed-927a-7a8b8d705ab0",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a date range picker",
+      "body": "Hard, comprehensive.",
+      "answer": "PLAYBOOK: Two months visible. Drag-select range OR click start, click end. Hover preview between mouseDown and mouseUp. Keyboard nav: arrows move, Enter sets boundary. Disabled dates (configurable). Timezone aware — store as UTC date strings (YYYY-MM-DD), display in user locale. RTL support. ARIA: role='application' for the calendar, aria-selected on day buttons.",
+      "difficulty": "hard",
+      "company": [
+        "Apple",
+        "Airbnb"
+      ],
+      "tags": [
+        "component",
+        "a11y",
+        "i18n",
+        "date-handling"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "bb2f1280-a20e-4201-a887-7dc226eca597",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a multi-step form (wizard) with back/next, validation, async submit",
+      "body": "Common.",
+      "answer": "PLAYBOOK: State: currentStep, form data per step, validation errors. Per-step validation runs on Next. Going back preserves data (don't reset). Step indicator at top. URL sync (?step=2) so refresh keeps state. Async submit with loading state, error display, retry. Confirmation step shows summary. Resume support: localStorage snapshot of current state.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "component",
+        "forms",
+        "state-management"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "1d0f1319-8db9-4fcb-9881-156ab3cd50d9",
+      "roundType": "MACHINE_CODING",
+      "title": "Build a comment thread with nested replies",
+      "body": "Common social/forum component.",
+      "answer": "PLAYBOOK: Recursive component. Data: tree of comments. Collapse/expand per node. Sort by: newest, oldest, top (by score). Reply textarea inline. Edit/delete only for author (check auth). Avatar, timestamp, relative time ('2 hours ago' updates per minute). Deep threads — show 'Continue thread' at depth N to prevent infinite indentation. Markdown rendering with safe HTML.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "component",
+        "recursion"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "612cc598-5fd6-4d03-b71e-59661556a716",
+      "roundType": "FE_SYSTEM_DESIGN_COMPONENT",
+      "title": "Design an Autocomplete component (system design depth)",
+      "body": "Discuss architecture, not write code. Apply RADIO framework.",
+      "answer": "PLAYBOOK: REQUIREMENTS (local vs remote? max results? recent searches? typo tolerance? mobile?). ARCHITECTURE (input + dropdown + result item; controlled state with optional uncontrolled fallback). DATA FLOW (debounced fetch with AbortController, cache by query, prefetch on focus, optional Trie for local data). INTERFACE (props: source, renderItem, onSelect, minChars, debounceMs, maxResults, value/onChange for controlled). OPTIMIZATION (LRU cache by query, AbortController to cancel in-flight, virtualization if 1000+ results, keyboard navigation, ARIA combobox, no-results state, error state). DISCUSS: typo tolerance — server-side fuzzy (Postgres trgm, ES fuzzy) vs client-side (Levenshtein, BM25). PERFORMANCE: time-to-first-suggestion is the metric; pre-warm with empty-query top picks.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "system-design",
+        "autocomplete",
+        "RADIO"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "c8a40575-e0bc-49ed-9379-f3d7fecde408",
+      "roundType": "FE_SYSTEM_DESIGN_COMPONENT",
+      "title": "Design a Data Table for 100k rows",
+      "body": "Sticky columns, virtual scroll, sort, multi-filter, column resize/reorder, row selection, export to CSV.",
+      "answer": "PLAYBOOK: Virtualization (windowed render with overscan). Column resize via drag handle on header (mouseDown → mouseMove computes delta → set column width). Column reorder via HTML5 DnD. Sticky columns: position:sticky on first N columns; complicates virtualization because horizontal scroll. Sort: server-side preferred at 100k; if client-side, sort the indices not the data. Multi-filter: combine into a single predicate; debounced. Selection: track selected IDs in a Set; 'select all' is logical (filter+all) not physical. Export: stream to Blob using a Web Worker for 100k rows. Mobile: collapse to card layout below a breakpoint.",
+      "difficulty": "hard",
+      "company": [
+        "Stripe",
+        "Bloomberg",
+        "Atlassian"
+      ],
+      "tags": [
+        "system-design",
+        "table",
+        "performance"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8606510c-5a30-44fb-b74f-3ca82cdb03df",
+      "roundType": "FE_SYSTEM_DESIGN_COMPONENT",
+      "title": "Design a Rich Text Editor (block-based, Notion-style)",
+      "body": "Block tree, undo/redo, collaboration boundaries.",
+      "answer": "PLAYBOOK: DATA MODEL (tree of blocks; each block has type, content, children, attrs). RENDERING (contenteditable per block, NOT the whole doc — gives per-block keyboard and undo handling). SELECTION (custom selection model layered on browser selection; serialize/deserialize to/from DOM Range). UNDO/REDO (operational transform OR immutable snapshots; OT supports collaboration). SLASH COMMANDS (/h1, /code, /image — detect '/' at start of empty block, open menu). KEYBOARD MAP (Enter → new block of same type or paragraph; Backspace at start → merge with previous block; Tab in list → indent). COLLABORATION (CRDT — Yjs — wraps the document state). PERFORMANCE (virtualize long docs, lazy-render images, suspend rendering during typing bursts).",
+      "difficulty": "hard",
+      "company": [
+        "Notion",
+        "Anthropic"
+      ],
+      "tags": [
+        "system-design",
+        "editor",
+        "CRDT"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "a9baaea4-72f8-4bca-9917-0e1bb88c0bed",
+      "roundType": "FE_SYSTEM_DESIGN_COMPONENT",
+      "title": "Design a Modal component (advanced)",
+      "body": "Handles nested modals, focus trap, route-based modals, animation lifecycle.",
+      "answer": "PLAYBOOK: STACK MODEL — modals tracked in a context-provided stack, only the top one is interactive. ROUTE-BASED — `/photos/123` can either render a modal over the previous page or a dedicated route based on entry (deep link → full page, click → modal). ANIMATION LIFECYCLE — exit animations require keeping the unmounted-tree-but-still-rendered state; framer-motion AnimatePresence pattern. PORTAL — render in a top-level portal; manage z-index globally not per-modal. INERT — set inert on the rest of the page; restore on close. SCROLL LOCK — body overflow:hidden compensating for scrollbar.",
+      "difficulty": "hard",
+      "company": [
+        "Apple",
+        "Stripe"
+      ],
+      "tags": [
+        "system-design",
+        "modal",
+        "a11y"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "7b2acec1-60a8-4c57-98f3-064cd12d39fa",
+      "roundType": "FE_SYSTEM_DESIGN_COMPONENT",
+      "title": "Design a Toast/Notification system",
+      "body": "Stack, queue, dedup, priority, a11y.",
+      "answer": "PLAYBOOK: SINGLETON store. QUEUE if stack exceeds max. DEDUP by content+type within a window (don't spam 'Network error'). PRIORITY: errors over info; promote errors above info in the stack. POSITION: configurable per app (top-right, top-center, bottom). HOVER PAUSES auto-dismiss. SWIPE TO DISMISS on mobile. ARIA: role='status' (info), role='alert' (error), aria-live='polite'/'assertive'. PROMISE TOASTS: `toast.promise(p, { loading, success, error })` updates inline. UNDO TOASTS: include action button that calls a provided undo fn.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "system-design",
+        "global-state",
+        "a11y"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "202058da-c6f8-4ad2-900c-4e5cd5f602df",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design a chat application (Slack/Messenger)",
+      "body": "Classic. Senior-level depth expected.",
+      "answer": "PLAYBOOK: REQUIREMENTS (channels, DMs, threads, presence, typing, files, search, scale to 10k users). ARCHITECTURE (WebSocket for real-time, REST for history, optimistic send + reconciliation, message ordering via server-assigned monotonic timestamp). CLIENT STATE (normalized by channel+message; virtualized message list per channel). SYNC (delta sync on reconnect via last-seen pointer; full-channel resync rare). OFFLINE (queue outgoing in IndexedDB; flush on reconnect). PERFORMANCE (virtualization, message batching for bursts, image lazy load, code-split per channel type). PRESENCE (heartbeat + decay; show 'last seen' fallback). TYPING (throttled event, no persistence). SEARCH (server-side for history; client-side filter for current channel). ACCESSIBILITY (live region for new messages, keyboard nav between channels).",
+      "difficulty": "hard",
+      "company": [
+        "Meta",
+        "Stripe",
+        "Slack",
+        "Anthropic"
+      ],
+      "tags": [
+        "system-design",
+        "chat",
+        "realtime"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "7ee2718f-6093-45e0-8f50-ed2d1eb1de11",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design Google Docs (collaborative editor)",
+      "body": "Senior+ filter. The real depth is CRDT vs OT.",
+      "answer": "PLAYBOOK: REAL-TIME (WebSocket transport, low-latency edits). CONCURRENCY MODEL: choose CRDT (Yjs, Automerge) — peer-to-peer-friendly, no central authority needed, conflict-free by construction; OR OT (Google's choice) — requires server arbitration, slightly more efficient for text. PRESENCE: cursors and selections rendered for each user with name+color, synced via separate ephemeral channel. OFFLINE: edits queue locally, merge on reconnect. PERMISSIONS: ACL on document; read-only mode disables input. COMMENTS: anchored to text ranges; ranges shift as text changes (use markers/anchors that survive edits). VERSION HISTORY: snapshot strategy (periodic + named); rebuild any version by replaying ops. RENDERING: only the viewport's range; image lazy-load.",
+      "difficulty": "hard",
+      "company": [
+        "Google",
+        "Notion",
+        "Anthropic"
+      ],
+      "tags": [
+        "system-design",
+        "collaborative-editing",
+        "CRDT",
+        "OT"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "764ae3a4-09e7-4660-9f06-6d8ae3e4a6bf",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design a news feed (Twitter/LinkedIn)",
+      "body": "Classic.",
+      "answer": "PLAYBOOK: PAGINATION (cursor-based, not offset — handles inserts correctly). RANKING (server-side ML; client receives ranked list with reason chips). INFINITE SCROLL (IntersectionObserver sentinel). PREFETCH (next page when user is N items from end). REAL-TIME (new posts arrive — show 'X new posts' button rather than auto-prepending; prepending breaks reading). VIRTUALIZATION (variable height, position cache). IMAGES (lazy load, blur placeholder, srcset). VIDEO (autoplay on intersection, muted by default, pause when scrolled out, single playing video at a time). COMPOSE (drafts in localStorage). NOTIFICATIONS (Web Push for re-engagement).",
+      "difficulty": "hard",
+      "company": [
+        "Meta",
+        "LinkedIn"
+      ],
+      "tags": [
+        "system-design",
+        "feed",
+        "realtime"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "a6e4a5aa-3191-40a8-bbd1-10345ce2cf64",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design Figma (collaborative design tool)",
+      "body": "Multiplayer + Canvas perf.",
+      "answer": "PLAYBOOK: MULTIPLAYER (CRDT for the document tree; presence channel for cursors). RENDERING (Canvas/WebGL — DOM can't handle 50k nodes; layer tiling for large canvases). HIT TESTING (spatial index — R-tree or quadtree). UNDO/REDO (per-user history of own operations, not global). NETWORK (binary protocol, delta encoding, compression). LOCAL STATE FIRST then echo to server. PERFORMANCE (offload heavy paths to Web Worker; OffscreenCanvas for rendering). PLUGINS (sandboxed iframe with postMessage API). EXPORT (server-side rasterization for high-res).",
+      "difficulty": "hard",
+      "company": [
+        "Figma",
+        "Anthropic"
+      ],
+      "tags": [
+        "system-design",
+        "canvas",
+        "CRDT",
+        "graphics"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "31da991e-beec-4329-89db-145a2b024aba",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design Netflix",
+      "body": "Adaptive streaming + recommendation UI.",
+      "answer": "PLAYBOOK: VIDEO (HLS/DASH for adaptive bitrate; <video> with Media Source Extensions for advanced control). PREFETCH (next-up episode buffered while watching). DATA SAVER mode (lower bitrate on cellular). UI: row-based browse, lazy-load row contents, hero on first row. SEARCH (server-side, autocomplete-style). WATCHLIST (sync across devices). RESUME WATCHING (per-device + cross-device; store last position every N seconds). RECOMMENDATIONS (rows are recommendation 'shelves'; each row fetched independently for cache-friendliness). OFFLINE (downloaded titles, DRM constraints). A11Y (captions, audio description, keyboard nav).",
+      "difficulty": "hard",
+      "company": [
+        "Netflix"
+      ],
+      "tags": [
+        "system-design",
+        "streaming",
+        "media"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "0348738d-f16a-489f-b801-116127b37c7a",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design Amazon (e-commerce PDP + search + cart + checkout)",
+      "body": "Comprehensive.",
+      "answer": "PLAYBOOK: PDP (SSG-with-ISR for SEO and speed; price/stock fetched client-side for freshness; image gallery lazy load with priority hint on first image for LCP). SEARCH (server-side; autocomplete via separate fast endpoint; faceted filters preserve URL state). CART (Redux/Zustand normalized; persisted to server for logged-in, localStorage for anon; merge strategy on login). CHECKOUT (multi-step, server-side validated at each step, idempotency keys on payment). PERFORMANCE (Core Web Vitals are revenue-tied; aggressive code-splitting, edge caching, RSC for non-interactive). PERSONALIZATION (recommendations injected via separate endpoint to avoid blocking primary content). A/B TESTING (server-side flag at edge).",
+      "difficulty": "hard",
+      "company": [
+        "Amazon",
+        "Stripe"
+      ],
+      "tags": [
+        "system-design",
+        "ecommerce",
+        "performance"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "598175cb-eb70-4754-aab6-106e45872d71",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design a multi-brand e-commerce platform",
+      "body": "YOUR STORY. The Wowcher migration in interview form.",
+      "answer": "PLAYBOOK (YOUR STORY): BRAND CONFIG (folder per brand with theme tokens, content, feature toggles, routing rules; replaces env-based brand resolution). FEATURE FLAGS (typed config imported from brands/<brand>/features). EDGE BRAND RESOLUTION (Cloudflare Worker reads cookie/host/path → routes to right backend or sets brand context). SHARED COMPONENT LIBRARY (brand-agnostic primitives styled via CSS vars). BRAND-SPECIFIC OVERRIDES (composition pattern: shared logic + per-brand component for any brand-divergent UI). DEPLOYMENT (canary by brand — Wowcher.com canary at 5%→100% in 8 phases). MONITORING (per-brand: normalised revenue ratio = (MB rev/MB sessions) ÷ (WUK rev/WUK sessions); alerts on regression). BLUE/GREEN (keep old stack warm 2-3 weeks post-cutover for fast rollback). Mention: 1056 divergent files audited via compare.sh and analyze_diff.py, 50% code duplication reduction.",
+      "difficulty": "hard",
+      "company": [],
+      "tags": [
+        "system-design",
+        "multi-brand",
+        "story-bank",
+        "migration"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "01ea770a-a76a-4a82-910b-c2df0de0dc9c",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design a real-time collaborative whiteboard (Excalidraw/Miro)",
+      "body": "Drawing + multiplayer.",
+      "answer": "PLAYBOOK: CANVAS rendering with layer composition. PERSIST shapes as JSON, not pixels. CRDT for shapes (Yjs). PRESENCE for cursors. UNDO/REDO per-user. EXPORT to PNG/SVG. INFINITE CANVAS (pan/zoom; rendering culling outside viewport). PERFORMANCE (debounced re-render, OffscreenCanvas for heavy paths). PLUGINS / EMBEDS (iframe sandbox).",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "Excalidraw"
+      ],
+      "tags": [
+        "system-design",
+        "canvas",
+        "collaboration"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "7554093d-6250-4d78-a258-928875dc89ed",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design an AI chat application with multiple models and tools",
+      "body": "Very relevant for AI roles.",
+      "answer": "PLAYBOOK: BLOCK MODEL — each assistant turn is array of typed blocks (text, tool_use, tool_result, thinking). STREAMING — SSE or fetch ReadableStream; parse and append per-block. TOOL CALLS — show as collapsible cards; show args, status, result; never partial-render args. MODEL SWITCHER — per-conversation model setting; show capability differences. ATTACHMENTS — upload pipeline with progress; store as base64 or external URL with auth. ARTIFACTS / CODE OUTPUTS — pop-out panel; iframe sandbox if executable. HISTORY — sidebar with conversation list, search, filter, rename, delete, share. SETTINGS PER CONVERSATION — system prompt, model, temperature, tools enabled. COST/TOKEN COUNTER — running tally for transparency. KEYBOARD SHORTCUTS — Cmd+K command palette, Cmd+/ for slash commands, shift+enter for newline. MOBILE — full screen, swipe to see sidebar.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "system-design",
+        "AI",
+        "streaming",
+        "chat"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "7c8b8726-13bd-4d8b-a129-40f398917712",
+      "roundType": "FE_SYSTEM_DESIGN_APPLICATION",
+      "title": "Design Notion (block-based docs with databases)",
+      "body": "Hard.",
+      "answer": "PLAYBOOK: BLOCK DOCUMENT MODEL (each block has type, props, children). DATABASE VIEWS (table, kanban, gallery, calendar) projected from same underlying data. PERMISSIONS (per-workspace, per-page, inherited from parent). SEARCH (server-side, indexes block contents + properties). OFFLINE (IndexedDB cache of recent pages). SYNC (CRDT or OT; Notion uses operational transforms). PAGE LOAD: progressive — render skeleton, then top blocks, then everything; defer images. EXPORT (markdown, PDF). MOBILE optimizations differ heavily.",
+      "difficulty": "hard",
+      "company": [
+        "Notion"
+      ],
+      "tags": [
+        "system-design",
+        "blocks",
+        "databases"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "424a8850-dec7-4465-a8ad-0770ae5d6a92",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Universal playbook: how to approach any AI-assisted coding round",
+      "body": "Reference card. Read this before doing any of the scenario questions.",
+      "answer": "METHODOLOGY (the answer):\n\n1. READ FIRST, CODE SECOND. Spend 5-10 mins reading the codebase. List files. Skim each. Understand data flow before touching anything.\n\n2. RUN THE TESTS IMMEDIATELY. See what passes and fails. Failing tests tell you both what's expected and what's broken.\n\n3. STATE YOUR PLAN OUT LOUD before touching the AI. \"I'm going to add X to Y, write tests for Z, verify by running A.\" This gives the interviewer evidence of judgment.\n\n4. USE THE AI AS A TYPIST, NOT A THINKER. \"Write me the boilerplate for X\" is great. \"How should I solve this problem?\" is grading-down.\n\n5. VERIFY EVERY AI OUTPUT. Read it. Run it. Check edge cases. Especially watch for HALLUCINATED METHODS in libraries the AI knows less well, INCONSISTENT TYPES, SUBOPTIMAL ALGORITHMS, MISSING EDGE CASES.\n\n6. NARRATE AI INTERACTIONS. \"I'm about to ask Claude to scaffold the parser — I expect it to give me a basic regex split, but I'll need to handle quoted strings myself, so I'll review carefully.\"\n\n7. ITERATE IN SMALL STEPS. Build → test → review → next. Never let the AI generate 200 lines you haven't read.\n\n8. WHEN THE AI IS WRONG, SAY SO OUT LOUD. \"The AI suggested Array.prototype.flat but package.json shows Node 14 — I'll do it manually.\"\n\nWHAT YOU ARE GRADED ON: critical reading of AI output, engineering judgment, narration of reasoning, ownership of every line.\n\nWHAT YOU ARE NOT GRADED ON: how often you use the AI, prompt eloquence, typing speed.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic",
+        "OpenAI",
+        "Apple",
+        "Canva",
+        "Shopify"
+      ],
+      "tags": [
+        "AI-assisted",
+        "methodology",
+        "meta"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "c1c62b04-62e7-44a1-9ddb-31b9c5edc5a2",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Build feature: add 'save for later' to existing e-commerce cart",
+      "body": "You inherit a Next.js + TypeScript e-commerce app. Files: Cart.tsx, Product.tsx, CartContext.tsx, types.ts. Cart has add/remove/setQty. Implement: move item from cart to saved list and back. UI: 'Save for later' button on cart row; 'Saved for later' section below cart; 'Move to cart' button on saved row.",
+      "answer": "PLAYBOOK:\n1. READ. CartContext is a useReducer with actions ADD, REMOVE, SET_QTY. Items keyed by productId. Types.ts has CartItem.\n2. PLAN OUT LOUD: \"I'll mirror the cart state with a savedItems slice in the same context. Add SAVE_FOR_LATER and MOVE_TO_CART actions. Then UI: button on CartItem row, new SavedItems component below cart.\"\n3. AI PROMPT: \"In CartContext.tsx, extend the state shape to include `savedItems: Record<string, CartItem>` alongside `items`. Add reducer cases SAVE_FOR_LATER (move from items to savedItems by productId) and MOVE_TO_CART (reverse). Keep the existing API stable.\"\n4. VERIFY: read output, ensure the existing ADD/REMOVE/SET_QTY still work, add tests.\n5. UI: \"Now add a 'Save for later' button to the CartItem row that dispatches SAVE_FOR_LATER. Create a SavedItems component that maps over context.savedItems and renders each with a 'Move to cart' button.\"\n6. EDGE CASES: what if user saves the same product twice while it's already in saved? Preserve qty or reset? Confirm with interviewer.\n7. PERSIST: extend localStorage serializer to include savedItems.\n\nNARRATE while coding. Don't accept AI's first try blindly — verify the state shape change didn't break the existing types.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Shopify"
+      ],
+      "tags": [
+        "AI-assisted",
+        "build-feature",
+        "state-management"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "e6c5c3f0-54ed-4130-9cc3-8e4bd7f52c95",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Build feature: add typing indicators to a chat UI",
+      "body": "You inherit a chat app with WebSocket already connected. Implement: when other users in the channel are typing, show 'X is typing...' (or 'X, Y are typing...' for multiple).",
+      "answer": "PLAYBOOK:\n1. READ. Find the WebSocket message handler. Find the chat component. Identify how messages are added to state.\n2. PLAN: \"I'll add a 'typing' event type. Client sends it on input change (throttled to once per 3s). Server broadcasts to channel. UI shows recent typers with a 5-second decay.\"\n3. AI PROMPT (CLIENT SEND): \"Add a throttled emit of `{ type: 'typing', userId }` on every input change. Use the existing socket instance. Throttle to once every 3 seconds.\"\n4. VERIFY: throttle implementation — does it leading-edge? Decide explicitly.\n5. AI PROMPT (CLIENT RECEIVE): \"In the WS message handler, add case 'typing': maintain a Map<userId, lastTypingTime>. Add a setInterval that prunes entries older than 5 seconds.\"\n6. UI: render typer list with proper plural ('Alice is typing', 'Alice and Bob are typing', 'Alice, Bob, and 2 others are typing').\n7. EDGE: don't show yourself as typing; clear typer when they send a message.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Meta"
+      ],
+      "tags": [
+        "AI-assisted",
+        "build-feature",
+        "realtime",
+        "AI-relevant"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "c227b743-4b1a-4133-800e-f2e5cb5b2595",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Build feature: add auto-complete table of contents to a markdown blog",
+      "body": "Blog with MarkdownRenderer.tsx that takes markdown string. Implement: TableOfContents component that extracts headings and renders a clickable nav synced with scroll.",
+      "answer": "PLAYBOOK:\n1. READ. Renderer uses unified/remark/rehype.\n2. PLAN: \"I'll add an AST walker that pulls headings with their id. Render as nested list. Use IntersectionObserver to highlight current section.\"\n3. AI PROMPT: \"Write a function `extractHeadings(markdown: string): Heading[]` where Heading = { level, text, id }. Use unified+remark-parse, walk the AST for type='heading', generate slug ids using github-slugger.\"\n4. VERIFY: check that the IDs match what the renderer produces — if they don't, nav clicks won't scroll. Look at how the renderer generates IDs and reuse the SAME mechanism.\n5. UI: nested list reflecting heading levels. position:sticky in sidebar.\n6. SCROLL SYNC: IntersectionObserver on each heading. The 'current' section is the topmost intersecting. Throttle updates.\n7. EDGE: duplicate heading text → IDs collide. Slugger handles with -1, -2 suffixes if implemented correctly. Verify.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "build-feature",
+        "parsing"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "dd6b7faf-06e2-44a2-8a9e-d41c3dd86a4d",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Build feature: add dark mode that respects system preference",
+      "body": "You inherit a Tailwind app. Implement: toggle in settings, defaults to system, persists across reload.",
+      "answer": "PLAYBOOK:\n1. READ. Tailwind config — is `darkMode: 'class'` or `'media'`? If 'media', it auto-follows system. To support user override, change to 'class'.\n2. PLAN: \"State = 'light' | 'dark' | 'system'. Apply class='dark' on html when computed value is dark. Listen to prefers-color-scheme media query so system mode follows.\"\n3. AI PROMPT: \"Write a useDarkMode hook with state 'light' | 'dark' | 'system', defaulting to 'system'. Persist to localStorage. Apply 'dark' class to html element when effective value is dark. Listen to (prefers-color-scheme: dark) changes.\"\n4. VERIFY: SSR safety — useEffect to read localStorage on client. First paint flash: inline a small script in <head> to set the class before React hydrates.\n5. EDGE: storage event from another tab → sync across tabs.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "build-feature",
+        "theming"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "9f7c4d21-cc9e-4692-b753-0f1da76bc71f",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Build feature: undo toast for destructive actions",
+      "body": "Existing app with confirm-dialog on delete. Replace with optimistic delete + 5-second undo toast.",
+      "answer": "PLAYBOOK:\n1. PLAN: \"Optimistic flow: remove from UI immediately, schedule actual API call after 5s. Toast with 'Undo' button. Click undo → cancel pending call, restore. Otherwise → fire delete.\"\n2. AI PROMPT: \"Implement an `optimisticDelete(item)` function that: (1) removes from local state immediately, (2) schedules an API call after 5000ms, (3) shows a toast with an Undo button. Undo cancels the scheduled call and restores the item. Returns a promise that resolves when the operation is finalized.\"\n3. VERIFY: race conditions — what if user navigates away while pending? Either commit on unmount or store pending in a context that survives. What about closing tab — fire beacon API or accept loss.\n4. EDGE: multiple deletes in quick succession — each has its own 5s timer? Stack them in the toast component? Confirm UX with interviewer.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "build-feature",
+        "UX"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "043ec2d9-c376-425f-87c9-ddafb033fc3e",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Extend partial: maze solver — BFS exists, add DFS, then Dijkstra, then diagonal movement",
+      "body": "Codebase has Maze class with grid, start, end, and `bfs()` method that returns shortest path. Extend progressively as interviewer adds constraints.",
+      "answer": "PLAYBOOK:\nSTAGE 1 - DFS:\n- Plan: \"DFS is a stack instead of queue. Mirror the BFS structure.\"\n- DON'T ask AI for the algorithm. ASK: \"Add a method `dfs(start, end)` to Maze with the same signature as bfs but using DFS. Show me the method shape; I'll fill in the algorithm.\"\n- Then implement DFS yourself, narrating. This shows judgment.\n\nSTAGE 2 - DIJKSTRA (weighted edges):\n- Plan: \"Swap queue for priority queue. Track distances. Same structure.\"\n- Check: does Node have a heap? Likely not. AI PROMPT: \"Scaffold a min-heap class with push, pop, peek, size. I'll integrate it.\"\n- VERIFY the heap with a quick unit test before using it in Dijkstra.\n\nSTAGE 3 - DIAGONAL:\n- Just changes the neighbour generation function. AI PROMPT: \"Update getNeighbors to include diagonal moves with cost sqrt(2) (or 14 if using integer costs and cardinal=10).\"\n- VERIFY by running existing tests for cardinal-only; should still pass with diagonal disabled flag.\n\nNARRATE constantly. The interviewer wants to see you doing the algorithmic thinking; the AI does the boilerplate.",
+      "difficulty": "hard",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "AI-assisted",
+        "extend",
+        "algorithms"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d80a6f02-e699-4ab2-ae2f-49fb0da1b67e",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Extend partial: rate limiter — fixed window exists, add sliding window, then distributed",
+      "body": "Codebase: RateLimiter class with `allow(userId): boolean`, fixed window of 100 req/min. Extend progressively.",
+      "answer": "PLAYBOOK:\nSTAGE 1 - SLIDING WINDOW (LOG):\n- Plan: \"Sliding window via log: store timestamps per user, on allow() prune > windowMs old, count, accept if < limit.\"\n- AI PROMPT: \"Add `allowSliding(userId): boolean` that uses a sliding window of 60s. Show me the data structure choice; I'll review.\"\n- VERIFY: memory grows with traffic — flag this. Suggest alternative: sliding-window counter (two buckets, weighted).\n\nSTAGE 2 - SLIDING WINDOW (COUNTER, memory-efficient):\n- Plan: \"Two buckets: current minute, previous minute. Weight previous by how far into current we are.\"\n- This is subtle math. Do it yourself. AI can scaffold the structure.\n\nSTAGE 3 - DISTRIBUTED (REDIS-BACKED):\n- AI PROMPT: \"Refactor allowSliding to use Redis for state. Use ZSet of timestamps with ZREMRANGEBYSCORE for pruning and ZCARD for count. Use a pipeline to make it atomic.\"\n- VERIFY: race conditions — multiple instances reading-then-writing creates a TOCTOU bug. Use Lua script or MULTI/EXEC. Discuss this OUT LOUD.\n- COST: at high QPS, ZSet operations are expensive. Mention HyperLogLog or token bucket as alternatives.",
+      "difficulty": "hard",
+      "company": [
+        "Stripe",
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI-assisted",
+        "extend",
+        "distributed-systems",
+        "rate-limiting"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "75efd6c2-76cb-4a1e-897a-c5504d1bca35",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Extend partial: state machine — basic transition exists, add guards and actions",
+      "body": "Codebase: StateMachine class with states and `transition(event)` method. Extend to support guards (preconditions) and actions (side effects on transition).",
+      "answer": "PLAYBOOK:\n1. READ existing API. transition() probably looks up event in current state's transitions and switches.\n2. PLAN: \"Guards = optional predicate per transition; if returns false, transition rejected. Actions = optional callback fired during transition.\"\n3. AI PROMPT: \"Extend the transitions config to optionally include `guard: (context) => boolean` and `action: (context, event) => void`. Update transition() to call guard, skip if false, then fire action before changing state.\"\n4. VERIFY: where does `context` come from? Add context to constructor. What if action throws? Discuss: rollback or commit + log?\n5. FOLLOW-UP often asked: hierarchical states (XState-like). Defer unless asked.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "extend",
+        "state-machine"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "09bb89f7-c9f8-4a38-a812-589c9c014cef",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Extend partial: promise pool — concurrency exists, add priority queue",
+      "body": "Codebase: PromisePool that runs N tasks at a time. Extend so tasks have priority — high-priority tasks jump the line.",
+      "answer": "PLAYBOOK:\n1. READ. Existing uses a FIFO queue (probably just shift() from array).\n2. PLAN: \"Replace queue with min-heap keyed on priority. When a worker frees, take highest priority pending.\"\n3. AI PROMPT: \"Scaffold a min-heap class. I want enqueue(task, priority) and dequeueHighest().\"\n4. INTEGRATE yourself — that's where judgment shows. AI gives you the heap, you wire it in.\n5. EDGE: priorities aren't a global queue between batches — once a task starts, it can't be preempted. Mention this trade-off out loud.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "extend",
+        "concurrency",
+        "data-structures"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "f92db2f6-acd3-4447-bdff-a784921ca475",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Extend partial: event emitter — basic on/off/emit exists, add wildcard listeners",
+      "body": "EventEmitter has on(event, fn), emit(event, ...args). Add support for `on('*', fn)` (all events) and `on('user.*', fn)` (namespace).",
+      "answer": "PLAYBOOK:\n1. READ existing structure: probably Map<event, Set<fn>>.\n2. PLAN: \"Two extra maps: wildcardListeners (for '*') and patternListeners (for 'a.*' style). On emit, also call all matching.\"\n3. AI PROMPT: \"Update emit to also invoke wildcard listeners and any pattern listeners whose pattern matches the event name. Pattern syntax: 'foo.*' matches 'foo.bar' but not 'foo.bar.baz'.\"\n4. VERIFY: pattern semantics — does '*' alone match 'a.b'? Confirm spec. Edge case: same listener registered on both specific and wildcard — should fire twice (or once if dedup is desired).",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "extend",
+        "pubsub"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "0d5b1217-9942-4c06-a6db-ea545dcb7724",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: failing calculator tests",
+      "body": "Inherited Calculator class. 7 of 12 tests fail. Find and fix.",
+      "answer": "PLAYBOOK:\n1. RUN TESTS. Read the failure list. Don't open the code yet — read test names first.\n2. Failing test names tell you what's broken: e.g. 'handles parentheses' failing → parentheses not implemented or broken; 'handles negative numbers' failing → sign handling bug.\n3. PICK simplest failing test. Read its assertion. Trace through code to find where it diverges.\n4. Common bugs: order of operations (multiplication/division before addition), off-by-one (last token skipped), missing edge case (empty input, single operand), floating-point comparison (use Number.EPSILON or toBeCloseTo).\n5. DON'T pattern-match a fix from AI — trace first, then fix. Then re-run tests to confirm exactly that test passes without breaking others.\n6. NARRATE: \"Test 'handles 2+3*4' expects 14. Current returns 20. That tells me operator precedence is missing — let me find where parsing builds the AST.\"\n\nDO NOT ask AI to \"fix all the bugs\" — that's the wrong instinct. Use AI to: explain a stack trace, show idiomatic JS for parsing, scaffold a test for an edge case you found.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "parsing"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "0e04e695-76e4-46f4-870e-21b69be74eda",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: React app with memory leak — find and fix",
+      "body": "App grows in memory over time. Profile and fix.",
+      "answer": "PLAYBOOK:\n1. REPRO: open Chrome DevTools → Memory → record allocations over time. Click around. See growth.\n2. SUSPECT LIST: (a) event listeners not cleaned up in useEffect, (b) intervals/timeouts not cleared, (c) subscriptions to stores not unsubscribed, (d) refs holding stale closures, (e) large objects in state that should be in ref, (f) infinite re-renders causing fiber-tree allocation.\n3. AI PROMPT: \"Audit this useEffect for cleanup issues\" + paste effect — useful for tedious checking.\n4. VERIFY each suspect by commenting it out and re-profiling.\n5. Most common in 2026: WebSocket onmessage handlers attached but never removed; subscribe to a store in component but no unsubscribe on unmount; setInterval started but not cleared.\n\nDON'T accept AI's first diagnosis without profiling. Memory issues need data, not guessing.",
+      "difficulty": "hard",
+      "company": [
+        "Meta",
+        "Anthropic"
+      ],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "React",
+        "memory"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "eb6d56f4-1212-47f4-a997-c3c5700333d3",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: pagination returns duplicate items on rapid page clicks",
+      "body": "Race condition.",
+      "answer": "PLAYBOOK:\n1. REPRO. Click page 2, immediately click page 3. Observe duplicates from page 2 still rendered.\n2. DIAGNOSE: out-of-order fetch responses. Page 2 fetch was slower; page 3 returned first, then page 2 overwrote with page 2 results.\n3. FIX OPTIONS:\n   - AbortController on each fetch, abort previous on new (preferred)\n   - Sequence guard: each request has an ID, only accept response whose ID matches latest\n   - React Query / SWR with proper query keys (does the right thing automatically)\n4. AI PROMPT: \"Add AbortController to this useEffect that fetches page N. Abort on dep change.\"\n5. VERIFY: rapid clicks no longer cause stale renders.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "race-conditions"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "516efd87-a3de-4f65-a7a0-bf2e96863cbe",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: useEffect re-running infinitely",
+      "body": "Classic.",
+      "answer": "PLAYBOOK:\n1. Look at the deps array. Most common cause: an object or array dep that's recreated each render.\n   ```js\n   useEffect(() => {...}, [{foo: 'bar'}])  // new object every render\n   useEffect(() => {...}, [items.filter(...)])  // new array every render\n   ```\n2. Less common: a function recreated each render that's also in deps.\n3. FIX: useMemo the object/array, useCallback the function. OR restructure to avoid the dep — e.g., destructure primitive values.\n4. AI is useful here: paste the effect, ask \"why might this run infinitely?\" — AI is usually right because this is a well-known pattern.\n5. VERIFY: add a console.log inside the effect, count invocations.",
+      "difficulty": "easy",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "React",
+        "hooks"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "2d87b6f0-9796-4d05-a6cf-c5eb089bf865",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: dates display wrong for users outside London",
+      "body": "Timezone bug.",
+      "answer": "PLAYBOOK:\n1. Audit: where does the app handle dates? Find every `new Date()`, `getDate()` (LOCAL), `getUTCDate()`, `toLocaleString()`, formatting calls.\n2. Common bug: server sends ISO string in UTC; client formats with `toLocaleDateString()` (local timezone) — fine. But somewhere code does `new Date(isoString).getDate()` and stores that as a 'day' — wrong if user is in non-UTC zone.\n3. FIX: store UTC everywhere. Format with explicit timezone using Intl.DateTimeFormat or date-fns-tz. Be explicit about which 'day' you mean.\n4. AI PROMPT: \"Audit this function for timezone bugs\" — useful for tedious files.\n5. VERIFY: set computer to Tokyo time, reload, see if dates make sense.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "timezones"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "2a8b7b94-9a34-40b7-888e-d3d099e30ef2",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: tests pass locally, fail in CI",
+      "body": "Common.",
+      "answer": "PLAYBOOK:\n1. Compare environments: Node version, OS, timezone, locale.\n2. Common causes:\n   - TIMEZONE: tests assume local time. Fix: set `TZ=UTC` in CI; mock Date.\n   - RANDOM DATA: tests use Math.random or Date.now. Fix: seed RNG, mock Date.now.\n   - PARALLEL POLLUTION: tests share global state (DB, file system, env vars). Fix: isolate per test.\n   - TIMING: setTimeout-dependent tests; CI is slower. Fix: use waitFor, avoid fixed timeouts.\n   - DEPENDENCY VERSIONS: lockfile vs package.json drift. Fix: `npm ci` not `npm install`.\n3. AI PROMPT: \"What CI-specific issues could cause this test to fail?\" + paste test. Useful for brainstorming.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "CI"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "4d5351c1-e44d-48fb-809f-ed0a7da37faa",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Debug: login redirects in a loop between /login and /dashboard",
+      "body": "Auth race condition.",
+      "answer": "PLAYBOOK:\n1. Trace: what does each route check? /dashboard checks for token, redirects to /login if missing. /login checks for token, redirects to /dashboard if present. Loop happens when token state is inconsistent between checks.\n2. Common causes:\n   - Empty string token: one check treats `'' as falsy, another as 'present'.\n   - Async state not propagated: token set in localStorage but React state not yet updated when navigation happens.\n   - Middleware checks cookie; client checks localStorage. Out of sync.\n3. FIX: single source of truth for auth. Loading state during initial auth check — don't redirect until you know.\n4. AI is useful to talk through the flow: \"explain this auth check\" + paste — gets you a checklist of what could go wrong.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "debug",
+        "auth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "e1a4e128-7c41-49d6-b42d-f68cc2179ec0",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Meta: 'Why did you choose this AI prompt over another?'",
+      "body": "Asked during the round when you prompt the AI.",
+      "answer": "PLAYBOOK: Explain INTENT. Examples: \"I gave the exact function signature because I don't want the AI inventing a different API.\" \"I asked it to explain its plan before writing code so I can intervene before it goes off-track.\" \"I scoped the prompt to just the parser logic — I'll handle integration myself because I want to keep that code clean.\"",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Anthropic",
+        "Canva"
+      ],
+      "tags": [
+        "AI-assisted",
+        "meta",
+        "prompting"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "5e4a455e-a89f-4da4-8705-e1890c5dbdef",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Meta: 'The AI gave you code that works but doesn't match the codebase style. What do you do?'",
+      "body": "Asked during the round.",
+      "answer": "PLAYBOOK: Bring it in line. Mention out loud: \"This uses class syntax but the rest of the file uses functions. I'll refactor before submitting. Consistency is part of code quality.\" Don't just leave it — that signals you don't care about the existing code.",
+      "difficulty": "easy",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "meta",
+        "code-quality"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "0b495b07-4c2d-47e0-bd5f-4a00f1fe4e62",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Meta: 'The AI confidently claims library X has method Y. You're not sure. How do you check?'",
+      "body": "Common scenario during the round.",
+      "answer": "PLAYBOOK: Don't trust, verify. Options: open the docs in a tab, check node_modules source, write a quick test, or use AI's web-enabled mode for grounding. Out loud: \"I'm not familiar with this method — let me check the docs before relying on it.\" Hallucinated methods are the #1 AI-failure mode in coding rounds.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Apple"
+      ],
+      "tags": [
+        "AI-assisted",
+        "meta",
+        "verification"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ff41c66d-e01d-47a7-9b32-f56ab5009872",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Meta: 'You're stuck. The AI's suggestions aren't helping. What's your move?'",
+      "body": "Common pressure moment.",
+      "answer": "PLAYBOOK: Stop using the AI for a moment. Restate the problem from scratch — to yourself, then to the interviewer, then maybe to the AI with a fresh prompt. Often the problem is YOUR understanding, not the AI's capability. Better questions yield better answers. If still stuck, ask the interviewer for a hint — that's not a failure, it's a normal interview move.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "meta",
+        "problem-solving"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ad8091a9-895c-4567-961c-6568b683d11b",
+      "roundType": "AI_ASSISTED_CODING",
+      "title": "Meta: 'How much should you rely on AI in this interview?'",
+      "body": "Sometimes asked directly.",
+      "answer": "PLAYBOOK: The honest answer interviewers love: \"As much as it helps me ship correct code I understand, and no more. I'd write a `for` loop myself; I'd ask AI to scaffold a class hierarchy. The line is: am I learning anything by typing this, or am I just typing?\"",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "AI-assisted",
+        "meta",
+        "philosophy"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "91dcb9fb-2bd8-4d3d-bd72-ba73f0781761",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What is a large language model, in one paragraph?",
+      "body": "Foundational. They want clarity.",
+      "answer": "ANSWER: A transformer-based neural network trained on huge text corpora to predict the next token given a sequence. At inference, it samples tokens one at a time conditioned on the prompt + previously generated tokens. 'Knowledge' is compressed into the weights during training; 'reasoning' is an emergent property of next-token prediction at scale. The model doesn't think, plan, or remember between calls — every API call is stateless except for what you put in the context.",
+      "difficulty": "easy",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "AI",
+        "fundamentals",
+        "LLM"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d8b817e6-880b-4943-8247-0ed92d75bd12",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What is a token? Why does it matter?",
+      "body": "Foundational.",
+      "answer": "ANSWER: A token is the unit the model operates on — roughly 4 chars or 0.75 words in English. Tokenization uses BPE (byte-pair encoding) or similar. Why it matters: (1) pricing is per-token, (2) context windows are token-bounded (200k Claude, 128k GPT-4), (3) rare words become multiple tokens, hurting both cost and quality, (4) generation latency scales with output tokens.",
+      "difficulty": "easy",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "fundamentals",
+        "tokens"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "b90601fc-7029-41de-adc1-70299f65e6d5",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Why do LLMs hallucinate, and what do you do about it?",
+      "body": "Core AI engineering question.",
+      "answer": "ANSWER: They hallucinate because they're next-token predictors, not knowledge bases. When asked something they don't have well-grounded weights for, they generate plausible-looking text. Mitigations layered: (1) RAG — give them grounded context from authoritative sources; (2) constrained generation — function calling, JSON schema, structured output; (3) eval-based prompt iteration — measure hallucination rate, iterate; (4) lower temperature for factual tasks; (5) require citations and verify them; (6) for high-stakes domains, route to human in the loop or refuse out-of-scope queries.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "AI",
+        "hallucinations",
+        "safety"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "1e8dbd68-c88b-429f-a74d-4e72dd115acf",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Explain RAG (Retrieval-Augmented Generation) in one paragraph",
+      "body": "Most common 2026 interview topic.",
+      "answer": "ANSWER: Embed user query, retrieve top-k relevant chunks from a vector store, stuff into prompt as context, generate. The model 'knows' facts it wasn't trained on because they're in the prompt. Key benefits: knowledge updates without retraining, citations possible, smaller models can handle complex domains. Key costs: retrieval quality dominates final quality, latency increases with retrieval step, prompt cost increases with context.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere",
+        "Faculty AI"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "fundamentals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "fc3b252c-70b8-43c3-beae-464d8ca762a7",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Walk through a RAG pipeline for customer support over a product manual",
+      "body": "Common system design question.",
+      "answer": "ANSWER: INGESTION: parse manual → split into ~500-token overlapping chunks (paragraph-aware) → embed each (OpenAI text-embedding-3-large or open-source like BGE) → store in vector DB (Pinecone, Weaviate, pgvector) with metadata (source, section, last_updated). QUERY TIME: embed user query → vector search top-k (10-20) → optionally rerank with cross-encoder (Cohere Rerank or BGE reranker) → format into prompt with citations like '[1] page 23: <chunk>' → LLM generates with instruction to cite → parse citations from output → return answer with linked sources. EVALUATION: golden set of (question, expected sources, expected answer); measure retrieval recall and generation faithfulness.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "system-design"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "3ea8db91-946b-4ffe-a2c2-cbf028051693",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Your RAG system gives wrong answers even when the right chunk is in the vector DB. Diagnose.",
+      "body": "Common 2026 interview probe.",
+      "answer": "ANSWER: Usually retrieval not generation. CHECK FIRST: was the right chunk in top-k? If not: chunking strategy wrong (too big = noisy, too small = no context, no overlap = boundary loss), embedding model wrong domain, query needs rewriting (HyDE: generate hypothetical document for the query then embed THAT). If yes: model in context but ignoring it — try moving to start/end of context (lost-in-the-middle), use stronger instructions ('answer ONLY from the provided context'), require citations to enforce grounding. Always test retrieval and generation INDEPENDENTLY in evals.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "debugging"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "b3ad751b-407b-475e-9bb5-046492d32226",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What's chunking strategy? Trade-offs?",
+      "body": "Common follow-up to RAG.",
+      "answer": "ANSWER: Fixed-size (e.g., 500 tokens): simple, often splits mid-sentence — bad. Recursive (paragraph → sentence fallback): better semantic boundaries — current standard. Semantic (embed sentences, split where similarity drops): best quality, slow. Late-chunking (embed whole doc, chunk after): newest approach, preserves context. Overlap (50-100 tokens between chunks) preserves cross-boundary context at storage cost. Choose based on: doc structure (code? prose? Q&A?), retrieval precision needed, query type (specific vs broad).",
+      "difficulty": "medium",
+      "company": [
+        "Cohere",
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "chunking"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "53f58143-5db3-48df-afc7-c9ae4952c431",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "How do you evaluate a RAG system?",
+      "body": "Critical question for production AI roles.",
+      "answer": "ANSWER: Two metric families. RETRIEVAL: recall@k (does the right chunk appear in top-k?), MRR (mean reciprocal rank — how high is it?). Built from a labelled set of (query, correct_chunk_ids). GENERATION: faithfulness (does the answer match the chunk?), answer relevance (does it match the question?), citation accuracy (do citations actually support the claim?). Both can be scored with LLM-as-judge or human review for a sample. Tools: RAGAS, TruLens, Braintrust. Process: 50-200 examples covering the distribution, automate the run, track over time, gate PRs on regression.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "evals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ad80f6f4-4596-4f60-9b84-25aa625a002d",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What's reranking and when do you need it?",
+      "body": "Senior RAG question.",
+      "answer": "ANSWER: A second-stage cross-encoder model that scores query-chunk pairs after initial retrieval. Use when initial top-k retrieval has decent RECALL but the right answer isn't top-1 — reranking surfaces it. Cost: each rerank is one model call per (query, chunk) pair, so it's only practical for small k (10-50). Tools: Cohere Rerank, BGE reranker. Typical pipeline: retrieve top-50 by vector search → rerank to top-5 → send to LLM.",
+      "difficulty": "medium",
+      "company": [
+        "Cohere",
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "reranking"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "3f525332-7d3e-4b86-a01e-2475f346846e",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Why stream LLM responses to the UI?",
+      "body": "Frontend AI question.",
+      "answer": "ANSWER: PERCEIVED LATENCY. First-token latency might be 500ms; full response 5s. Streaming shows progress immediately, maintaining user trust. UX research shows time-to-first-token matters more than total time. Also: lets the user STOP early if the answer is going wrong, saving cost. And reduces 'is it broken?' anxiety on long generations.",
+      "difficulty": "easy",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "streaming",
+        "UX"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "98dc7f19-cbe7-4554-866c-900e0db3b931",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Implement streaming in React from an SSE endpoint",
+      "body": "Practical question.",
+      "answer": "ANSWER:\n```js\nasync function streamChat(prompt, onChunk, signal) {\n  const res = await fetch('/api/chat', {\n    method: 'POST',\n    body: JSON.stringify({ prompt }),\n    headers: { 'Content-Type': 'application/json' },\n    signal,\n  });\n  const reader = res.body.getReader();\n  const decoder = new TextDecoder();\n  let buffer = '';\n  while (true) {\n    const { done, value } = await reader.read();\n    if (done) break;\n    buffer += decoder.decode(value, { stream: true });\n    const lines = buffer.split('\\n');\n    buffer = lines.pop();  // keep incomplete line\n    for (const line of lines) {\n      if (line.startsWith('data: ')) {\n        const data = line.slice(6);\n        if (data === '[DONE]') return;\n        const parsed = JSON.parse(data);\n        onChunk(parsed);\n      }\n    }\n  }\n}\n```\nHook it up:\n```js\nconst ctrl = new AbortController();\nstreamChat(prompt, chunk => setMessages(m => updateLast(m, chunk)), ctrl.signal);\nreturn () => ctrl.abort();\n```",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "streaming",
+        "SSE",
+        "React"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "e1ca92f8-ba0e-402b-848a-f8955ac00c0a",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "The model returns tool calls mid-stream. How do you handle the UI?",
+      "body": "Senior AI frontend question.",
+      "answer": "ANSWER: BLOCK-BASED MESSAGE MODEL. Each assistant turn is an array of blocks: text, tool_use, tool_result, thinking. Stream into the CURRENT block; when a new block starts, close the old one. Show tool_use blocks as collapsible cards (name + args + status). NEVER show partial tool calls — wait for the block to complete before invoking the tool (partial JSON args are useless). Once tool result comes back, render as a sibling block. UI distinguishes: assistant text (chat bubble), thinking (collapsed by default, optional reveal), tool use (card), tool result (inline data or card).",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "streaming",
+        "tool-calls"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "22aef3c2-fa16-4b60-a131-8a33042b846f",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "A user wants to stop the stream mid-response. Design the UX and implementation.",
+      "body": "Common AI UX question.",
+      "answer": "ANSWER: UX: 'send' button becomes 'stop' button while streaming. Stop preserves the partial message in history (don't discard). Show partial as complete from the user's perspective but mark internally as 'stopped'. IMPLEMENTATION: AbortController on the fetch — abort cancels the stream. Server-side: if your inference provider supports cancel, propagate it (saves cost). Update the message status from 'streaming' to 'stopped'. Next user message picks up the conversation including the partial.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "streaming",
+        "UX"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8adeef1e-ada5-4f22-a7e3-6e9918cd4f99",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What is function calling? How is it different from giving the LLM access to a tool?",
+      "body": "Common.",
+      "answer": "ANSWER: Function calling = the LLM emits a STRUCTURED request to call a function (name + arguments JSON conforming to your schema). Your CODE executes it; you return the result; the LLM continues with the result in context. The LLM does NOT run the function — you do, in a controlled environment. 'Tool' is the broader term that includes function calling, code execution, web search, file ops, MCP servers — any external capability surfaced through the function-calling interface.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "tool-calls",
+        "function-calling"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8204839c-1d3a-4ff5-b519-cf47618a7847",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Design a UI for an agent that calls multiple tools in a loop",
+      "body": "Senior AI frontend question.",
+      "answer": "ANSWER: TIMELINE VIEW. Each step is a card: tool name, args (collapsed by default), status (running/success/failed), result (truncated with expand). Show progress (step N of estimated M, or just step N). Allow user to: PAUSE the loop, EDIT a step's args and re-run, RETRY a failed step, OVERRIDE a tool result (manually). Streaming: show 'calling X...' then result. Final answer in chat bubble at end. KEY DESIGN: agent transparency builds trust. Hiding tool calls is a red flag for users — they don't trust black boxes.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "agents",
+        "tool-calls",
+        "UX"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "2ce189c1-ab60-41fd-9c05-27be55c2a9d8",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What are the failure modes of agents in production?",
+      "body": "Senior AI question.",
+      "answer": "ANSWER: LOOPING (calls same tool over and over — token budget exhaustion). DRIFT (forgets goal over long context — periodically re-state in prompt). COST BLOWUP (no budget, no max-iterations). WRONG TOOL SELECTION (calls search when math was needed — better tool descriptions, examples). UNVERIFIABLE CLAIMS (agent did 'something' but you can't tell — require structured output, log everything). HALLUCINATED TOOL OUTPUTS (model invents what the tool returned — strict typing and parsing). CASCADING FAILURE (one bad tool result poisons the rest — validate each step). Mitigations: max iterations, token budgets, eval on tool-selection, traceability via LangSmith/Helicone/Braintrust.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "agents",
+        "production"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "b50c0229-559d-4676-8736-624cc279a706",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "How do you debug an agent that gave a wrong answer?",
+      "body": "Standard production AI question.",
+      "answer": "ANSWER: TRACE every step: prompt, tool calls, tool results, model outputs. Use a tracing tool (LangSmith, Helicone, Braintrust, custom). Find the FIRST step where things went wrong — usually a misread tool result or a hallucinated assumption. Then ask: was the prompt clear? Was the tool description sufficient? Was the tool result well-formatted? Did the model have enough context? Fix at the lowest layer (prompt > tool desc > model > guardrail). Add to eval set as a regression test.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "agents",
+        "debugging"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "da13c74a-a787-4c24-a07f-503b4064d52b",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "How do you evaluate an LLM feature you just shipped?",
+      "body": "Essential for AI roles.",
+      "answer": "ANSWER: BUILD LABELLED EVAL SET (50-200 examples covering the distribution, edge cases, known failure modes). SCORE OUTPUTS: exact match (for extraction), LLM-as-judge (for open-ended), human review (high-stakes or where automation is unreliable). TRACK METRICS over time. RE-RUN EVALS on every prompt change, model swap, retrieval change. MINIMUM BAR: 30 golden examples scored on every PR. GOAL: regressions caught before production.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "AI",
+        "evals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "5b25cca2-e5cc-4e74-b7c3-7ef29fdaf45f",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What's LLM-as-judge and what are its pitfalls?",
+      "body": "Senior eval question.",
+      "answer": "ANSWER: Use a strong LLM to score outputs of another LLM/system. PITFALLS: position bias (favors first answer in pairwise comparison), verbosity bias (favors longer answers), self-preference (favors its own family — e.g. GPT-4 prefers GPT-4 output), inconsistency (same input → different scores), brittleness (small prompt changes shift scores). MITIGATIONS: randomize position in pairwise, use multiple judges and aggregate, calibrate against human labels periodically, use a stronger judge than the system under test.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "evals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ff7eb92c-00d1-4634-ab59-dba26f78d480",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "A chat feature costs £10k/month. Cut it in half without losing quality.",
+      "body": "Cost optimization question — common at AI scaleups.",
+      "answer": "ANSWER (in order of impact): (1) SMALLER MODEL for routing or simple turns (Haiku, Gemini Flash, GPT-4o-mini) — often 10x cheaper, fine for classification or simple Q&A. (2) PROMPT CACHING (Anthropic, OpenAI both support) — system prompt is reused, only pay for the dynamic part. (3) CACHE common queries semantically — Redis with embedding-based dedup. (4) CUT PROMPT SIZE — audit system prompt for fluff, tighten RAG context budget. (5) BATCH where latency allows (Anthropic Batch API: 50% off). (6) SWITCH PROVIDERS — Gemini often cheapest for parity quality; open-source via Together/Anyscale for scale. (7) STREAMING reduces wasted tokens (user stops early).",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "AI",
+        "cost",
+        "production"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "513e92a2-879f-4de6-ad9c-4e714fbd13e8",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "First-token latency is 2 seconds. Users complain. What do you do?",
+      "body": "Latency question.",
+      "answer": "ANSWER: DIAGNOSE LAYERS: network (CDN, edge?), API queue (provider-side), model TTFT itself. MITIGATIONS: (1) EDGE DEPLOY — Cloudflare AI, Vercel AI SDK, Modal for proximity to user. (2) PROMPT CACHING — system prompt cached at provider cuts TTFT significantly. (3) SMALLER MODEL for first response, optionally hand-off — 'Let me think about that' from fast model while slow model works. (4) STREAMING — perceived latency = TTFT, not total time. (5) SPECULATIVE EXECUTION — fire requests early on partial user intent. (6) Check for token-per-input scaling — long prompts have longer TTFT.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "latency",
+        "production"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "2fd49c78-d353-4405-907e-d86ffea9e490",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "A medical app uses an LLM. How do you reduce harm?",
+      "body": "Safety question — Anthropic specifically loves this.",
+      "answer": "ANSWER: LAYERED DEFENSE. (1) RAG over verified medical sources, NEVER the model's parametric memory for facts. (2) Citation requirement — every claim links to a source. (3) Refuse out-of-scope queries via input classifier. (4) Refuse to give medical advice — route to disclaimer + 'consult a doctor' + emergency phone numbers where appropriate. (5) Output classifier for confidently-wrong patterns (low-confidence hedging, dangerous instructions). (6) Aggressive eval set including red team prompts and known dangerous patterns. (7) Human-in-the-loop for any output that will be acted upon. (8) Legal review of system prompt. (9) Log everything (with privacy in mind) for postmortems.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "safety",
+        "medical"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "1260c384-0f73-4a77-b61c-775e55029de9",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "A user is jailbreaking your assistant to write malware. How do you respond at the system level?",
+      "body": "Anthropic/OpenAI safety question.",
+      "answer": "ANSWER: LAYERED. (1) INPUT CLASSIFIER refuses before generation — fast and cheap. (2) SYSTEM PROMPT with explicit refusals for malware, weapons, etc. — but don't rely solely on this, it can be bypassed. (3) OUTPUT CLASSIFIER refuses after generation if something slipped through. (4) RATE LIMIT suspicious accounts (many refusals = suspicious). (5) LOG and review patterns for new attacks. (6) Don't rely on one layer — defense in depth. (7) Trust the model's training (Anthropic, OpenAI invest heavily in refusal training) but verify with red team. (8) Customer notification if patterns suggest compromise.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "safety",
+        "jailbreaks"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "032f356c-b9e5-4187-871e-d5f3c2c95243",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What's chain-of-thought prompting? When does it help?",
+      "body": "Common prompt engineering question.",
+      "answer": "ANSWER: 'Think step by step' — model writes its reasoning before the final answer. Helps on math, multi-step logic, and tasks where the answer benefits from intermediate work. With REASONING MODELS (o1, Claude thinking variants, DeepSeek R1), CoT is built into the model — happens in 'thinking tokens' before the response. With base models, EXPLICIT CoT (asking for steps in the prompt) is still useful and improves accuracy substantially on reasoning benchmarks. Caveat: increases token cost; for simple tasks, no benefit.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "prompting",
+        "CoT"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "a0982775-ee19-4fbc-b046-127bfaec29a2",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "You change a prompt and accuracy drops. How do you debug?",
+      "body": "Practical AI engineering.",
+      "answer": "ANSWER: RUN EVAL SET before and after — you can't manage what you can't measure. Look at WHICH EXAMPLES REGRESSED (vs which improved). Compare DIFFS between old and new prompts. Common causes: removed an anchoring example (few-shot regression), introduced a constraint that confuses the model, reordered instructions and model now follows different ones, added jargon the model interprets differently. Fix: revert and add one change at a time, re-eval each. This is why a 30-example minimum eval set is non-negotiable.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Cohere"
+      ],
+      "tags": [
+        "AI",
+        "prompting",
+        "evals"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ebf8a8b0-6de3-47ab-b4bc-6ab2fc96c52d",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "How would you A/B test two prompts in production?",
+      "body": "Senior AI product question.",
+      "answer": "ANSWER: FEATURE FLAG per user — stable assignment so a user doesn't bounce between prompts. LOG inputs, both outputs (compute both for fair comparison or accept asymmetric data), USER-VISIBLE METRIC (clicked, copied, regenerated, downvoted), INVISIBLE METRIC (cost, latency, refusal rate). Run for STATISTICAL POWER — calculate sample size in advance based on expected effect. Use chi-square or sequential test (avoid peeking). Watch for NOVELTY EFFECT — early users behave differently, run for a week minimum.",
+      "difficulty": "hard",
+      "company": [
+        "OpenAI",
+        "Stripe",
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "experimentation",
+        "production"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "030078c8-47f4-42f9-82bb-78470ad86fb2",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What's the difference between an 'AI engineer' and a 'frontend engineer who uses AI'?",
+      "body": "Positioning question — Anthropic/OpenAI specifically.",
+      "answer": "ANSWER: AI engineer OWNS the LLM-facing layers: prompt design, retrieval architecture, tool definitions, evaluation framework, cost/latency optimization, agent design. Frontend engineer who uses AI BUILDS product surfaces on top of those layers — streaming UI, tool-call UX, mobile chat, error states. The best teams have BOTH, or one person who can do both — which is what I'm positioning as. My Ticketmaster project required both: I designed the prompts and the UI; I evaluated outputs and shipped the React.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "positioning",
+        "career"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "19d49cd1-7009-407a-9a64-d403d5b7a640",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Explain prompt caching and when it helps",
+      "body": "Modern AI engineering question.",
+      "answer": "ANSWER: Provider feature (Anthropic, OpenAI, Gemini all support variants) that caches the static prefix of the prompt (system prompt, RAG context, etc.) so subsequent calls skip re-processing. Cuts cost by 50-90% on cache hits and improves TTFT significantly. Use when: system prompt is large and reused, RAG context is reused across turns, agent has a long history. Cache TTL is short (5 min Anthropic; cached at server until eviction). Doesn't help if every call is unique.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "AI",
+        "caching",
+        "cost"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "6d991efa-44a1-4feb-9ebb-82c892c93834",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What's MCP (Model Context Protocol) and why does it matter?",
+      "body": "Anthropic-specific. Asked at Anthropic interviews 2026.",
+      "answer": "ANSWER: Open protocol from Anthropic for connecting AI assistants to external systems (data sources, tools, APIs). Standardizes how an LLM-powered app discovers and calls external capabilities. Why it matters: instead of every AI app reimplementing connectors to Google Drive, Slack, GitHub, etc., they speak MCP and connect to any MCP server. For frontend: lets you build an assistant once that adapts to whatever the user has connected. Increasingly being adopted across the industry — supported in Claude, increasingly in Anthropic's competitors.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "MCP",
+        "Anthropic-specific"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "a5511ae0-f32b-48a1-bf6d-f74a0b695590",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "What is a hybrid search and why use it?",
+      "body": "RAG depth.",
+      "answer": "ANSWER: Combines vector (semantic) search with keyword (lexical, BM25) search. Catches cases where keywords matter (product names, error codes, dates, code identifiers) that pure embeddings miss. Vector search alone misses 'XF7-2024' if no XF7 in training. Keyword search alone misses 'how do I' phrasings. Combine: run both, fuse scores via reciprocal rank fusion (RRF) or a learned reranker. Modern vector DBs (Weaviate, Vespa, Elasticsearch) support hybrid out-of-the-box.",
+      "difficulty": "medium",
+      "company": [
+        "Cohere",
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "RAG",
+        "search"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "9afdb1ed-76cb-4d11-a03c-5b0d4ff9ffdd",
+      "roundType": "AI_PRODUCT_ENGINEERING",
+      "title": "Should you ship without evals?",
+      "body": "Anthropic loves this question.",
+      "answer": "ANSWER: Almost never for AI features. Without evals: regressions go undetected, prompt changes are vibes-based, you can't make data-driven model swaps, you can't measure improvement, debugging is anecdotal. MINIMUM BAR: 30 golden examples scored on every PR. Better: 200+ examples, automated, gating CI. Counter-argument: very early prototypes where the goal is direction-finding — fine to skip until you know what you're building. But ship to production without evals = ship a feature you can't maintain.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic"
+      ],
+      "tags": [
+        "AI",
+        "evals",
+        "engineering-discipline"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "23915840-8727-45b4-a4e7-acfbc977df90",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "Walk through optimizing a slow React page. What do you check first?",
+      "body": "Classic. Senior interview filter.",
+      "answer": "PLAYBOOK: MEASURE, DON'T GUESS. (1) Lighthouse → which Core Web Vital is bad (LCP, INP, CLS)? (2) React DevTools Profiler → which components are slow or re-rendering too often? (3) Network tab → blocking requests, large bundles, slow API. (4) Performance tab → long tasks, layout shifts, main-thread blocking. Then optimize the biggest offender. Don't pre-optimize. Always re-measure after each change.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Apple",
+        "Stripe"
+      ],
+      "tags": [
+        "performance",
+        "methodology"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "84c51b35-ac26-4fea-9cd4-344cf0e341c1",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "What is INP and how is it different from FID?",
+      "body": "Current Core Web Vital.",
+      "answer": "ANSWER: INP (Interaction to Next Paint) measures the SLOWEST interaction across the entire page lifetime — typing, clicks, taps. FID measured FIRST interaction only. INP reflects real user pain better. Improve INP by: breaking up long tasks (scheduler.yield, setTimeout chunks), isolating heavy work in Web Workers, using useTransition for non-urgent updates, avoiding synchronous layout reads after writes.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "performance",
+        "CWV",
+        "INP"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d12f5721-f267-420b-84e4-c43cce926bdc",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "LCP is 4 seconds. Walk through diagnostics.",
+      "body": "Common.",
+      "answer": "PLAYBOOK: IDENTIFY THE LCP ELEMENT (Lighthouse shows it). Most common: large hero image. FIX: <Image priority /> hint, preload link in head, srcset for responsive, modern format (AVIF/WebP), CDN. Other causes: render-blocking CSS/JS (defer/async), slow server response (TTFB > 1s — server-side issue or no CDN), late-loaded fonts (font-display:swap), client-side rendering of LCP (move to SSR).",
+      "difficulty": "medium",
+      "company": [
+        "Stripe",
+        "Meta"
+      ],
+      "tags": [
+        "performance",
+        "LCP"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8ca195a5-0b67-42eb-9829-b59235a9a90a",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "You're using Next.js. The build size is 5MB. How do you cut it?",
+      "body": "Common.",
+      "answer": "PLAYBOOK: `next build` shows per-route bundle size. (1) Identify heaviest bundles. (2) Dynamic import non-critical components (modals, charts, editors). (3) Replace heavy libs: moment → date-fns; lodash → modular imports or native. (4) Audit dependencies with `npm ls` or depcheck — find unused. (5) Tree-shaking: ensure libs are ESM and side-effect-free. (6) Remove polyfills if browser target excludes old browsers. (7) RSC for non-interactive — zero JS shipped. (8) Code-split per route via App Router.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Stripe"
+      ],
+      "tags": [
+        "performance",
+        "bundle-size"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "c005040b-5ac6-49e1-818e-a6876975613f",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "Multi-brand site: how do you avoid shipping all 4 brand bundles to every user?",
+      "body": "YOUR STORY.",
+      "answer": "PLAYBOOK (YOUR STORY): PER-BRAND BUILD via Vercel/CloudFront brand-specific deployments. EDGE BRAND RESOLUTION: Cloudflare Worker resolves brand from cookie/host/path, sets a header. Subdomain or path-based per brand. Conditional dynamic imports keyed on brand — `if (brand === 'superbreak') import('./Superbreak')`. Build-time DEAD CODE ELIMINATION via process.env.BRAND. Separate CDN paths so caching is brand-isolated. Net effect: a Wowcher user never downloads Superbreak JS.",
+      "difficulty": "hard",
+      "company": [],
+      "tags": [
+        "performance",
+        "multi-brand",
+        "story-bank"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d06721b5-ff9e-4ca1-ae92-de4818efa038",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "Scroll-heavy page drops frames. Diagnose.",
+      "body": "Common.",
+      "answer": "PLAYBOOK: LONG TASKS during scroll. Common causes: (1) onScroll handler doing layout reads (offsetTop, getBoundingClientRect) — these force synchronous layout. Fix: throttle to rAF, or use IntersectionObserver/ResizeObserver instead. (2) React state updates on every scroll → big re-renders. Fix: useDeferredValue on scroll-derived state, or move the state out of React (ref + manual DOM). (3) Non-composited animations (top/left transitions). Fix: use transform/opacity, will-change. (4) Passive listener missing — Chrome warns. Fix: { passive: true } on the listener.",
+      "difficulty": "medium",
+      "company": [
+        "Meta",
+        "Apple"
+      ],
+      "tags": [
+        "performance",
+        "scroll",
+        "rendering"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "370b7e40-5324-4e3a-a1c6-c42ee9d86955",
+      "roundType": "PERFORMANCE_OPTIMIZATION",
+      "title": "A page has high CLS. Most common cause?",
+      "body": "Common.",
+      "answer": "ANSWER: Images without width/height attributes (or aspect-ratio CSS). Browser can't reserve space, content shifts when image loads. Other causes: fonts swapping (FOIT/FOUT) — set font-display:optional or preload critical fonts; late-injected banners/ads/cookie notices — reserve space or use position:fixed; dynamically-loaded above-the-fold content — use skeleton placeholders with same dimensions.",
+      "difficulty": "easy",
+      "company": [
+        "Stripe"
+      ],
+      "tags": [
+        "performance",
+        "CLS"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "6511ba01-ed8c-4ef3-8264-b54a75755e58",
+      "roundType": "CODE_REVIEW_DEBUG",
+      "title": "Review this PR (interviewer shows a diff)",
+      "body": "Classic senior interview format.",
+      "answer": "PLAYBOOK CHECKLIST: (1) CORRECTNESS — does it do what the PR claims? Edge cases handled? (2) TESTS — covered? Edge cases tested? Snapshot vs behavior tests? (3) SECURITY — XSS in any HTML rendering? Injection in queries? Auth checks present? Secrets not committed? (4) PERFORMANCE — regressions? N+1 queries? Unnecessary re-renders? (5) ACCESSIBILITY — keyboard nav? ARIA? contrast? focus management? (6) READABILITY — naming, complexity, dead code, consistency with codebase. (7) ERROR HANDLING — async errors caught? user-facing errors clear? (8) OBSERVABILITY — logs/metrics added for new flow? Lead with the big things; nits at the end.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Stripe",
+        "Anthropic"
+      ],
+      "tags": [
+        "code-review",
+        "methodology"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d2d3956e-d322-4d40-9b15-c1e483f6b826",
+      "roundType": "CODE_REVIEW_DEBUG",
+      "title": "What's wrong with this component?",
+      "body": "```jsx\nfunction UserList({ users }) {\n  return users.map(u => <User user={u} onClick={() => doStuff(u)} />);\n}\n```",
+      "answer": "ANSWER: (1) Missing `key` — React warning, breaks reconciliation. Fix: `<User key={u.id} ... />`. (2) Inline function on each render — recreated each time; if User is React.memo'd, breaks memo. Fix: useCallback or move handler up. (3) No fragment wrapper — `.map` returns array, fine in JSX but unusual without wrapper. (4) No empty state — `[]` renders nothing. (5) `users` not defaulted — crashes if undefined. Fix: `users = []` in destructure. (6) No error boundary suggestion. The interviewer wants to see you spot multiple issues and prioritize.",
+      "difficulty": "easy",
+      "company": [
+        "Apple"
+      ],
+      "tags": [
+        "code-review",
+        "React"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "c92cc8ba-f51d-4c6f-9c83-66d2cd51753d",
+      "roundType": "CODE_REVIEW_DEBUG",
+      "title": "A test is flaky. How do you fix?",
+      "body": "Common.",
+      "answer": "PLAYBOOK: REPRODUCE first — run it 100 times to find the failing case (Jest --runInBand --runs=100, Vitest similar). Don't retry your way out — fix the cause. Common causes: TIMING (real timers when fake should be used; missing await; fixed sleeps instead of waitFor). NETWORK (real requests; mock them). RANDOM (seed the RNG). TEST POLLUTION (shared mutable state — DB, modules, window). DOM CLEANUP (afterEach unmount). Add the fix as a regression test that fails before, passes after.",
+      "difficulty": "medium",
+      "company": [
+        "Apple",
+        "Meta"
+      ],
+      "tags": [
+        "code-review",
+        "testing",
+        "flakiness"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "9abeece7-83c6-45ea-a2ec-1776cb66c9be",
+      "roundType": "CODE_REVIEW_DEBUG",
+      "title": "Walk through a security review of an LLM chat UI",
+      "body": "AI-specific code review.",
+      "answer": "PLAYBOOK: (1) XSS — markdown rendering must allow-list HTML tags (no <script>, no event handlers); render code as text only. (2) PROMPT INJECTION — treat user input as content not instructions; system prompt isolated from user input; instructions for the model in clear hierarchy. (3) DATA LEAKAGE — don't echo PII into logs; rate-limit per-user prompts; ensure RAG retrieval respects ACLs (user can only retrieve their docs). (4) CSRF on history endpoints (mutation-style). (5) RATE LIMITING — cost protection (block runaway loops). (6) AUTH — tokens scoped, refresh handled, no JWT in URL. (7) DRM/CONTENT — don't echo back system prompts (some apps hide them as 'secret'). (8) AUDIT LOGGING — who did what when.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "code-review",
+        "security",
+        "AI"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "a94c137a-9a59-407d-b0e9-ea21bb255a93",
+      "roundType": "CODE_REVIEW_DEBUG",
+      "title": "Bug hunt: navigate this codebase, find the bug",
+      "body": "Apple's Bug Hunt round format.",
+      "answer": "PLAYBOOK: This is Apple's signature format. (1) Read the README/spec to understand intended behavior. (2) Run the app, observe the bug. (3) Form a hypothesis BEFORE diving into code — narrows search. (4) Use the debugger or strategic console.logs to confirm/refute. (5) Read the suspect code carefully — the bug is usually subtle (off-by-one, missing await, wrong dep, race condition). (6) Fix, verify all manual cases, then write a test that would have caught it. (7) Look for SIMILAR bugs elsewhere — Apple loves candidates who find adjacent issues.",
+      "difficulty": "hard",
+      "company": [
+        "Apple"
+      ],
+      "tags": [
+        "code-review",
+        "debugging",
+        "Apple-specific"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "88bd14a7-fa3c-4363-97b0-76afcc520f25",
+      "roundType": "BACKEND_ADJACENT",
+      "title": "REST vs GraphQL vs tRPC. When use which?",
+      "body": "Common.",
+      "answer": "ANSWER: REST: simple, cacheable, language-agnostic, ubiquitous. Best for public APIs, simple CRUD, when client needs vary independently of server. GRAPHQL: flexible queries, no over/under-fetching, strong typing, single endpoint. Best for complex client-driven views (mobile + web with different needs), federated data, big teams. tRPC: typesafe RPC between TypeScript client and server, no schema layer. Best for full-stack TS apps, internal APIs, fast iteration. Decision: if BOTH ends are your TS code → tRPC. If many clients or external consumers → REST or GraphQL.",
+      "difficulty": "medium",
+      "company": [
+        "Stripe",
+        "OpenAI"
+      ],
+      "tags": [
+        "backend",
+        "API-design"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "127ecd28-2109-4c0b-8ed5-c6393881e73b",
+      "roundType": "BACKEND_ADJACENT",
+      "title": "WebSocket vs SSE vs polling. Trade-offs?",
+      "body": "Real-time question.",
+      "answer": "ANSWER: WEBSOCKET — full-duplex, persistent, both sides push. Best for chat, collaboration. Cost: stateful connection, harder to scale, requires sticky sessions. SSE — server → client only, over HTTP, simple. Best for streaming text (LLM responses!), notifications. Reconnects automatically, works through proxies, no special server. POLLING — client requests periodically. Simple but wasteful. LONG POLLING — request held open until update. Fallback when WS not available. For LLM streaming, SSE is the standard.",
+      "difficulty": "medium",
+      "company": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "tags": [
+        "backend",
+        "realtime"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "1d732e4b-e664-4359-8996-cb8398f44027",
+      "roundType": "BACKEND_ADJACENT",
+      "title": "Optimistic vs pessimistic updates. Failure modes?",
+      "body": "Common.",
+      "answer": "ANSWER: OPTIMISTIC — assume server will accept, update UI immediately, reconcile on response. Pros: snappy UX. Cons: when server rejects, must revert with explanation; complex state if many ops in flight; harder to keep cache consistent. PESSIMISTIC — wait for server, then update. Pros: simple, consistent. Cons: feels slow. Hybrid: optimistic for low-risk ops (like, comment), pessimistic for high-stakes (payment, delete). Failure modes for optimistic: (1) rollback UX is jarring; (2) cascading state if other UI depends on the optimistic value; (3) reconciliation conflicts if server modifies the entity differently.",
+      "difficulty": "medium",
+      "company": [
+        "Stripe",
+        "Meta"
+      ],
+      "tags": [
+        "backend",
+        "UX-state"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "4d50fc50-f6e0-441f-9e88-96d9326ada88",
+      "roundType": "BACKEND_ADJACENT",
+      "title": "Explain CORS and the most common gotchas",
+      "body": "Common.",
+      "answer": "ANSWER: Browser security: scripts can't read responses from different origins (scheme+host+port) unless the server explicitly opts in via Access-Control-Allow-Origin headers. Preflight: complex requests (non-simple methods, custom headers) trigger an OPTIONS preflight; server must allow the method/headers. GOTCHAS: (1) credentials require explicit ACAO+credentials:true AND specific origin (not *). (2) Wildcard ACAO doesn't apply to non-GET non-POST. (3) S3 buckets often forget CORS for SPAs. (4) Cookie SameSite=Strict blocks cross-site even with CORS. (5) Subdomains are cross-origin unless you set document.domain (deprecated).",
+      "difficulty": "medium",
+      "company": [
+        "Stripe",
+        "Apple"
+      ],
+      "tags": [
+        "backend",
+        "security",
+        "browser"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "633cc264-be79-44e9-996d-e9e342175b2b",
+      "roundType": "BACKEND_ADJACENT",
+      "title": "What's a JWT and what are its drawbacks?",
+      "body": "Common.",
+      "answer": "ANSWER: JSON Web Token — signed (or encrypted) JSON containing claims. Used as a stateless auth token. PROS: stateless verification (no DB lookup), easy to share between services. DRAWBACKS: (1) Can't revoke without a blocklist (defeating stateless benefit). (2) Tokens grow with claims; cookies have size limits. (3) Algorithm confusion attacks if library accepts 'none' or HS256 instead of RS256. (4) Storage problems: localStorage is XSS-vulnerable; cookies need CSRF protection. (5) Refresh-token rotation complexity. Modern preference: short-lived JWT + httpOnly refresh cookie, or just session cookies.",
+      "difficulty": "medium",
+      "company": [
+        "Stripe",
+        "Monzo",
+        "Revolut"
+      ],
+      "tags": [
+        "backend",
+        "security",
+        "auth"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "56074a4d-f7fb-4367-bbf2-bfb7c44bb4fb",
+      "roundType": "ARCHITECTURE_TECH_LEAD",
+      "title": "You're brought into a team where the codebase is a mess. 30+ engineers, no tests, mixed React versions, three state libraries. What's your 90-day plan?",
+      "body": "Staff/senior+ filter.",
+      "answer": "PLAYBOOK: WEEK 1-2: LISTEN. Pair with engineers, read PRs, understand which messes hurt vs which are tolerable. Write down everything but DON'T propose changes yet. WEEK 3-4: MEASURE. Set up baseline metrics (build time, bundle size, test coverage, time-to-deploy, MTTR). WEEK 5-8: PICK ONE THING. The painful-est blocker. Make a small, visible, defensible improvement. Get a win. WEEK 9-12: STAGE THE REST. Propose a 6-month plan with phases, ordered by ROI/risk. Build coalition with seniors before announcing. PRINCIPLES throughout: never trash the existing code in front of the team; credit the engineers who came before; small wins build trust for bigger changes.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic",
+        "OpenAI",
+        "Stripe"
+      ],
+      "tags": [
+        "leadership",
+        "staff-level",
+        "change-management"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "ca8a7fe1-1348-47cf-8efd-833be871ee1b",
+      "roundType": "ARCHITECTURE_TECH_LEAD",
+      "title": "How do you decide build vs buy?",
+      "body": "Common.",
+      "answer": "ANSWER FRAMEWORK: (1) IS IT CORE TO YOUR PRODUCT? If yes, build. If no, buy. (2) WHAT'S THE TCO? Build = engineering time + maintenance + opportunity cost. Buy = license + integration + lock-in risk. (3) WHAT'S THE QUALITY GAP? Mature vendors often outperform internal v1. (4) HOW FAST DO YOU NEED IT? Buy = weeks; build = months. (5) WHAT'S THE STRATEGIC POSITION? Buy where the market is commoditized; build where you have an advantage. (6) WHAT'S THE EXIT PATH if you change your mind?",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "leadership",
+        "decision-making"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "853eae48-a90a-4435-b003-fe0b94e05e04",
+      "roundType": "ARCHITECTURE_TECH_LEAD",
+      "title": "Walk me through the riskiest engineering decision you've made.",
+      "body": "YOUR STORY.",
+      "answer": "PLAYBOOK (YOUR STORY): Wowcher canary rollout strategy. Hit: RISK (revenue regression during cutover for £M revenue/day brand), DECISION (5%→100% canary in 8 phases, normalised revenue ratio for monitoring, blue/green with 2-3 week warm period for rollback), TRADE-OFFS (infrastructure cost vs revenue protection; speed vs safety), HOW YOU CONVINCED CEO (data on similar industry cutovers, defined kill criteria, rollback plan rehearsed), OUTCOME (POC live at 50/50; canary phases meeting thresholds).",
+      "difficulty": "hard",
+      "company": [],
+      "tags": [
+        "leadership",
+        "story-bank",
+        "risk"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "8baa8ce0-3fc5-48ce-8193-feda38b8ee88",
+      "roundType": "ARCHITECTURE_TECH_LEAD",
+      "title": "A senior engineer on your team is hostile to AI tooling. Blocks PRs with AI-generated code. What do you do?",
+      "body": "Current hot-button question.",
+      "answer": "PLAYBOOK: Don't escalate or shame. (1) UNDERSTAND THEIR POSITION — 1:1, ask why. Possible reasons: security concerns, quality concerns, philosophical, fear of obsolescence. All legitimate. (2) NEGOTIATE GUARDRAILS not BANS. Maybe: AI-generated code must be marked, must have human-written tests, must pass extra review. (3) MEASURE — track defect rate of AI-assisted vs human PRs. Bring data to the next conversation. (4) BUILD COMMON GROUND — agree the goal is good code, not pro-AI or anti-AI. (5) ESCALATE only if blocking the team after good-faith effort.",
+      "difficulty": "hard",
+      "company": [
+        "Anthropic"
+      ],
+      "tags": [
+        "leadership",
+        "AI",
+        "team-dynamics"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    },
+    {
+      "id": "d3022035-3ceb-4bbf-8dd1-e72f32f1b84b",
+      "roundType": "ARCHITECTURE_TECH_LEAD",
+      "title": "Your team is split on Tanstack Query vs SWR. As tech lead, how do you decide?",
+      "body": "Decision-making.",
+      "answer": "PLAYBOOK: Frame as PROCESS not OPINION. (1) Criteria: maintainership/funding, ecosystem fit, ergonomics for our use case, team familiarity, migration cost. (2) Score both on each criterion. (3) Build a small spike (1-2 days) if undecided — try a real feature in each. (4) Document the decision (Architecture Decision Record / ADR) with the alternatives considered and why this one. (5) Commit and move on. Bike-shedding kills momentum.",
+      "difficulty": "medium",
+      "company": [],
+      "tags": [
+        "leadership",
+        "decision-making"
+      ],
+      "source": "seed",
+      "createdAt": 1780310079501,
+      "updatedAt": 1780310079501
+    }
+  ],
+  "stories": [
+    {
+      "id": "de4cc40d-a280-4b47-81b6-0220f317ee28",
+      "title": "Wowcher Multi-Brand Migration (HEADLINE STORY)",
+      "situation": "Wowcher's e-commerce platform served the Wowcher UK brand on a monolithic Next.js codebase. The business wanted to launch new brands (Metro Deals, Things To Do, 5PM, continue Superbreak as a travel brand) but each spin-up took ~6 months due to tight coupling to Wowcher-specific assumptions in env vars and content.",
+      "task": "Re-architect into a multi-brand shared codebase. Reconcile ~1,056 divergent files across parallel codebases. Hit feature parity by June 2026 with zero revenue regression.",
+      "action": "Built compare.sh and analyze_diff.py to categorize the 1,056 divergent files into flag-only, flag+code, and code-only differences. Designed brand config folder system (brands/<brand>/features) replacing env-based brand resolution. Presented 15-slide migration strategy to the CEO: 8-phase canary rollout (5%-100%) with normalised revenue ratio for monitoring — (MB rev / MB sessions) divided by (WUK rev / WUK sessions). Designed blue/green deployment with Wowcher kept warm 2-3 weeks for fast rollback. Built Cloudflare Worker for cookie-based canary assignment. Processed PR audit spreadsheet (469 rows) categorizing 411 PRs into 37 functional areas. Led offshore team of 15 with structured review process and SharePoint worklog enforcement.",
+      "result": "POC live at 50/50 on next.wowcher.ie. New brand launch time reduced from 6 months to under 1 week. ~50% code duplication cut. CEO-level visibility. June 2026 parity target on track.",
+      "metrics": "1,056 files audited; 50% code duplication reduction; 6 months to under 1 week new brand launch; 8-phase canary rollout; 15-developer offshore team led; 411 PRs categorized.",
+      "applicableTo": [
+        "most-impactful-project",
+        "senior-decision",
+        "ambiguity",
+        "leadership",
+        "architecture"
+      ],
+      "tags": [
+        "scale",
+        "leadership",
+        "architecture",
+        "ambiguity",
+        "ownership",
+        "staff-signal"
+      ]
+    },
+    {
+      "id": "d557af33-3a56-457c-9b62-80624f58995d",
+      "title": "Ticketmaster AI-First Delivery",
+      "situation": "Stakeholders needed a 3D Map Review Application for venue review. Traditional delivery timeline 3+ months. Team had no prior 3D-in-React experience.",
+      "task": "Ship on compressed timeline while maintaining code quality and shipping a maintainable tool.",
+      "action": "Designed AI-first workflow with Claude as primary code-gen tool. Architecture decisions (Three.js + React + state model) made by me, not the AI. AI used for: scaffolding, generating test fixtures, writing tests, exploring Three.js APIs. Every line code-reviewed; ~20% of AI suggestions rejected. Explicit prompts for 'don't invent APIs'; verified references against docs. Comprehensive test suite. Pair-prompted with another engineer on hardest sections.",
+      "result": "~90% faster delivery vs traditional baseline. Quality maintained, no production incidents. Set template for AI-first workflows at the team.",
+      "metrics": "~90% AI-generated code; ~90% faster delivery; ~20% rejection rate.",
+      "applicableTo": [
+        "AI-experience",
+        "fast-delivery",
+        "judgment",
+        "ownership"
+      ],
+      "tags": [
+        "AI",
+        "speed",
+        "judgment",
+        "ownership",
+        "production-AI"
+      ]
+    },
+    {
+      "id": "0dd028f2-07e4-4f58-86b9-a1dd85b81f57",
+      "title": "Lloyds Digitization of Banking Forms",
+      "situation": "Lloyds Bank had 25 paper-based processes for high-value customer requests. Each took days; error-prone; required physical handling.",
+      "task": "Digitize the journeys end-to-end, reduce turnaround from days to hours, maintain regulatory compliance.",
+      "action": "Led end-to-end web development for digital banking journeys. Implemented role-based access control. Designed self-service flows. Performance optimization (code-splitting, lazy loading, caching) reduced key web service request from 700ms to 150ms. Raised testing coverage from 15% to 90% on main project; up to 99% on others. Collaborated on 20+ wireframes with UX/UI.",
+      "result": "+20% revenue from faster turnaround. Days to hours. +15% user engagement. 700ms to 150ms on critical request path.",
+      "metrics": "25 forms digitized; +20% revenue; 700ms to 150ms; 15% to 90% test coverage; +15% engagement.",
+      "applicableTo": [
+        "impact",
+        "cross-functional",
+        "regulated-industry",
+        "performance"
+      ],
+      "tags": [
+        "impact",
+        "regulated-industry",
+        "testing",
+        "performance"
+      ]
+    },
+    {
+      "id": "bec8f9f7-7ecc-4682-9533-9204737ea7fa",
+      "title": "Mentoring the Offshore Team of 15",
+      "situation": "15-developer offshore team at Wowcher. Code quality varied; reviews dragged; merging felt risky.",
+      "task": "Raise quality bar across the team and reduce review thrash without micromanaging.",
+      "action": "Wrote coding standards doc. Set up structured review process with checklists. Tracked upgrade tasks in SharePoint worklog. Enforced 'no PR approved until logged' policy. Ran pairing sessions framed as 'I want to understand your thinking' not 'let me correct you'. Praised good code as visibly as critique weak code.",
+      "result": "Consistent quality across team. Reduced review cycles. Engineers leveled up.",
+      "metrics": "15 developers mentored; consistent delivery quality.",
+      "applicableTo": [
+        "leadership",
+        "mentoring",
+        "scaling-yourself"
+      ],
+      "tags": [
+        "leadership",
+        "mentoring",
+        "process"
+      ]
+    },
+    {
+      "id": "41845155-5a46-4599-8a28-60486d7555db",
+      "title": "Performance Optimization: 700ms to 150ms",
+      "situation": "Lloyds web service taking 700ms per request. Multiple teams had touched it; no one owned the perf problem end-to-end.",
+      "task": "Cut latency materially and prevent regression.",
+      "action": "Profiled end-to-end with DevTools + backend tracing. Identified bottlenecks: oversized payloads, sync DB calls in middleware, missing CDN cache. Implemented HTTP caching, code-splitting, lazy loading. Renegotiated payload size with backend. Added monitoring for regression prevention.",
+      "result": "700ms to 150ms (78% reduction). +15% user engagement. Created team perf playbook.",
+      "metrics": "78% latency reduction; +15% engagement.",
+      "applicableTo": [
+        "performance-optimization",
+        "cross-team",
+        "measurable-impact",
+        "debugging"
+      ],
+      "tags": [
+        "performance",
+        "cross-team",
+        "measurable-impact"
+      ]
+    },
+    {
+      "id": "49241902-464f-4a94-8e06-04a7e969a1c3",
+      "title": "Production Incident: Token / Basket Mismatch",
+      "situation": "Live production incident at Wowcher: items disappearing from baskets after login; session tokens occasionally not matching basket service. Revenue at risk; support tickets spiking.",
+      "task": "Diagnose root cause, ship fix, post-mortem.",
+      "action": "Reproduced across browsers, narrowed to specific flow combinations. Traced request chain — identified race condition between session refresh and basket sync (~50ms stale token window). Designed fix: token version in headers, basket service rejects stale-version requests, client retries with fresh token. Deployed behind flag at 10%, verified, promoted to 100%. Blameless post-mortem; added contract tests for token rotation.",
+      "result": "Resolved within SLA. Post-mortem informed cross-service contract tests. No recurrence.",
+      "metrics": "Resolved within SLA; zero recurrence.",
+      "applicableTo": [
+        "production-incident",
+        "debugging",
+        "ownership",
+        "failure-story"
+      ],
+      "tags": [
+        "ownership",
+        "debugging",
+        "customer-impact",
+        "post-mortem"
+      ]
+    }
+  ],
+  "companies": [
+    {
+      "id": "d7a33dbf-cb34-47cd-b7b1-0f6e87850545",
+      "name": "Anthropic",
+      "location": "London / Remote-friendly",
+      "archetype": "ai_lab",
+      "loopStructure": "Total: 7-9 rounds across 1-4 months. Two onsite loops on separate days; second loop cancelled if you don't pass the first.\n\n1. Recruiter screens (30 min, sometimes split into 2): background, motivation, AI safety alignment.\n2. Online Assessment (90 min CodeSignal, or 60 min live): typically 2 multi-part problems building a small system from scratch (e.g., in-memory database with SET/GET/DELETE then filtered scans then TTL then file compression).\n3. Hiring Manager Screen (45-60 min): engineering judgment, codebase analysis, scale discussion — NOT live coding.\n4. Virtual Onsite Loop 1 (2-3 rounds): coding (build-from-scratch, in-memory db style), system design (LLM infra, GPU scheduling, distributed scale).\n5. Virtual Onsite Loop 2 (3-4 rounds): more coding, frontend round (streaming chat, MCP tool-call UI), behavioral, values/culture round (the most common failure point).",
+      "notes": "Watch out for:\n- Culture/values round is the #1 failure mode. Read Anthropic's published views on AI safety before the onsite. Recruiters share materials; engage with them and form opinions. Expect 3-4 levels of follow-up.\n- Concurrency comes up across multiple rounds.\n- Coding is first-principles. They may ask you to defend complexity choices and reimplement data structures from scratch after solving cleanly.\n- Frontend rounds test streaming UX, MCP tool-call UIs, latency awareness.\n- Python is the default language; TypeScript for frontend rounds.\n\nYour edge: Ticketmaster AI-first story is exactly what they hire for. Multi-brand migration shows senior architectural maturity. Prepare to discuss safety trade-offs in your own work.\n\nFailure question to prep: 'Tell me about a time you raised an ethical concern at work or pushed back on a decision.'",
+      "aiPolicy": "encouraged",
+      "links": [
+        {
+          "label": "Anthropic Careers",
+          "url": "https://www.anthropic.com/careers"
+        },
+        {
+          "label": "Core Views on AI Safety",
+          "url": "https://www.anthropic.com/news/core-views-on-ai-safety"
+        },
+        {
+          "label": "Engineering Blog",
+          "url": "https://www.anthropic.com/engineering"
+        }
+      ]
+    },
+    {
+      "id": "17a8786c-7c06-4c70-bfec-85f5ba727d62",
+      "name": "OpenAI",
+      "location": "London / SF",
+      "archetype": "ai_lab",
+      "loopStructure": "Total: 4-6 weeks; sometimes 8-12 for staff+.\n\n1. Recruiter Screen (30-45 min): mission alignment with AGI safety.\n2. Technical Screen (60 min): progressive 'gate' format — one problem gets harder over 4 stages. Pass at least 2 to advance. Reported examples: Snapshot Array, Time-Based KV Store, efficient Tokenizer, sliding-window Rate Limiter.\n3. Work Trial / Take-Home (48 hours): real engineering project (e.g., webhook delivery system). Evaluated on reliability, code quality, testing.\n4. Technical Deep Dive (60-90 min): walk through take-home OR past project.\n5. Final Onsite (4-6 hours, 4-6 rounds): coding, system design, project presentation, behavioral. Senior loops add code refactoring round and cross-functional communication round.\n\nFrontend roles specifically: streaming chat UI, browser performance profiler, OpenAI Playground design. Tests practical browser engineering, not React syntax.",
+      "notes": "Watch out for:\n- Progressive gates: clean working code at each stage beats rushing all 4.\n- State management, versioning, memory-efficient data handling are recurring themes.\n- Constraints added mid-solve ('now make it thread-safe').\n- Mission alignment matters. Read OpenAI's Charter and recent safety blog posts.\n- Frontend tests streaming, real-time state, network fundamentals. Be ready on SSE, fetch streams, abort patterns.\n- Compensation is exceptional (£140-200k+ base for senior + equity).\n\nYour edge: AI-first delivery + perf stories (700ms to 150ms) align with their practical engineering bar.\n\nPrep specifically: practice the progressive-gate format. Build Time-Based KV store, LRU cache, sliding-window rate limiter. Walk through each level out loud before moving on.",
+      "aiPolicy": "encouraged",
+      "links": [
+        {
+          "label": "OpenAI Careers",
+          "url": "https://openai.com/careers"
+        },
+        {
+          "label": "OpenAI Charter",
+          "url": "https://openai.com/charter"
+        }
+      ]
+    },
+    {
+      "id": "76072dcc-49f7-4ac9-a107-277604e76f62",
+      "name": "Apple",
+      "location": "London / Cupertino",
+      "archetype": "big_tech",
+      "loopStructure": "Total: 4-8 weeks. 5-8 round onsite. Team-based hiring — each team has its own bar.\n\n1. Recruiter Screen.\n2. Coding Assessment (sometimes): 20 multiple-choice + small coding tasks under tight time limit.\n3. Technical Phone Screen (60 min): React output-based questions, small component builds, vanilla JS depth.\n4. Onsite Loop (5-8 rounds, marathon day):\n   - JavaScript / Coding: vanilla JS heavy, DOM-related, polyfills (debounce, throttle, deepClone, EventEmitter).\n   - Bug Hunt: working on an existing codebase, find and fix bugs. Apple's signature round.\n   - Web Performance: LCP, INP, CLS, rendering pipeline, when to use which optimization.\n   - Frontend System Design: autocomplete, infinite scroll, real-time, large datasets.\n   - Product Thinking (behavioral): collaboration with designers/PMs, balancing technical vs business needs.\n   - Team lunch (evaluative).\n   - Hiring Manager final.",
+      "notes": "Watch out for:\n- Vanilla JS / DOM heavy. Apple cares less about React syntax, more about fundamentals. Practice GreatFrontEnd's vanilla JS questions.\n- Bug Hunt is unique. You navigate unfamiliar codebase under time pressure. Practice with open-source projects.\n- Product Thinking is scenario-based: 'You disagreed with a designer about X — walk me through it.'\n- Privacy + craft + performance are recurring themes — mention proactively.\n- Team-based hiring means each team has different needs — ask your recruiter about the specific team.\n- Compensation is lower than other FAANG but the culture/craft attracts people who care.\n\nYour edge: 700ms to 150ms perf story is gold for Web Performance round. Production token/basket debug experience maps to Bug Hunt. CEO-direct collaboration shows Product Thinking maturity.\n\nPrep specifically: drill vanilla JS polyfills to 2-min flat each. Clone a small open-source project, navigate it, find a bug. Watch CSS-Tricks for Apple-style craft conversations.",
+      "aiPolicy": "mixed",
+      "links": [
+        {
+          "label": "Apple Careers",
+          "url": "https://www.apple.com/careers/"
+        },
+        {
+          "label": "WebKit Blog",
+          "url": "https://webkit.org/blog/"
+        }
+      ]
+    },
+    {
+      "id": "46eb72a6-a0ca-4178-9e09-f8f0c266cac7",
+      "name": "Monzo",
+      "location": "London",
+      "archetype": "fintech",
+      "loopStructure": "4-5 weeks typical.\n1. Recruiter screen.\n2. Take-home (async, your IDE, your language). Spec published publicly.\n3. Walkthrough (60 min): review submission with senior engineer; defend every decision.\n4. Live problem-solving (no AI in live; AI allowed on take-home with disclosure).\n5. Behavioral (60 min).",
+      "notes": "Watch out for:\n- AI on take-home is allowed but defend every line.\n- They publish their interview process publicly — read it.\n- Backend-heavy company; senior FE rare and highly compensated.\n- Culture round probes ethical instincts in fintech.\n\nYour edge: Lloyds digitization story translates directly.",
+      "aiPolicy": "allowed_take_home",
+      "links": [
+        {
+          "label": "Monzo Engineering Blog",
+          "url": "https://monzo.com/blog/technology"
+        },
+        {
+          "label": "Monzo Hiring Process",
+          "url": "https://monzo.com/blog/demystifying-the-backend-engineering-interview-process"
+        }
+      ]
+    },
+    {
+      "id": "d1925dfc-176c-412f-8e5f-9145230e08d7",
+      "name": "Revolut",
+      "location": "London",
+      "archetype": "fintech",
+      "loopStructure": "3-5 weeks.\n1. Recruiter screen.\n2. Take-home (6-8 hours; days to submit): build small service with tests + docs.\n3. Take-home review (45-60 min): 'Why this architecture?' 'How would this scale 10x?' 'Where are the failure modes?'\n4. Live coding (45-60 min): fintech flavor (transaction processors, currency conversion).\n5. System design (mid+).\n6. Bar raiser / team fit.",
+      "notes": "Watch out for:\n- Rushed take-home is #1 rejection reason. Don't ship until tests pass and README is good.\n- Stack: Java/Kotlin BE, React/TypeScript FE on Kubernetes.\n- 'Measurable outcomes' language preferred — user growth, conversion, cost per transaction.\n- Fast culture — they ship a lot.\n\nYour edge: Your numerical bullets (20% conversion, 700ms to 150ms, 50% code dedup) match their language exactly.",
+      "aiPolicy": "mixed",
+      "links": [
+        {
+          "label": "Revolut Tech Blog",
+          "url": "https://medium.com/revolut"
+        }
+      ]
+    },
+    {
+      "id": "87338fdd-8c44-41af-bc2c-c57ff61e86ee",
+      "name": "Deliveroo",
+      "location": "London",
+      "archetype": "fintech",
+      "loopStructure": "1. Recruiter screen.\n2. Take-home (async, NO AI — AI-generated submissions rejected outright).\n3. Live coding (60 min, paired — NO AI). Build a production-ready UI.\n4. Behavioral (Deliveroo Values).",
+      "notes": "Watch out for:\n- AI is BANNED in live coding. AI-generated take-homes = rejection.\n- Async-friendly process.\n- Communication-heavy. 'Engineering is collaborative — so is the interview.'\n- Their public values are evaluated.\n\nYour edge: Collaboration stories (CEO/CTO, offshore team) play well here.",
+      "aiPolicy": "banned_live",
+      "links": [
+        {
+          "label": "Deliveroo FE Interview Guide",
+          "url": "https://careers.deliveroo.co.uk/our-interview-guide-frontend-engineering/"
+        }
+      ]
+    },
+    {
+      "id": "748c6a18-08b0-4d62-85d9-a6cb43d9da06",
+      "name": "Meta London",
+      "location": "London",
+      "archetype": "big_tech",
+      "loopStructure": "4-8 weeks.\n1. Recruiter screen.\n2. Technical phone screen (1-2x coding).\n3. Onsite (4-5 hours):\n   - Coding round 1 (traditional CoderPad).\n   - AI-Assisted Coding round (E4-E5+ since Oct 2025): 60 min, multi-file codebase, AI chat panel, optional use.\n   - Frontend System Design (build at scale).\n   - Behavioral (Meta Values: ownership, impact, move fast).",
+      "notes": "Watch out for:\n- AI-Assisted round is HERE. Practice methodology — read first, run tests, narrate, verify.\n- One thematic question with multiple stages — pacing matters.\n- Three scenario types: build feature / extend partial / debug broken.\n- Graded on judgment, not AI usage volume.\n\nYour edge: AI-first delivery experience prepares you. Interviewer will appreciate production AI use, not just interview use.",
+      "aiPolicy": "mixed",
+      "links": [
+        {
+          "label": "Meta Careers",
+          "url": "https://www.metacareers.com"
+        }
+      ]
+    },
+    {
+      "id": "2a1372b6-e2ab-4508-b257-4bfe9d2c3c97",
+      "name": "Synthesia",
+      "location": "London",
+      "archetype": "ai_scaleup",
+      "loopStructure": "3-4 weeks. Recruiter to take-home OR pair-coded screen to onsite with founder/CTO often present to product/AI deep dive.",
+      "notes": "AI video generation; frontend is the product surface. Want engineers who understand video, streaming, performance. Hiring senior+ in London.",
+      "aiPolicy": "encouraged",
+      "links": [
+        {
+          "label": "Synthesia Careers",
+          "url": "https://www.synthesia.io/careers"
+        }
+      ]
+    },
+    {
+      "id": "1ed2ea76-5f7d-4bac-b9bc-21da7a122332",
+      "name": "Eleven Labs",
+      "location": "London",
+      "archetype": "ai_scaleup",
+      "loopStructure": "Fast process. Audio-focused product. Recruiter to take-home or pair screen to onsite.",
+      "notes": "Voice AI; product surface is heavily audio + waveform UI. Streaming is critical to UX.",
+      "aiPolicy": "encouraged",
+      "links": []
+    },
+    {
+      "id": "a0480342-ac88-4431-abe9-b72abd412d82",
+      "name": "Wayve",
+      "location": "London",
+      "archetype": "ai_scaleup",
+      "loopStructure": "Autonomous driving AI. Well-funded London-based company. Typical AI scaleup loop (3-4 weeks).",
+      "notes": "Frontend roles often involve tooling for annotators and ML researchers. Less consumer-facing; more internal tools.",
+      "aiPolicy": "encouraged",
+      "links": []
+    },
+    {
+      "id": "f5de4952-12bf-4adc-a0ae-a82aa3fbaef0",
+      "name": "Cohere",
+      "location": "London",
+      "archetype": "ai_scaleup",
+      "loopStructure": "Enterprise LLM company. Strong London presence. Typical scaleup loop.",
+      "notes": "Heavy on RAG and reranking expertise. They make Cohere Rerank — interviewers will probe deeply on retrieval quality.",
+      "aiPolicy": "encouraged",
+      "links": [
+        {
+          "label": "Cohere Careers",
+          "url": "https://cohere.com/careers"
+        }
+      ]
+    },
+    {
+      "id": "b2f2ced9-1523-48fe-8c12-3c6d43445b15",
+      "name": "Stripe London",
+      "location": "London",
+      "archetype": "product_led",
+      "loopStructure": "Recruiter to tech screen (integration-heavy coding) to onsite (coding, integrations, system design, behavioral). Known for high bar and clear rubric.",
+      "notes": "Stripe has invested heavily in AI tooling (Sigma assistant). Frontend roles increasingly touch AI. Clear, fair process.",
+      "aiPolicy": "allowed_take_home",
+      "links": [
+        {
+          "label": "Stripe Press",
+          "url": "https://stripe.com/press"
+        }
+      ]
+    },
+    {
+      "id": "0bc15496-2f0e-4f8f-bb3e-295b7beb523e",
+      "name": "Spotify London",
+      "location": "London",
+      "archetype": "product_led",
+      "loopStructure": "Recruiter to take-home OR live to onsite (frontend coding, frontend system design, behavioral, sometimes cross-functional with PM/design).",
+      "notes": "Discovery + generative AI features for music. Frontend roles span web player, internal tools, and AI product surfaces.",
+      "aiPolicy": "mixed",
+      "links": []
+    }
+  ]
+}
