@@ -1,7 +1,7 @@
 // Phase 5 smoke: review a card, confirm review state persists, streak logs,
 // and a back-dated due card appears in the dashboard queue.
 import { chromium } from 'playwright';
-import { newSignedInContext } from './lib/auth.mjs';
+import { newSignedInContext, questionsWithState, eventually, rest } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
@@ -23,20 +23,10 @@ const qid = qUrl.split('/questions/')[1];
 await page.click('button:has-text("Good")');
 await page.waitForTimeout(500);
 
-// Read review state straight from IndexedDB via Dexie in-page
-const review = await page.evaluate(async (id) => {
-  const req = indexedDB.open('InterviewPrep');
-  return await new Promise((resolve) => {
-    req.onsuccess = () => {
-      const db = req.result;
-      const tx = db.transaction('reviewStates', 'readonly');
-      const get = tx.objectStore('reviewStates').get(id);
-      get.onsuccess = () => resolve(get.result || null);
-      get.onerror = () => resolve(null);
-    };
-    req.onerror = () => resolve(null);
-  });
-}, qid);
+// Read the review state from the account (synced asynchronously).
+const review = (
+  await eventually(questionsWithState, (all) => all.find((q) => q.id === qid)?.review)
+).find((q) => q.id === qid)?.review;
 log(!!review, `review state created for ${qid}`);
 log(review?.reviewCount === 1, `reviewCount = ${review?.reviewCount}`);
 log(review?.intervalDays === 1, `intervalDays = ${review?.intervalDays} (new+good=1)`);
@@ -47,30 +37,24 @@ const streak = await page.evaluate(() =>
   JSON.parse(localStorage.getItem('studyLog') || '[]'),
 );
 log(streak.length >= 1, `study log has ${streak.length} day(s)`);
+const days = await eventually(() => rest('study_days?select=day'), (d) => d.length > 0);
+log(days.length >= 1, `study day saved to the account (${days.map((d) => d.day).join(', ')})`);
 
-// Back-date the review so it's due now, then check dashboard queue
-await page.evaluate(async (id) => {
-  const req = indexedDB.open('InterviewPrep');
-  await new Promise((resolve) => {
-    req.onsuccess = () => {
-      const db = req.result;
-      const tx = db.transaction('reviewStates', 'readwrite');
-      const store = tx.objectStore('reviewStates');
-      const get = store.get(id);
-      get.onsuccess = () => {
-        const r = get.result;
-        r.nextDue = Date.now() - 86400000; // yesterday
-        store.put(r);
-      };
-      tx.oncomplete = () => resolve();
-    };
-  });
-}, qid);
+// Back-date the review in the account so it's due now (as if from another
+// device), then check the dashboard queue picks it up on the next app load.
+await rest(`user_question_state?question_id=eq.${qid}`, {
+  method: 'PATCH',
+  body: JSON.stringify({ next_due: Date.now() - 86400000 }),
+});
 
 await page.goto(BASE, { waitUntil: 'networkidle' });
 await page.waitForSelector("text=Today's review queue");
-await page.waitForTimeout(500);
-const dueLink = await page.locator(`a[href="/questions/${qid}"]`).count();
+const dueLink = await page
+  .locator(`a[href="/questions/${qid}"]`)
+  .first()
+  .waitFor({ timeout: 10000 })
+  .then(() => 1)
+  .catch(() => 0);
 log(dueLink > 0, 'back-dated card appears in dashboard due queue');
 
 // Streak stat shows >=1

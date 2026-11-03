@@ -1,6 +1,48 @@
-import { db } from '@/lib/db';
+import { queryClient } from '@/lib/queryClient';
+import { fetchAll } from '@/lib/remote';
+import { enqueue, waitForPendingWrites } from '@/lib/sync';
 import { uid } from '@/lib/utils';
 import type { Note } from '@/types';
+
+export const NOTES_KEY = ['notes'] as const;
+
+interface NoteRow {
+  id: string;
+  title: string;
+  body_json: object;
+  tags: string[];
+  linked_question_ids: string[];
+  created_at: number;
+  updated_at: number;
+}
+
+const NOTE_COLUMNS =
+  'id, title, body_json, tags, linked_question_ids, created_at, updated_at';
+
+/** All of the user's notes, most recently edited first. */
+export async function fetchNotes(): Promise<Note[]> {
+  await waitForPendingWrites();
+  const rows = await fetchAll<NoteRow>('notes', NOTE_COLUMNS, 'id');
+  return sortNotes(
+    rows.map((r) => ({
+      id: r.id,
+      title: r.title,
+      bodyJson: r.body_json,
+      tags: r.tags,
+      linkedQuestionIds: r.linked_question_ids,
+      createdAt: Number(r.created_at),
+      updatedAt: Number(r.updated_at),
+    })),
+  );
+}
+
+function sortNotes(notes: Note[]): Note[] {
+  return [...notes].sort((a, b) => b.updatedAt - a.updatedAt);
+}
+
+function setNotes(fn: (notes: Note[]) => Note[]) {
+  queryClient.setQueryData<Note[]>(NOTES_KEY, (n) => (n ? sortNotes(fn(n)) : n));
+}
 
 const EMPTY_DOC = {
   type: 'doc',
@@ -18,7 +60,23 @@ export async function createNote(title = 'Untitled note'): Promise<string> {
     createdAt: now,
     updatedAt: now,
   };
-  await db.notes.put(note);
+  setNotes((n) => [note, ...n]);
+  void enqueue({
+    type: 'upsert',
+    table: 'notes',
+    rows: [
+      {
+        id: note.id,
+        title: note.title,
+        body_json: note.bodyJson,
+        tags: note.tags,
+        linked_question_ids: note.linkedQuestionIds,
+        created_at: now,
+        updated_at: now,
+      },
+    ],
+    onConflict: 'id',
+  });
   return note.id;
 }
 
@@ -26,11 +84,42 @@ export async function updateNote(
   id: string,
   patch: Partial<Note>,
 ): Promise<void> {
-  await db.notes.update(id, { ...patch, updatedAt: Date.now() });
+  const now = Date.now();
+  const base = queryClient
+    .getQueryData<Note[]>(NOTES_KEY)
+    ?.find((n) => n.id === id)?.updatedAt;
+  setNotes((notes) =>
+    notes.map((n) => (n.id === id ? { ...n, ...patch, updatedAt: now } : n)),
+  );
+
+  const row: Record<string, unknown> = { updated_at: now };
+  if ('title' in patch) row.title = patch.title;
+  if ('bodyJson' in patch) row.body_json = patch.bodyJson;
+  if ('tags' in patch) row.tags = patch.tags;
+  if ('linkedQuestionIds' in patch) row.linked_question_ids = patch.linkedQuestionIds;
+
+  void enqueue({
+    type: 'update',
+    table: 'notes',
+    match: { id },
+    patch: row,
+    // Keep the other device's version if this edit would overwrite it.
+    guard:
+      'bodyJson' in patch && base !== undefined
+        ? {
+            entity: 'note',
+            entityId: id,
+            match: { id },
+            baseUpdatedAt: base,
+            columns: ['title', 'body_json'],
+          }
+        : undefined,
+  });
 }
 
 export async function deleteNote(id: string): Promise<void> {
-  await db.notes.delete(id);
+  setNotes((notes) => notes.filter((n) => n.id !== id));
+  void enqueue({ type: 'delete', table: 'notes', match: { id } });
 }
 
 /** Walk a Tiptap doc and collect questionIds from questionReference nodes. */
@@ -210,7 +299,10 @@ function safeName(s: string): string {
 export async function exportVaultZip(): Promise<void> {
   const { default: JSZip } = await import('jszip');
   const zip = new JSZip();
-  const notes = await db.notes.toArray();
+  const notes = await queryClient.fetchQuery({
+    queryKey: NOTES_KEY,
+    queryFn: fetchNotes,
+  });
   const seen = new Map<string, number>();
   for (const n of notes) {
     let base = safeName(n.title);

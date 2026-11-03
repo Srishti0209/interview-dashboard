@@ -1,7 +1,7 @@
 // Phase 6 smoke: create a note, type content, insert code/math/mermaid via
 // slash, link a question, verify persistence + bidirectional link.
 import { chromium } from 'playwright';
-import { newSignedInContext } from './lib/auth.mjs';
+import { newSignedInContext, notes, eventually } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
@@ -73,22 +73,11 @@ log(refOk, 'inserted a question reference card');
 // wait for autosave
 await page.waitForTimeout(2300);
 
-// read note id + linkedQuestionIds from IndexedDB
-const noteData = await page.evaluate(async (t) => {
-  const req = indexedDB.open('InterviewPrep');
-  return await new Promise((resolve) => {
-    req.onsuccess = () => {
-      const db = req.result;
-      const tx = db.transaction('notes', 'readonly');
-      const store = tx.objectStore('notes');
-      const all = store.getAll();
-      all.onsuccess = () => {
-        const note = all.result.find((n) => n.title === t);
-        resolve(note ? { id: note.id, linked: note.linkedQuestionIds } : null);
-      };
-    };
-  });
-}, title);
+// read note id + linkedQuestionIds from the account
+const savedNote = (
+  await eventually(notes, (all) => all.find((n) => n.title === title)?.linkedQuestionIds?.length)
+).find((n) => n.title === title);
+const noteData = savedNote ? { id: savedNote.id, linked: savedNote.linkedQuestionIds } : null;
 log(!!noteData, `note persisted (id ${noteData?.id?.slice(0, 8)})`);
 log(noteData?.linked?.length >= 1, `linkedQuestionIds populated: ${JSON.stringify(noteData?.linked)}`);
 

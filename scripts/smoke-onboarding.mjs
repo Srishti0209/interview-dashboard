@@ -12,6 +12,7 @@ import {
   setSmokeProfile,
   getSmokeSession,
   rest,
+  readAppCache,
   url,
   key,
   SMOKE_PROFILE,
@@ -233,8 +234,8 @@ try {
   await page.getByRole('main').getByRole('button', { name: 'Sign out' }).click();
   await page.getByRole('button', { name: 'Email me a sign-in link' }).waitFor({ timeout: 10000 });
   log(true, 'sign out returns to sign-in page');
-  await page.waitForTimeout(500);
-  const cache = await page.evaluate(() => localStorage.getItem('interview-prep-cache') || '');
+  await page.waitForTimeout(800);
+  const cache = await readAppCache(page);
   log(!cache.includes('"profile"') && !cache.includes('"resume"'), 'sign out clears cached account data from the device');
 } catch (e) {
   log(false, 'unexpected failure: ' + e.message);

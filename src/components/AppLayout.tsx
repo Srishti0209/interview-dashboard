@@ -20,6 +20,8 @@ import { useUIStore, type Theme } from '@/store/ui';
 import { useSession, signOut } from '@/hooks/useSession';
 import { useProfile } from '@/hooks/useProfile';
 import { roleTitle } from '@/lib/constants';
+import { SyncStatus } from '@/components/SyncStatus';
+import { LocalImportBanner } from '@/components/LocalImportBanner';
 
 const THEME_ORDER: Theme[] = ['light', 'dark', 'system'];
 const THEME_ICON: Record<Theme, typeof Sun> = {
@@ -94,9 +96,12 @@ export function AppLayout() {
           ))}
         </nav>
 
+        <div className="mt-auto">
+          <SyncStatus />
+        </div>
         <button
           onClick={cycleTheme}
-          className="mt-auto flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-sidebar-accent/60"
+          className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-sidebar-accent/60"
           title="Toggle theme"
         >
           <ThemeIcon className="size-4" />
@@ -132,6 +137,7 @@ export function AppLayout() {
         <header className="flex items-center gap-2 border-b px-4 py-3 md:hidden">
           <GraduationCap className="size-5 text-primary" />
           <span className="flex-1 text-sm font-semibold">Interview Prep</span>
+          <SyncStatus compact />
           <NavLink
             to="/account"
             className="rounded-md p-1.5 text-muted-foreground"
@@ -149,6 +155,7 @@ export function AppLayout() {
             <LogOut className="size-4" />
           </button>
         </header>
+        <LocalImportBanner />
         <main className="min-w-0 flex-1 overflow-x-hidden">
           <Outlet />
         </main>

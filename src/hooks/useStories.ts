@@ -1,7 +1,7 @@
-import { useLiveQuery } from 'dexie-react-hooks';
-import { db } from '@/lib/db';
+import { useQuery } from '@tanstack/react-query';
+import { STORIES_KEY, fetchStories } from '@/lib/stories';
 import type { Story } from '@/types';
 
 export function useStories(): Story[] | undefined {
-  return useLiveQuery(() => db.stories.toArray(), []);
+  return useQuery({ queryKey: STORIES_KEY, queryFn: fetchStories }).data;
 }

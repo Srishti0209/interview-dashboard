@@ -10,6 +10,8 @@ import {
   queryPersister,
   PERSIST_MAX_AGE,
 } from '@/lib/queryClient';
+// Registers the write queue's defaults.
+import '@/lib/sync';
 import { CommandPalette } from '@/components/CommandPalette';
 import { InstallPrompt } from '@/components/InstallPrompt';
 import { useTheme } from '@/hooks/useTheme';
@@ -98,7 +100,12 @@ export default function App() {
   return (
     <PersistQueryClientProvider
       client={queryClient}
-      persistOptions={{ persister: queryPersister, maxAge: PERSIST_MAX_AGE }}
+      persistOptions={{
+        persister: queryPersister,
+        maxAge: PERSIST_MAX_AGE,
+        // Queued writes are kept in the sync outbox, not the cache.
+        dehydrateOptions: { shouldDehydrateMutation: () => false },
+      }}
     >
       <AuthGate>
         <ProfileGate>

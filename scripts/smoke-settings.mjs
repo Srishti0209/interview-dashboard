@@ -1,7 +1,7 @@
 // Settings: export → wipe → import round-trips data (criteria #7),
-// and reset-to-seed preserves personal answers (criteria #8).
+// and refreshing the question bank preserves personal answers (criteria #8).
 import { chromium } from 'playwright';
-import { newSignedInContext } from './lib/auth.mjs';
+import { newSignedInContext, resetSmokeData, questionsWithState, eventually } from './lib/auth.mjs';
 import { readFileSync } from 'node:fs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
@@ -38,31 +38,29 @@ const backup = JSON.parse(readFileSync(path, 'utf8'));
 const hasMarker = JSON.stringify(backup.tables.questions).includes(marker);
 log(hasMarker, 'export JSON contains the personal answer');
 
-// 3. Wipe DB then import
-await page.evaluate(async () => {
-  await new Promise((res) => {
-    const r = indexedDB.deleteDatabase('InterviewPrep');
-    r.onsuccess = r.onerror = r.onblocked = () => res();
-  });
-  localStorage.removeItem('seedVersion');
-});
+// 3. Wipe the account's data, then import the backup
+await eventually(questionsWithState, (all) => all.some((q) => q.personalAnswer === marker));
+await resetSmokeData();
+const wiped = await questionsWithState();
+log(!wiped.some((q) => q.personalAnswer === marker), 'account data wiped before import');
+page.once('dialog', (d) => d.accept()); // "Replace … with this backup?"
 await page.goto(`${BASE}/settings`, { waitUntil: 'networkidle' });
 await page.setInputFiles('input[type="file"]', path);
-await page.waitForTimeout(1500); // import + reload
+await page.waitForTimeout(3000); // import + reload
 await page.goto(qUrl, { waitUntil: 'networkidle' });
 await page.click('button:has-text("My Answer")');
 const restored = await page.locator('textarea').first().inputValue();
 log(restored === marker, `personal answer restored after import (${restored === marker})`);
 
-// 4. Reset to seed preserves personal answer (criteria #8)
+// 4. Refreshing the question bank preserves the personal answer (criteria #8)
 await page.goto(`${BASE}/settings`, { waitUntil: 'networkidle' });
-await page.click('button:has-text("Reset to seed")');
-await page.click('div[role="dialog"] button:has-text("Reset to seed")');
+await page.click('button:has-text("Refresh question bank")');
+await page.click('div[role="dialog"] button:has-text("Refresh")');
 await page.waitForTimeout(1200);
 await page.goto(qUrl, { waitUntil: 'networkidle' });
 await page.click('button:has-text("My Answer")');
 const afterReset = await page.locator('textarea').first().inputValue();
-log(afterReset === marker, `personal answer preserved after reset-to-seed (${afterReset === marker})`);
+log(afterReset === marker, `personal answer preserved after refreshing the bank (${afterReset === marker})`);
 
 await browser.close();
 if (errors.length) { console.log('\nErrors:'); errors.slice(0,8).forEach(e=>console.log('  - '+e)); }

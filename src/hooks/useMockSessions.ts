@@ -1,10 +1,9 @@
-import { useLiveQuery } from 'dexie-react-hooks';
-import { db } from '@/lib/db';
+import { useQuery } from '@tanstack/react-query';
+import { MOCK_SESSIONS_KEY, fetchMockSessions } from '@/lib/mock';
 import type { MockSession } from '@/types';
 
+/** All mock sessions, newest first. */
 export function useMockSessions(): MockSession[] | undefined {
-  return useLiveQuery(
-    () => db.mockSessions.orderBy('startedAt').reverse().toArray(),
-    [],
-  );
+  return useQuery({ queryKey: MOCK_SESSIONS_KEY, queryFn: fetchMockSessions })
+    .data;
 }

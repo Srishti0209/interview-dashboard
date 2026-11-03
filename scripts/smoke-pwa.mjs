@@ -45,11 +45,31 @@ await page.goto(`${BASE}/questions`, { waitUntil: 'networkidle' });
 await page.waitForSelector('text=/of 161 questions/', { timeout: 10000 });
 log(true, 'question bank seeded in production build');
 
-// The signed-in profile must be cached locally before going offline.
+// The signed-in profile and question bank must be cached on the device
+// (IndexedDB, idb-keyval's default store) before going offline.
 await page.waitForFunction(
-  () => (localStorage.getItem('interview-prep-cache') || '').includes('"profile"'),
+  () =>
+    new Promise((resolve) => {
+      const req = indexedDB.open('keyval-store');
+      req.onerror = () => resolve(false);
+      req.onsuccess = () => {
+        try {
+          const get = req.result
+            .transaction('keyval')
+            .objectStore('keyval')
+            .get('interview-prep-cache');
+          get.onsuccess = () => {
+            const v = String(get.result ?? '');
+            resolve(v.includes('"profile"') && v.includes('"questions"'));
+          };
+          get.onerror = () => resolve(false);
+        } catch {
+          resolve(false);
+        }
+      };
+    }),
   null,
-  { timeout: 10000 },
+  { timeout: 15000 },
 );
 log(true, 'account data cached for offline use');
 

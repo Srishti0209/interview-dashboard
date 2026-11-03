@@ -1,4 +1,11 @@
-import { db } from '@/lib/db';
+import {
+  QUESTIONS_KEY,
+  getCachedReviewState,
+  putReviewState,
+  saveQuestionState,
+  type QuestionData,
+} from '@/lib/questions';
+import { queryClient } from '@/lib/queryClient';
 import { logStudyDay } from '@/lib/streak';
 import type { ReviewState, Confidence } from '@/types';
 
@@ -84,16 +91,26 @@ export async function reviewQuestion(
   rating: Rating,
   config?: SrsConfig,
 ): Promise<ReviewState> {
-  const prev = await db.reviewStates.get(questionId);
+  const prev = getCachedReviewState(questionId);
   const next = computeNextReview(prev, rating, Date.now(), config);
   next.questionId = questionId;
-  await db.reviewStates.put(next);
+  putReviewState(next);
   logStudyDay();
+  void saveQuestionState(questionId, {
+    confidence: next.confidence,
+    last_reviewed: next.lastReviewed ?? null,
+    next_due: next.nextDue,
+    interval_days: next.intervalDays,
+    ease_factor: next.easeFactor,
+    review_count: next.reviewCount,
+  });
   return next;
 }
 
 /** Question ids whose review is due now (nextDue <= now). */
-export async function dueQuestionIds(now = Date.now()): Promise<string[]> {
-  const due = await db.reviewStates.where('nextDue').belowOrEqual(now).toArray();
-  return due.map((r) => r.questionId);
+export function dueQuestionIds(now = Date.now()): string[] {
+  const data = queryClient.getQueryData<QuestionData>(QUESTIONS_KEY);
+  return (data?.reviews ?? [])
+    .filter((r) => r.nextDue <= now)
+    .map((r) => r.questionId);
 }

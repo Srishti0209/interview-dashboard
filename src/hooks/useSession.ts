@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
+import { pendingSyncCount } from '@/lib/sync';
 
 /**
  * Subscribes to Supabase auth. `undefined` while the stored session is still
@@ -36,5 +37,13 @@ export function useSession(): Session | null {
 }
 
 export async function signOut(): Promise<void> {
+  const pending = pendingSyncCount();
+  if (
+    pending > 0 &&
+    !window.confirm(
+      `${pending} change${pending === 1 ? " hasn't" : "s haven't"} synced to your account yet. Signing out now will lose ${pending === 1 ? 'it' : 'them'}. Sign out anyway?`,
+    )
+  )
+    return;
   await supabase.auth.signOut();
 }

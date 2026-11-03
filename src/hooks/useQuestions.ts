@@ -1,25 +1,37 @@
 import { useMemo } from 'react';
-import { useLiveQuery } from 'dexie-react-hooks';
-import { db } from '@/lib/db';
+import { useQuery } from '@tanstack/react-query';
+import { QUESTIONS_KEY, fetchQuestionData, type QuestionData } from '@/lib/questions';
 import type { Question, ReviewState } from '@/types';
 import type { QuestionFilters } from '@/store/ui';
 
+function useQuestionData<T>(select: (d: QuestionData) => T) {
+  return useQuery({
+    queryKey: QUESTIONS_KEY,
+    queryFn: fetchQuestionData,
+    select,
+  }).data;
+}
+
+const selectQuestions = (d: QuestionData) => d.questions;
+const selectReviews = (d: QuestionData) => d.reviews;
+
 export function useAllQuestions(): Question[] | undefined {
-  return useLiveQuery(() => db.questions.toArray(), []);
+  return useQuestionData(selectQuestions);
 }
 
 /** Returns `undefined` while loading, `null` if not found, else the question. */
 export function useQuestion(
   id: string | undefined,
 ): Question | null | undefined {
-  return useLiveQuery(
-    async () => (id ? ((await db.questions.get(id)) ?? null) : null),
-    [id],
-  );
+  const questions = useAllQuestions();
+  return useMemo(() => {
+    if (!questions) return undefined;
+    return (id && questions.find((q) => q.id === id)) || null;
+  }, [questions, id]);
 }
 
 export function useReviewStates(): Map<string, ReviewState> {
-  const states = useLiveQuery(() => db.reviewStates.toArray(), []);
+  const states = useQuestionData(selectReviews);
   return useMemo(() => {
     const m = new Map<string, ReviewState>();
     for (const s of states ?? []) m.set(s.questionId, s);
@@ -30,10 +42,10 @@ export function useReviewStates(): Map<string, ReviewState> {
 export function useReviewState(
   questionId: string | undefined,
 ): ReviewState | undefined {
-  return useLiveQuery(
-    async () =>
-      questionId ? await db.reviewStates.get(questionId) : undefined,
-    [questionId],
+  const states = useQuestionData(selectReviews);
+  return useMemo(
+    () => states?.find((s) => s.questionId === questionId),
+    [states, questionId],
   );
 }
 

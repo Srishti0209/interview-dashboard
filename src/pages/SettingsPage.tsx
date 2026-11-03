@@ -69,10 +69,16 @@ export default function SettingsPage() {
   };
 
   const handleImport = async (file: File) => {
+    if (
+      !window.confirm(
+        'Replace the answers, notes, stories, reviews, applications and mock history in your account with this backup? This affects every device you use.',
+      )
+    )
+      return;
     setBusy('import');
     try {
       const data = JSON.parse(await file.text()) as BackupFile;
-      await importAll(data);
+      await importAll(data, 'replace');
       flash('Imported. Reloading…');
       setTimeout(() => window.location.reload(), 800);
     } catch (e) {
@@ -87,7 +93,7 @@ export default function SettingsPage() {
     try {
       await resetToSeed();
       setConfirmReset(false);
-      flash('Re-seeded. Your answers, notes & statuses were preserved.');
+      flash('Refreshed. Your answers, notes & statuses were preserved.');
     } finally {
       setBusy('');
     }
@@ -186,8 +192,9 @@ export default function SettingsPage() {
       <Card className="mt-4 p-5">
         <h2 className="text-sm font-semibold">Data & backup</h2>
         <p className="text-xs text-muted-foreground">
-          Everything is stored locally on this device. Export regularly to back
-          up.
+          Your data is saved to your account and available on every device.
+          It's also kept on this device so the app works offline. Export a JSON
+          copy any time.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button
@@ -209,7 +216,7 @@ export default function SettingsPage() {
             onClick={() => setConfirmReset(true)}
             disabled={busy === 'reset'}
           >
-            <RotateCcw className="size-4" /> Reset to seed
+            <RotateCcw className="size-4" /> Refresh question bank
           </Button>
           <input
             ref={fileInput}
@@ -234,12 +241,12 @@ export default function SettingsPage() {
       <Dialog open={confirmReset} onOpenChange={setConfirmReset}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reset to seed?</DialogTitle>
+            <DialogTitle>Refresh question bank?</DialogTitle>
             <DialogDescription>
-              This refreshes the pre-loaded questions, stories and companies to
-              the latest seed content. Your own questions, written answers,
-              personal notes, bookmarks, notes, application statuses and mock
-              history are <strong>preserved</strong>.
+              This reloads the latest questions and company playbooks from the
+              server. Your own questions, written answers, personal notes,
+              bookmarks, notes, stories, application statuses and mock history
+              are <strong>preserved</strong>.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -247,7 +254,7 @@ export default function SettingsPage() {
               Cancel
             </Button>
             <Button onClick={handleReset} disabled={busy === 'reset'}>
-              Reset to seed
+              Refresh
             </Button>
           </DialogFooter>
         </DialogContent>
