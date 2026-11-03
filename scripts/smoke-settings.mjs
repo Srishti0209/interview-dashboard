@@ -1,12 +1,13 @@
 // Settings: export → wipe → import round-trips data (criteria #7),
 // and reset-to-seed preserves personal answers (criteria #8).
 import { chromium } from 'playwright';
+import { newSignedInContext } from './lib/auth.mjs';
 import { readFileSync } from 'node:fs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext({ acceptDownloads: true });
+const ctx = await newSignedInContext(browser, { acceptDownloads: true });
 const page = await ctx.newPage();
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));

@@ -1,10 +1,11 @@
 // Phase 4 smoke: create a user question, verify it opens, edit it, delete it.
 import { chromium } from 'playwright';
+import { newSignedInContext } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const page = await (await browser.newContext()).newPage();
+const page = await (await newSignedInContext(browser)).newPage();
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
 

@@ -1,11 +1,12 @@
 // PWA verification against the production build (vite preview):
 // SW registers, manifest is valid, app works offline after first load.
 import { chromium } from 'playwright';
+import { newSignedInContext } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5183';
 const errors = [];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext();
+const ctx = await newSignedInContext(browser);
 const page = await ctx.newPage();
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));

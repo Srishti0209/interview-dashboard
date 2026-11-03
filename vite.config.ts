@@ -36,6 +36,8 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,json}'],
         navigateFallback: 'index.html',
+        // API routes are served by Vercel functions, never the SPA shell.
+        navigateFallbackDenylist: [/^\/api\//],
         // cache the seed json + google fonts for full offline use
         runtimeCaching: [
           {

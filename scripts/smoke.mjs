@@ -2,12 +2,13 @@
 // Verifies: app boots, seeding populates the bank, list renders,
 // detail page tabs work, and a personal answer persists across reload.
 import { chromium } from 'playwright';
+import { newSignedInContext } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext();
+const ctx = await newSignedInContext(browser);
 const page = await ctx.newPage();
 page.on('console', (m) => {
   if (m.type() === 'error') errors.push(m.text());

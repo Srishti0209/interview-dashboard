@@ -12,9 +12,11 @@ import {
   Sun,
   Moon,
   Monitor,
+  LogOut,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore, type Theme } from '@/store/ui';
+import { useSession, signOut } from '@/hooks/useSession';
 
 const THEME_ORDER: Theme[] = ['light', 'dark', 'system'];
 const THEME_ICON: Record<Theme, typeof Sun> = {
@@ -38,6 +40,7 @@ export function AppLayout() {
   const setTheme = useUIStore((s) => s.setTheme);
   const setCommandOpen = useUIStore((s) => s.setCommandOpen);
   const ThemeIcon = THEME_ICON[theme];
+  const email = useSession()?.user.email;
   const cycleTheme = () =>
     setTheme(THEME_ORDER[(THEME_ORDER.indexOf(theme) + 1) % 3]);
 
@@ -91,13 +94,38 @@ export function AppLayout() {
           <ThemeIcon className="size-4" />
           <span className="capitalize">{theme}</span>
         </button>
+
+        <div className="mt-2 flex items-center gap-2 border-t px-3 pt-3">
+          <span
+            className="min-w-0 flex-1 truncate text-xs text-muted-foreground"
+            title={email}
+          >
+            {email}
+          </span>
+          <button
+            onClick={signOut}
+            className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground"
+            title="Sign out"
+            aria-label="Sign out"
+          >
+            <LogOut className="size-4" />
+          </button>
+        </div>
       </aside>
 
       {/* Mobile top nav */}
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="flex items-center gap-2 border-b px-4 py-3 md:hidden">
           <GraduationCap className="size-5 text-primary" />
-          <span className="text-sm font-semibold">Interview Prep</span>
+          <span className="flex-1 text-sm font-semibold">Interview Prep</span>
+          <button
+            onClick={signOut}
+            className="rounded-md p-1.5 text-muted-foreground"
+            title="Sign out"
+            aria-label="Sign out"
+          >
+            <LogOut className="size-4" />
+          </button>
         </header>
         <main className="min-w-0 flex-1 overflow-x-hidden">
           <Outlet />

@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import { AppLayout } from '@/components/AppLayout';
 import { AppBootstrap } from '@/components/AppBootstrap';
+import { AuthGate } from '@/components/auth/AuthGate';
 import { CommandPalette } from '@/components/CommandPalette';
 import { InstallPrompt } from '@/components/InstallPrompt';
 import { useTheme } from '@/hooks/useTheme';
@@ -86,10 +87,12 @@ function InnerApp() {
 
 export default function App() {
   return (
-    <AppBootstrap>
-      <BrowserRouter>
-        <InnerApp />
-      </BrowserRouter>
-    </AppBootstrap>
+    <AuthGate>
+      <AppBootstrap>
+        <BrowserRouter>
+          <InnerApp />
+        </BrowserRouter>
+      </AppBootstrap>
+    </AuthGate>
   );
 }

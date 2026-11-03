@@ -4,12 +4,13 @@
 //  2. "Hide model answers" setting persists and hides the model answer
 //  3. opening + leaving a note without edits does not bump its updatedAt
 import { chromium } from 'playwright';
+import { newSignedInContext } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext();
+const ctx = await newSignedInContext(browser);
 const page = await ctx.newPage();
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
 
