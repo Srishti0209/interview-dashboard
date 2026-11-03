@@ -9,6 +9,7 @@ import type {
   ReviewState,
   Confidence,
   Source,
+  RoleFamily,
 } from '@/types';
 
 // ---------------------------------------------------------------------------
@@ -35,6 +36,7 @@ interface QuestionRow {
   company: string[];
   tags: string[];
   source: Source | 'ai';
+  role_families: RoleFamily[];
   created_at: number;
   updated_at: number;
 }
@@ -54,9 +56,18 @@ interface StateRow {
 }
 
 const QUESTION_COLUMNS =
-  'id, round_type, title, body, answer, difficulty, company, tags, source, created_at, updated_at';
+  'id, round_type, title, body, answer, difficulty, company, tags, source, role_families, created_at, updated_at';
 const STATE_COLUMNS =
   'question_id, personal_answer, personal_notes, bookmarked, confidence, last_reviewed, next_due, interval_days, ease_factor, review_count, updated_at';
+
+/**
+ * Whether a question belongs in the user's bank: shared questions for their
+ * target role, plus every question they created themselves.
+ */
+export function isForRole(q: Question, role: RoleFamily | null): boolean {
+  if (q.source === 'user' || !role || !q.roleFamilies?.length) return true;
+  return q.roleFamilies.includes(role);
+}
 
 export async function fetchQuestionData(): Promise<QuestionData> {
   await waitForPendingWrites();
@@ -77,6 +88,7 @@ export async function fetchQuestionData(): Promise<QuestionData> {
       company: r.company,
       tags: r.tags,
       source: r.source === 'ai' ? 'user' : r.source,
+      roleFamilies: r.role_families,
       personalAnswer: s?.personal_answer ?? undefined,
       personalNotes: s?.personal_notes ?? undefined,
       bookmarked: s?.bookmarked || undefined,

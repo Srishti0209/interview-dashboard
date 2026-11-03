@@ -21,6 +21,11 @@ export const ROUND_TYPES: RoundType[] = [
   'CODE_REVIEW_DEBUG',
   'BACKEND_ADJACENT',
   'ARCHITECTURE_TECH_LEAD',
+  'PRODUCT_SENSE',
+  'PRIORITIZATION_ROADMAP',
+  'STAKEHOLDER_AGILE',
+  'METRICS_ANALYTICS',
+  'TECHNICAL_FLUENCY',
 ];
 
 export const ROUND_LABEL: Record<RoundType, string> = {
@@ -36,6 +41,11 @@ export const ROUND_LABEL: Record<RoundType, string> = {
   CODE_REVIEW_DEBUG: 'Code Review & Debug',
   BACKEND_ADJACENT: 'Backend-Adjacent',
   ARCHITECTURE_TECH_LEAD: 'Architecture / Tech Lead',
+  PRODUCT_SENSE: 'Product Sense',
+  PRIORITIZATION_ROADMAP: 'Prioritisation & Roadmap',
+  STAKEHOLDER_AGILE: 'Stakeholders & Agile Delivery',
+  METRICS_ANALYTICS: 'Metrics & Analytics',
+  TECHNICAL_FLUENCY: 'Technical Fluency',
 };
 
 // Tailwind utility classes per round type (used for pills). Light + dark.
@@ -64,6 +74,16 @@ export const ROUND_COLOR: Record<RoundType, string> = {
     'bg-lime-100 text-lime-700 dark:bg-lime-500/15 dark:text-lime-300',
   ARCHITECTURE_TECH_LEAD:
     'bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300',
+  PRODUCT_SENSE:
+    'bg-cyan-100 text-cyan-700 dark:bg-cyan-500/15 dark:text-cyan-300',
+  PRIORITIZATION_ROADMAP:
+    'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/15 dark:text-yellow-300',
+  STAKEHOLDER_AGILE:
+    'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-300',
+  METRICS_ANALYTICS:
+    'bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300',
+  TECHNICAL_FLUENCY:
+    'bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300',
 };
 
 export const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];

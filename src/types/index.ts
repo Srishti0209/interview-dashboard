@@ -10,7 +10,13 @@ export type RoundType =
   | 'PERFORMANCE_OPTIMIZATION'
   | 'CODE_REVIEW_DEBUG'
   | 'BACKEND_ADJACENT'
-  | 'ARCHITECTURE_TECH_LEAD';
+  | 'ARCHITECTURE_TECH_LEAD'
+  // Product Owner rounds
+  | 'PRODUCT_SENSE'
+  | 'PRIORITIZATION_ROADMAP'
+  | 'STAKEHOLDER_AGILE'
+  | 'METRICS_ANALYTICS'
+  | 'TECHNICAL_FLUENCY';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type Source = 'seed' | 'user';
@@ -26,6 +32,8 @@ export interface Question {
   company?: string[];
   tags: string[];
   source: Source;
+  /** Target roles this question is for (shared bank only). */
+  roleFamilies?: RoleFamily[];
 
   // PERSONAL FIELDS — owned by the user, never overwritten by re-seed:
   personalAnswer?: string;

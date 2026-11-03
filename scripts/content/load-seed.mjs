@@ -1,11 +1,11 @@
 // Loads the shared content (question bank, companies, playbooks) from
-// public/seed/seed.json into Supabase. Idempotent: rows are upserted by id,
+// public/seed/seed.json and content/questions/*.json into Supabase. Idempotent: rows are upserted by id,
 // so re-running picks up content edits. Per-user data (answers, reviews,
 // application status) lives in separate tables and is never touched.
 //
 // Usage: node scripts/content/load-seed.mjs
 // Needs VITE_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local.
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { createClient } from '@supabase/supabase-js';
 
 if (existsSync('.env.local')) process.loadEnvFile('.env.local');
@@ -78,3 +78,34 @@ await upsert(
   })),
   'id',
 );
+
+// Role-specific banks built from content/src (see content/README.md).
+const ts = Date.now();
+const roleQuestions = existsSync('content/questions')
+  ? readdirSync('content/questions')
+      .filter((f) => f.endsWith('.json'))
+      .flatMap((f) => JSON.parse(readFileSync(`content/questions/${f}`, 'utf8')))
+  : [];
+if (roleQuestions.length) {
+  await upsert(
+    'questions',
+    roleQuestions.map((q) => ({
+      id: q.id,
+      owner_id: null,
+      role_families: q.roleFamilies,
+      levels: q.levels,
+      round_type: q.roundType,
+      title: q.title,
+      body: q.body,
+      answer: q.answer,
+      difficulty: q.difficulty,
+      company: q.company,
+      tags: q.tags,
+      source: 'seed',
+      review_status: 'approved',
+      created_at: ts,
+      updated_at: ts,
+    })),
+    'id',
+  );
+}
