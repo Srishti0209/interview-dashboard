@@ -16,7 +16,16 @@ export type RoundType =
   | 'PRIORITIZATION_ROADMAP'
   | 'STAKEHOLDER_AGILE'
   | 'METRICS_ANALYTICS'
-  | 'TECHNICAL_FLUENCY';
+  | 'TECHNICAL_FLUENCY'
+  // Backend rounds
+  | 'DSA_CODING'
+  | 'BE_SYSTEM_DESIGN'
+  | 'API_DESIGN'
+  | 'DATABASES_STORAGE'
+  | 'DISTRIBUTED_SYSTEMS'
+  | 'CONCURRENCY'
+  | 'RELIABILITY_OPERATIONS'
+  | 'SECURITY';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type Source = 'seed' | 'user';

@@ -26,6 +26,14 @@ export const ROUND_TYPES: RoundType[] = [
   'STAKEHOLDER_AGILE',
   'METRICS_ANALYTICS',
   'TECHNICAL_FLUENCY',
+  'DSA_CODING',
+  'BE_SYSTEM_DESIGN',
+  'API_DESIGN',
+  'DATABASES_STORAGE',
+  'DISTRIBUTED_SYSTEMS',
+  'CONCURRENCY',
+  'RELIABILITY_OPERATIONS',
+  'SECURITY',
 ];
 
 export const ROUND_LABEL: Record<RoundType, string> = {
@@ -46,6 +54,14 @@ export const ROUND_LABEL: Record<RoundType, string> = {
   STAKEHOLDER_AGILE: 'Stakeholders & Agile Delivery',
   METRICS_ANALYTICS: 'Metrics & Analytics',
   TECHNICAL_FLUENCY: 'Technical Fluency',
+  DSA_CODING: 'Data Structures & Algorithms',
+  BE_SYSTEM_DESIGN: 'Backend System Design',
+  API_DESIGN: 'API Design',
+  DATABASES_STORAGE: 'Databases & Storage',
+  DISTRIBUTED_SYSTEMS: 'Distributed Systems',
+  CONCURRENCY: 'Concurrency',
+  RELIABILITY_OPERATIONS: 'Reliability & Operations',
+  SECURITY: 'Security',
 };
 
 // Tailwind utility classes per round type (used for pills). Light + dark.
@@ -84,6 +100,22 @@ export const ROUND_COLOR: Record<RoundType, string> = {
     'bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300',
   TECHNICAL_FLUENCY:
     'bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300',
+  DSA_CODING:
+    'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300',
+  BE_SYSTEM_DESIGN:
+    'bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300',
+  API_DESIGN:
+    'bg-violet-100 text-violet-800 dark:bg-violet-500/15 dark:text-violet-300',
+  DATABASES_STORAGE:
+    'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300',
+  DISTRIBUTED_SYSTEMS:
+    'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/15 dark:text-indigo-300',
+  CONCURRENCY:
+    'bg-orange-100 text-orange-800 dark:bg-orange-500/15 dark:text-orange-300',
+  RELIABILITY_OPERATIONS:
+    'bg-teal-100 text-teal-800 dark:bg-teal-500/15 dark:text-teal-300',
+  SECURITY:
+    'bg-red-100 text-red-800 dark:bg-red-500/15 dark:text-red-300',
 };
 
 export const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];
