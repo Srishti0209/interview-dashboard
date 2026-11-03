@@ -34,6 +34,12 @@ export const ROUND_TYPES: RoundType[] = [
   'CONCURRENCY',
   'RELIABILITY_OPERATIONS',
   'SECURITY',
+  'TYPESCRIPT',
+  'HTML_CSS',
+  'ACCESSIBILITY',
+  'BROWSER_WEB_PLATFORM',
+  'STATE_DATA_FETCHING',
+  'TESTING',
 ];
 
 export const ROUND_LABEL: Record<RoundType, string> = {
@@ -62,6 +68,12 @@ export const ROUND_LABEL: Record<RoundType, string> = {
   CONCURRENCY: 'Concurrency',
   RELIABILITY_OPERATIONS: 'Reliability & Operations',
   SECURITY: 'Security',
+  TYPESCRIPT: 'TypeScript',
+  HTML_CSS: 'HTML & CSS',
+  ACCESSIBILITY: 'Accessibility',
+  BROWSER_WEB_PLATFORM: 'Browser & Web Platform',
+  STATE_DATA_FETCHING: 'State & Data Fetching',
+  TESTING: 'Testing',
 };
 
 // Tailwind utility classes per round type (used for pills). Light + dark.
@@ -116,6 +128,18 @@ export const ROUND_COLOR: Record<RoundType, string> = {
     'bg-teal-100 text-teal-800 dark:bg-teal-500/15 dark:text-teal-300',
   SECURITY:
     'bg-red-100 text-red-800 dark:bg-red-500/15 dark:text-red-300',
+  TYPESCRIPT:
+    'bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300',
+  HTML_CSS:
+    'bg-pink-100 text-pink-800 dark:bg-pink-500/15 dark:text-pink-300',
+  ACCESSIBILITY:
+    'bg-lime-100 text-lime-800 dark:bg-lime-500/15 dark:text-lime-300',
+  BROWSER_WEB_PLATFORM:
+    'bg-cyan-100 text-cyan-800 dark:bg-cyan-500/15 dark:text-cyan-300',
+  STATE_DATA_FETCHING:
+    'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-500/15 dark:text-fuchsia-300',
+  TESTING:
+    'bg-stone-200 text-stone-700 dark:bg-stone-500/20 dark:text-stone-300',
 };
 
 export const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];

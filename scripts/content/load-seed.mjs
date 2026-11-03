@@ -21,6 +21,10 @@ const seed = JSON.parse(readFileSync('public/seed/seed.json', 'utf8'));
 // The original bank was written for frontend / full-stack / AI engineering.
 // Phase 4 re-tags and adds the other role families.
 const ORIGINAL_ROLE_FAMILIES = ['frontend', 'fullstack', 'ai'];
+// Rounds from the original bank that don't apply to every original role.
+const ROUND_ROLE_FAMILIES = {
+  AI_PRODUCT_ENGINEERING: ['fullstack', 'ai'],
+};
 
 async function upsert(table, rows, onConflict) {
   for (let i = 0; i < rows.length; i += 200) {
@@ -62,7 +66,8 @@ await upsert(
   seed.questions.map((q) => ({
     id: q.id,
     owner_id: null,
-    role_families: q.roleFamilies ?? ORIGINAL_ROLE_FAMILIES,
+    role_families:
+      q.roleFamilies ?? ROUND_ROLE_FAMILIES[q.roundType] ?? ORIGINAL_ROLE_FAMILIES,
     levels: q.levels ?? [],
     round_type: q.roundType,
     title: q.title,

@@ -25,7 +25,14 @@ export type RoundType =
   | 'DISTRIBUTED_SYSTEMS'
   | 'CONCURRENCY'
   | 'RELIABILITY_OPERATIONS'
-  | 'SECURITY';
+  | 'SECURITY'
+  // Frontend rounds
+  | 'TYPESCRIPT'
+  | 'HTML_CSS'
+  | 'ACCESSIBILITY'
+  | 'BROWSER_WEB_PLATFORM'
+  | 'STATE_DATA_FETCHING'
+  | 'TESTING';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 export type Source = 'seed' | 'user';
