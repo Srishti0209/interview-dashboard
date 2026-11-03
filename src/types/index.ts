@@ -121,3 +121,33 @@ export interface SeedData {
   stories: Story[];
   companies: Company[];
 }
+
+// ---------------------------------------------------------------------------
+// Accounts
+// ---------------------------------------------------------------------------
+export type RoleFamily =
+  | 'product_owner'
+  | 'backend'
+  | 'frontend'
+  | 'fullstack'
+  | 'ai';
+
+export type RoleLevel = 'mid' | 'senior' | 'staff';
+
+export interface Profile {
+  id: string;
+  displayName: string | null;
+  currentPosition: string | null;
+  targetRoleFamily: RoleFamily | null;
+  targetLevel: RoleLevel | null;
+  onboarded: boolean;
+  activeResumeId: string | null;
+}
+
+export interface Resume {
+  id: string;
+  fileName: string | null;
+  storagePath: string | null;
+  extractedText: string;
+  createdAt: string;
+}

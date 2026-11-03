@@ -4,6 +4,8 @@ import type {
   Archetype,
   AiPolicy,
   ApplicationStatus,
+  RoleFamily,
+  RoleLevel,
 } from '@/types';
 
 export const ROUND_TYPES: RoundType[] = [
@@ -128,3 +130,62 @@ export const APPLICATION_STATUS_COLOR: Record<ApplicationStatus, string> = {
   rejected: 'bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300',
   declined: 'bg-zinc-100 text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400',
 };
+
+// ---------------------------------------------------------------------------
+// Target roles
+// ---------------------------------------------------------------------------
+export const ROLE_FAMILIES: RoleFamily[] = [
+  'product_owner',
+  'backend',
+  'frontend',
+  'fullstack',
+  'ai',
+];
+
+export const ROLE_FAMILY_LABEL: Record<RoleFamily, string> = {
+  product_owner: 'Product Owner',
+  backend: 'Backend Engineer',
+  frontend: 'Frontend Engineer',
+  fullstack: 'Full Stack Engineer',
+  ai: 'AI Engineer',
+};
+
+export const ROLE_FAMILY_BLURB: Record<RoleFamily, string> = {
+  product_owner: 'Product sense, prioritisation, stakeholders, metrics',
+  backend: 'APIs, databases, distributed systems, system design',
+  frontend: 'JS, React, UI architecture, performance',
+  fullstack: 'Frontend and backend, end-to-end system design',
+  ai: 'LLM systems, RAG, evals, AI product engineering',
+};
+
+/** Product Owner tracks stop at Senior; engineering tracks go to Staff. */
+export const ROLE_LEVELS: Record<RoleFamily, RoleLevel[]> = {
+  product_owner: ['mid', 'senior'],
+  backend: ['mid', 'senior', 'staff'],
+  frontend: ['mid', 'senior', 'staff'],
+  fullstack: ['mid', 'senior', 'staff'],
+  ai: ['mid', 'senior', 'staff'],
+};
+
+/** e.g. roleTitle('backend', 'staff') → "Staff Backend Engineer". */
+export function roleTitle(family: RoleFamily, level: RoleLevel): string {
+  const base = ROLE_FAMILY_LABEL[family];
+  if (level === 'senior') return `Senior ${base}`;
+  if (level === 'staff') return `Staff ${base}`;
+  return base;
+}
+
+export const CURRENT_ROLE_SUGGESTIONS = [
+  'Software Engineer',
+  'Senior Software Engineer',
+  'Frontend Engineer',
+  'Backend Engineer',
+  'Full Stack Engineer',
+  'Tech Lead',
+  'Engineering Manager',
+  'Product Owner',
+  'Product Manager',
+  'Business Analyst',
+  'Data Scientist',
+  'Student / Graduate',
+];

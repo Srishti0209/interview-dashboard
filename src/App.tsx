@@ -2,7 +2,14 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import { AppLayout } from '@/components/AppLayout';
 import { AppBootstrap } from '@/components/AppBootstrap';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { AuthGate } from '@/components/auth/AuthGate';
+import { ProfileGate } from '@/components/auth/ProfileGate';
+import {
+  queryClient,
+  queryPersister,
+  PERSIST_MAX_AGE,
+} from '@/lib/queryClient';
 import { CommandPalette } from '@/components/CommandPalette';
 import { InstallPrompt } from '@/components/InstallPrompt';
 import { useTheme } from '@/hooks/useTheme';
@@ -15,6 +22,7 @@ import Stories from '@/pages/Stories';
 import Companies from '@/pages/Companies';
 import CompanyDetail from '@/pages/CompanyDetail';
 import SettingsPage from '@/pages/SettingsPage';
+import Account from '@/pages/Account';
 import NotFound from '@/pages/NotFound';
 
 // Heavy routes are code-split to keep the initial bundle small.
@@ -78,6 +86,7 @@ function InnerApp() {
             }
           />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
@@ -87,12 +96,19 @@ function InnerApp() {
 
 export default function App() {
   return (
-    <AuthGate>
-      <AppBootstrap>
-        <BrowserRouter>
-          <InnerApp />
-        </BrowserRouter>
-      </AppBootstrap>
-    </AuthGate>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister: queryPersister, maxAge: PERSIST_MAX_AGE }}
+    >
+      <AuthGate>
+        <ProfileGate>
+          <AppBootstrap>
+            <BrowserRouter>
+              <InnerApp />
+            </BrowserRouter>
+          </AppBootstrap>
+        </ProfileGate>
+      </AuthGate>
+    </PersistQueryClientProvider>
   );
 }

@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 
 /**
- * Current Supabase session. `undefined` while the stored session is still
- * being restored, `null` when signed out.
+ * Subscribes to Supabase auth. `undefined` while the stored session is still
+ * being restored, `null` when signed out. Used once, by AuthGate.
  */
-export function useSession(): Session | null | undefined {
+export function useSupabaseSession(): Session | null | undefined {
   const [session, setSession] = useState<Session | null | undefined>(
     undefined,
   );
@@ -26,6 +26,13 @@ export function useSession(): Session | null | undefined {
   }, []);
 
   return session;
+}
+
+export const SessionContext = createContext<Session | null>(null);
+
+/** The signed-in session (always set inside AuthGate). */
+export function useSession(): Session | null {
+  return useContext(SessionContext);
 }
 
 export async function signOut(): Promise<void> {

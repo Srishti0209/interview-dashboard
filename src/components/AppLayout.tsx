@@ -13,10 +13,13 @@ import {
   Moon,
   Monitor,
   LogOut,
+  UserRound,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore, type Theme } from '@/store/ui';
 import { useSession, signOut } from '@/hooks/useSession';
+import { useProfile } from '@/hooks/useProfile';
+import { roleTitle } from '@/lib/constants';
 
 const THEME_ORDER: Theme[] = ['light', 'dark', 'system'];
 const THEME_ICON: Record<Theme, typeof Sun> = {
@@ -41,6 +44,11 @@ export function AppLayout() {
   const setCommandOpen = useUIStore((s) => s.setCommandOpen);
   const ThemeIcon = THEME_ICON[theme];
   const email = useSession()?.user.email;
+  const profile = useProfile().data;
+  const target =
+    profile?.targetRoleFamily && profile.targetLevel
+      ? roleTitle(profile.targetRoleFamily, profile.targetLevel)
+      : null;
   const cycleTheme = () =>
     setTheme(THEME_ORDER[(THEME_ORDER.indexOf(theme) + 1) % 3]);
 
@@ -95,13 +103,19 @@ export function AppLayout() {
           <span className="capitalize">{theme}</span>
         </button>
 
-        <div className="mt-2 flex items-center gap-2 border-t px-3 pt-3">
-          <span
-            className="min-w-0 flex-1 truncate text-xs text-muted-foreground"
-            title={email}
+        <div className="mt-2 flex items-center gap-2 border-t pt-3">
+          <NavLink
+            to="/account"
+            className="min-w-0 flex-1 rounded-md px-3 py-1 transition-colors hover:bg-sidebar-accent/60"
+            title="Account"
           >
-            {email}
-          </span>
+            <span className="block truncate text-xs font-medium">{email}</span>
+            {target && (
+              <span className="block truncate text-[11px] text-muted-foreground">
+                Preparing for {target}
+              </span>
+            )}
+          </NavLink>
           <button
             onClick={signOut}
             className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground"
@@ -118,6 +132,14 @@ export function AppLayout() {
         <header className="flex items-center gap-2 border-b px-4 py-3 md:hidden">
           <GraduationCap className="size-5 text-primary" />
           <span className="flex-1 text-sm font-semibold">Interview Prep</span>
+          <NavLink
+            to="/account"
+            className="rounded-md p-1.5 text-muted-foreground"
+            title="Account"
+            aria-label="Account"
+          >
+            <UserRound className="size-4" />
+          </NavLink>
           <button
             onClick={signOut}
             className="rounded-md p-1.5 text-muted-foreground"

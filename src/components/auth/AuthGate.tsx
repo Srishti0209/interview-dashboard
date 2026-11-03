@@ -1,11 +1,19 @@
 import { Loader2 } from 'lucide-react';
-import { useSession } from '@/hooks/useSession';
+import { useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { SessionContext, useSupabaseSession } from '@/hooks/useSession';
 import { supabaseConfigured } from '@/lib/supabase';
 import SignIn from '@/pages/SignIn';
 
 /** Renders the app only for signed-in users; everyone else sees SignIn. */
 export function AuthGate({ children }: { children: React.ReactNode }) {
-  const session = useSession();
+  const session = useSupabaseSession();
+  const qc = useQueryClient();
+
+  // Never show one user's cached data to the next user on this device.
+  useEffect(() => {
+    if (session === null) qc.clear();
+  }, [session, qc]);
 
   if (!supabaseConfigured) {
     return (
@@ -26,5 +34,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (!session) return <SignIn />;
 
-  return <>{children}</>;
+  return (
+    <SessionContext.Provider value={session}>{children}</SessionContext.Provider>
+  );
 }

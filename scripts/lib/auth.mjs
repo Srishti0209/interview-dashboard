@@ -9,7 +9,7 @@ import { existsSync } from 'node:fs';
 
 if (existsSync('.env.local')) process.loadEnvFile('.env.local');
 
-const { VITE_SUPABASE_URL: url, VITE_SUPABASE_ANON_KEY: key } = process.env;
+export const { VITE_SUPABASE_URL: url, VITE_SUPABASE_ANON_KEY: key } = process.env;
 const { SMOKE_EMAIL: email, SMOKE_PASSWORD: password } = process.env;
 
 let cached;
@@ -37,13 +37,50 @@ export async function getSmokeSession() {
   return cached;
 }
 
+/** Calls the Supabase REST API as the smoke user. */
+export async function rest(path, init = {}) {
+  const session = await getSmokeSession();
+  const res = await fetch(`${url}/rest/v1/${path}`, {
+    ...init,
+    headers: {
+      apikey: key,
+      Authorization: `Bearer ${session.access_token}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+      ...init.headers,
+    },
+  });
+  const text = await res.text();
+  const body = text ? JSON.parse(text) : null;
+  if (!res.ok) throw new Error(`${init.method ?? 'GET'} ${path}: ${res.status} ${text}`);
+  return body;
+}
+
+export const SMOKE_PROFILE = {
+  current_position: 'Senior Software Engineer',
+  target_role_family: 'frontend',
+  target_level: 'senior',
+  onboarded: true,
+};
+
+/** Updates the smoke user's profile row (defaults to a finished onboarding). */
+export async function setSmokeProfile(patch = SMOKE_PROFILE) {
+  const { user } = await getSmokeSession();
+  return rest(`profiles?id=eq.${user.id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(patch),
+  });
+}
+
 /** supabase-js stores the session under sb-<project-ref>-auth-token. */
 export function storageKey() {
   return `sb-${new URL(url).hostname.split('.')[0]}-auth-token`;
 }
 
-export async function newSignedInContext(browser, options = {}) {
+export async function newSignedInContext(browser, options = {}, { onboarded = true } = {}) {
   const session = await getSmokeSession();
+  // Feature smokes expect the app itself, not the onboarding screen.
+  if (onboarded) await setSmokeProfile();
   const ctx = await browser.newContext(options);
   await ctx.addInitScript(
     ([k, v]) => {
