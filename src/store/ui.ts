@@ -96,6 +96,7 @@ export const useUIStore = create<UIState>()(
         theme: s.theme,
         targetCompanyId: s.targetCompanyId,
         questionView: s.questionView,
+        hideAnswers: s.hideAnswers,
         notepadFontSize: s.notepadFontSize,
         srsHardFactor: s.srsHardFactor,
         srsEasyBonus: s.srsEasyBonus,

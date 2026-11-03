@@ -12,6 +12,7 @@ import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
 import {
   Dialog,
   DialogContent,
@@ -44,6 +45,8 @@ export default function SettingsPage() {
   const hardFactor = useUIStore((s) => s.srsHardFactor);
   const easyBonus = useUIStore((s) => s.srsEasyBonus);
   const setSrsConfig = useUIStore((s) => s.setSrsConfig);
+  const hideAnswers = useUIStore((s) => s.hideAnswers);
+  const setHideAnswers = useUIStore((s) => s.setHideAnswers);
 
   const fileInput = useRef<HTMLInputElement>(null);
   const [confirmReset, setConfirmReset] = useState(false);
@@ -162,6 +165,20 @@ export default function SettingsPage() {
               className="mt-1.5"
             />
           </div>
+        </div>
+
+        <div className="mt-5 flex items-center justify-between gap-4">
+          <div>
+            <Label htmlFor="hide-answers">Hide model answers</Label>
+            <p className="text-xs text-muted-foreground">
+              Keep the model answer covered until you click to reveal it.
+            </p>
+          </div>
+          <Switch
+            id="hide-answers"
+            checked={hideAnswers}
+            onCheckedChange={setHideAnswers}
+          />
         </div>
       </Card>
 

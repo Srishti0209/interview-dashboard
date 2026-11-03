@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import { AppLayout } from '@/components/AppLayout';
 import { AppBootstrap } from '@/components/AppBootstrap';
 import { CommandPalette } from '@/components/CommandPalette';
@@ -28,6 +28,13 @@ function RouteFallback() {
   );
 }
 
+// Remount per question so autosave state and its unmount flush can never
+// carry one question's pending edits over to another.
+function QuestionDetailRoute() {
+  const { id } = useParams();
+  return <QuestionDetail key={id} />;
+}
+
 function InnerApp() {
   useTheme();
   useGlobalShortcuts();
@@ -40,7 +47,7 @@ function InnerApp() {
         <Route element={<AppLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="questions" element={<Questions />} />
-          <Route path="questions/:id" element={<QuestionDetail />} />
+          <Route path="questions/:id" element={<QuestionDetailRoute />} />
           <Route path="my-questions/new" element={<NewQuestion />} />
           <Route
             path="notes"

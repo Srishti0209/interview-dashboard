@@ -4,7 +4,9 @@ type SaveStatus = 'idle' | 'saving' | 'saved';
 
 /**
  * Local-edit field with debounced autosave + manual flush (e.g. on blur).
- * Resets when `initial` changes identity (navigating to another record).
+ * Resyncs when `initial` changes and there are no pending edits. `save` is
+ * captured on mount for the unmount flush, so callers must remount (key) when
+ * the target record changes.
  */
 export function useAutosave(
   initial: string,

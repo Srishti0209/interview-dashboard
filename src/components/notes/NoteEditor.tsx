@@ -48,6 +48,8 @@ export function NoteEditor({ note }: { note: Note }) {
   const imageTarget = useRef<{ editor: Editor; range: Range } | null>(null);
   const bodyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const titleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const bodyDirty = useRef(false);
+  const titleDirty = useRef(false);
 
   const editor = useEditor({
     extensions: [
@@ -88,8 +90,10 @@ export function NoteEditor({ note }: { note: Note }) {
     },
     onUpdate: ({ editor }) => {
       setStatus('idle');
+      bodyDirty.current = true;
       if (bodyTimer.current) clearTimeout(bodyTimer.current);
       bodyTimer.current = setTimeout(async () => {
+        bodyDirty.current = false;
         setStatus('saving');
         await saveNoteBody(note.id, editor.getJSON());
         setStatus('saved');
@@ -97,12 +101,20 @@ export function NoteEditor({ note }: { note: Note }) {
     },
   });
 
-  // Flush on unmount
+  // Flush pending edits on unmount (skip when clean so updatedAt isn't bumped)
   useEffect(() => {
     return () => {
       if (bodyTimer.current) clearTimeout(bodyTimer.current);
       if (titleTimer.current) clearTimeout(titleTimer.current);
-      if (editor) void saveNoteBody(note.id, editor.getJSON(), titleRef.current);
+      if (bodyDirty.current && editor) {
+        void saveNoteBody(
+          note.id,
+          editor.getJSON(),
+          titleDirty.current ? titleRef.current : undefined,
+        );
+      } else if (titleDirty.current) {
+        void updateNote(note.id, { title: titleRef.current });
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -112,8 +124,10 @@ export function NoteEditor({ note }: { note: Note }) {
     (v: string) => {
       setTitle(v);
       titleRef.current = v;
+      titleDirty.current = true;
       if (titleTimer.current) clearTimeout(titleTimer.current);
       titleTimer.current = setTimeout(() => {
+        titleDirty.current = false;
         void updateNote(note.id, { title: v });
       }, 600);
     },

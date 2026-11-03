@@ -76,6 +76,7 @@ node scripts/smoke-phase8.mjs     # company status timeline
 node scripts/smoke-phase9.mjs     # timed mock + history
 node scripts/smoke-phase10.mjs    # command palette, shortcuts, theme
 node scripts/smoke-settings.mjs   # export / import round-trip + reset preserves
+node scripts/smoke-regressions.mjs # autosave targets right question, hide answers, note updatedAt
 node scripts/smoke-pwa.mjs        # (against `npm run preview`) SW + offline boot
 ```
 
