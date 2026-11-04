@@ -3980,7 +3980,7 @@ React uses `Object.is` to decide whether state changed: `setCount(NaN)` twice wo
 |---|---|
 | "== checks value, === checks type" | Explains coercion rules and why they're surprising |
 | Incomplete falsy list | Full list including -0, 0n, NaN |
-| Uses `||` for numeric defaults | Uses `??` |
+| Uses logical OR for numeric defaults, so 0 is replaced | Uses `??` |
 | Global isNaN | Number.isNaN, Object.is |
 | No real bugs | Forms, React `0 &&`, price filter |
 

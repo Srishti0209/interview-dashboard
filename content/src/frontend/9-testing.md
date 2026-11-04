@@ -283,3 +283,440 @@ Key details: `user-event` must be told about fake timers (`advanceTimers`), othe
 - "How do you test a modal dialog?"
 - "How do you test a component that depends on context or the router?"
 - "Enzyme vs React Testing Library: what changed and why?"
+
+## Mocking the network with MSW
+- id: fe-test-03
+- roles: frontend, fullstack
+- round: TESTING
+- difficulty: medium
+- levels:
+- tags: testing, MSW, mocking, fetch, integration tests, storybook
+
+### Prompt
+How do you mock network requests in frontend tests? Explain how Mock Service Worker (MSW) works, why it's often preferred over mocking `fetch` or your API module, and how you would set it up for a React app's tests, Storybook and local development.
+
+### Answer
+#### What the interviewer is really testing
+- Whether you know **where to put the seam** when mocking: at the network boundary, not inside your own code.
+- Understanding of **how MSW intercepts requests**: a Service Worker in the browser, and request interception (via `@mswjs/interceptors`) in Node.
+- Practical setup: **default handlers, per-test overrides, `resetHandlers`, `onUnhandledRequest: 'error'`**.
+- Testing the **unhappy paths**: errors, slow responses, empty lists, network failures.
+- Awareness of the **trade-off**: mocks can drift from the real API, so you need contract checks or generated types.
+
+#### Key points
+- **Three places to mock**, from worst to best for most tests:
+  1. **Mock the hook or module** (`vi.mock('./useOrders')`): fast, but your data-fetching code never runs, so caching, error handling and parsing go untested.
+  2. **Mock `fetch` globally** (`vi.spyOn(global, 'fetch')`): your code runs, but you hand-build `Response` objects, it breaks if you switch to axios, and matching requests is messy.
+  3. **Intercept at the network level with MSW**: your real `fetch`/axios/TanStack Query code runs unchanged; handlers describe the API declaratively.
+- **How MSW works:**
+  - **Browser** (`setupWorker`): registers a Service Worker that intercepts `fetch` events and asks the page which handler matches. Requests show in the Network tab.
+  - **Node** (`setupServer`): patches Node's `http`, `https`, `XMLHttpRequest` and global `fetch` in-process. No real server or port.
+- **Handlers** (MSW v2 syntax): `http.get('/api/orders', () => HttpResponse.json([...]))`. Also `graphql.query('GetUser', ...)`, and WebSocket support in newer versions.
+- **Lifecycle in tests:** `server.listen({ onUnhandledRequest: 'error' })` in `beforeAll`, `server.resetHandlers()` in `afterEach`, `server.close()` in `afterAll`. Override per test with `server.use(...)`.
+- **One set of handlers, reused everywhere:** unit and integration tests, Storybook (via `msw-storybook-addon`), local development before the backend exists, and demos.
+- **Scenarios to cover:** success, empty, 4xx validation errors, 500, network error (`HttpResponse.error()`), slow responses (`await delay(2000)`), and pagination.
+- **Drift risk:** keep handlers typed from the OpenAPI schema or generated client, or use contract tests (Pact) or a schema validator so mocks match the real API.
+
+#### Model answer
+"I mock at the network boundary, and MSW is my default tool for it. The principle is that the code I own, including my fetch wrapper, React Query hooks, response parsing and error handling, should run for real in tests. Only the thing I don't own, the server, gets replaced.
+
+If I mock the hook instead, the test passes even when my query key is wrong or my error handling is broken. If I mock `fetch` directly, I'm hand-building `Response` objects and coupling the test to the HTTP library. MSW sits below all of that.
+
+In Node, `setupServer` patches the request modules in-process, so when my component calls `fetch('/api/orders')`, MSW matches it against my handlers and returns a response. In the browser, `setupWorker` registers a real Service Worker, so the same handlers work in Storybook and local development, and requests appear in DevTools.
+
+My setup is a `handlers.ts` file with happy-path responses for every endpoint, and a test setup file:
+
+```ts
+// test/setup.ts
+import { server } from './server';
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+```
+
+`onUnhandledRequest: 'error'` is important: if a component calls an endpoint I didn't mock, the test fails loudly instead of hitting the real network or hanging.
+
+Then individual tests override just what they need:
+
+```tsx
+test('shows a retry button when orders fail to load', async () => {
+  server.use(
+    http.get('/api/orders', () => HttpResponse.json({ message: 'boom' }, { status: 500 })),
+  );
+  const user = userEvent.setup();
+  renderWithProviders(<OrdersPage />);
+
+  expect(await screen.findByRole('alert')).toHaveTextContent(/couldn't load orders/i);
+  server.resetHandlers(); // back to the happy path
+  await user.click(screen.getByRole('button', { name: /retry/i }));
+  expect(await screen.findByRole('row', { name: /order #1001/i })).toBeInTheDocument();
+});
+```
+
+This exercises the real retry flow end to end inside the component. The main risk with any mock is drift from the real API, so I type the handlers from our OpenAPI-generated types, which means a changed response shape breaks the build, and we rely on a small set of E2E tests against a real backend to catch anything else."
+
+#### Another worked example
+**Asserting on what was sent, not just what came back.** For a checkout form, you want to verify the request body without mocking internals:
+
+```ts
+test('sends the selected shipping method', async () => {
+  let body: unknown;
+  server.use(
+    http.post('/api/checkout', async ({ request }) => {
+      body = await request.json();
+      return HttpResponse.json({ orderId: 'A1' }, { status: 201 });
+    }),
+  );
+  const user = userEvent.setup();
+  renderWithProviders(<Checkout />);
+  await user.click(screen.getByRole('radio', { name: /express/i }));
+  await user.click(screen.getByRole('button', { name: /place order/i }));
+
+  expect(await screen.findByText(/order a1 confirmed/i)).toBeInTheDocument();
+  expect(body).toMatchObject({ shipping: 'express' });
+});
+```
+
+Capture the request in the handler, and assert on it at the end alongside the visible result. Avoid asserting "fetch was called 3 times" unless call count is the actual requirement, like proving a debounce works.
+
+#### A third worked example
+**Testing loading states and race conditions with `delay`.**
+```ts
+server.use(
+  http.get('/api/search', async ({ request }) => {
+    const q = new URL(request.url).searchParams.get('q');
+    await delay(q === 'a' ? 500 : 50); // the older query resolves last
+    return HttpResponse.json({ results: [q + '-result'] });
+  }),
+);
+```
+Type "a", then "ab". The "a" response arrives after "ab". A correct component shows only "ab-result". This is how you prove a race-condition fix (AbortController or ignoring stale responses) without relying on luck. For a loading skeleton, use `delay('infinite')` and assert the skeleton is present.
+
+#### Step-by-step framework
+1. **Decide the seam**: the network, so all your fetching code runs.
+2. **Write default handlers** for every endpoint's happy path, typed from the API schema.
+3. **Create `server.ts` (Node) and `browser.ts` (worker)** sharing the same handlers.
+4. **Wire the lifecycle** in the test setup file, with `onUnhandledRequest: 'error'`.
+5. **Override per test** with `server.use` for errors, empty states and delays.
+6. **Assert on visible output first**, request payloads second, call counts rarely.
+7. **Reuse the handlers** in Storybook and local dev so every state is demoable.
+8. **Guard against drift** with generated types, contract tests or a few real E2E tests.
+
+#### Strong versus weak answer
+| Weak | Strong |
+|---|---|
+| `vi.mock('../api')` returning canned data | MSW handlers so the real client, parsing and caching run |
+| Only tests the happy path | Covers 500s, network errors, empty lists, slow responses |
+| Unmocked requests silently pass or hang | `onUnhandledRequest: 'error'` |
+| Handlers leak between tests | `resetHandlers` in `afterEach`, fresh QueryClient per test |
+| Hand-written response shapes that drift | Handlers typed from OpenAPI, plus a few real E2E tests |
+
+#### Useful phrases
+- "I mock what I don't own, the server, and let everything I do own run."
+- "Unhandled requests should be errors, not silent passes."
+- "The same handlers power tests, Storybook and local dev."
+- "A mock is only as good as its match with the real API, so I type it from the schema."
+
+#### Common pitfalls
+- **Relative URLs in Node**: `fetch('/api/x')` needs a base URL in jsdom or Node; configure it or use absolute URLs in handlers.
+- Forgetting **`resetHandlers`**, so an error override from one test breaks the next.
+- A **shared QueryClient** with retries on: error tests take seconds and data leaks across tests.
+- Mixing **MSW with `vi.mock` of the same module**, so the handler never fires.
+- Forgetting to **serve `mockServiceWorker.js`** from the public folder for browser usage (`npx msw init public/`).
+- Shipping the worker to production: only start it behind `if (import.meta.env.DEV)`.
+
+#### Follow-ups to expect (with sample answers)
+- **"How is MSW different from a JSON server or a staging API?"** — "It runs in-process, needs no port or network, is deterministic per test, and lets me create edge cases like a 503 or a 5-second delay that a real server won't produce on demand."
+- **"How do you simulate a network failure?"** — "`return HttpResponse.error()`, which makes `fetch` reject with a TypeError, just like going offline. That's different from a 500, which resolves with `ok: false`, and the UI often needs to handle both."
+- **"Can MSW mock GraphQL?"** — "Yes, with `graphql.query('GetUser', ({ variables }) => ...)` and `graphql.mutation`, matched by operation name."
+- **"Won't mocks hide API changes?"** — "They can. Generated types catch shape changes at compile time, contract tests catch them in CI, and a thin E2E layer against a real backend catches integration issues."
+- **"How do you use it in Storybook?"** — "With `msw-storybook-addon`: each story sets `parameters.msw.handlers`, so I can have Loaded, Empty, Error and Slow stories for one component, all using real fetching code."
+
+#### What senior interviewers look for
+- A clear **philosophy of where to mock**, and why.
+- Systematic coverage of **failure and latency states**, not just success.
+- A **shared mocking layer** used across tests, Storybook and dev, not three separate fake-data systems.
+- Awareness of **drift** and a plan for it.
+
+#### Practise it
+- Set up MSW in a small app and write tests for success, empty, 500 and network-error states of one list page.
+- Write a test that proves a search box ignores stale responses, using `delay`.
+- Checklist: shared handlers · `onUnhandledRequest: 'error'` · `resetHandlers` · fresh QueryClient · failure states · typed handlers.
+
+#### Variations you might be asked
+- "How would you test a component that polls an API every 10 seconds?"
+- "What's wrong with `jest.mock('axios')`?"
+- "How do you develop a frontend before the backend endpoint exists?"
+
+## End-to-end testing with Playwright or Cypress
+- id: fe-test-04
+- roles: frontend, fullstack
+- round: TESTING
+- difficulty: medium
+- levels:
+- tags: testing, e2e, Playwright, Cypress, flaky tests, CI
+
+### Prompt
+How do you approach end-to-end testing for a web app? Compare Playwright and Cypress, explain what you would and wouldn't cover with E2E tests, and describe how you keep an E2E suite fast and free of flaky tests.
+
+### Answer
+#### What the interviewer is really testing
+- Knowing **what E2E tests are for**: a small number of critical user journeys through the real stack, not every edge case.
+- A grounded comparison of **Playwright vs Cypress**: architecture, browser support, parallelism, debugging.
+- Practical skills for **reliability**: auto-waiting, resilient locators, isolated test data, authentication setup.
+- How you run E2E in **CI**: sharding, retries with traces, running against preview deployments.
+- Whether you treat **flakiness as a bug** to fix, not something to retry away.
+
+#### Key points
+- **What E2E is for:** proving critical journeys work across the real frontend, backend, database and third parties: sign-up, login, checkout, the main create/edit flow. Typically 10 to 50 tests, not hundreds.
+- **What it isn't for:** validation rules, every error message, layout permutations. Those belong in component or integration tests, which are 10 to 100 times faster.
+- **Playwright:**
+  - Drives browsers out-of-process via the DevTools protocol (and patched WebKit/Firefox builds).
+  - Chromium, Firefox and **WebKit (Safari engine)**; multiple tabs, origins and browser contexts.
+  - Free **parallelism and sharding** built in; isolated `browserContext` per test is cheap.
+  - **Trace Viewer** (DOM snapshots, network, console per step), codegen, UI mode.
+  - Auto-waiting locators and web-first assertions: `await expect(locator).toBeVisible()`.
+- **Cypress:**
+  - Runs tests **inside the browser** alongside the app, giving an excellent interactive runner with time-travel snapshots.
+  - Chromium-family and Firefox; WebKit is experimental. Historically limited with multiple tabs and cross-origin (improved with `cy.origin`).
+  - Chained, command-queue API (`cy.get().click()`), not plain async/await.
+  - Parallelism mainly through Cypress Cloud (paid) or third-party sharding.
+  - Also strong at **component testing**.
+- **Reliability practices:**
+  - **Locators by role, label or text** (`getByRole('button', { name: 'Pay' })`), or `data-testid` for stable hooks. Never CSS chains like `div > span:nth-child(3)`.
+  - **No fixed sleeps**; rely on auto-waiting and assertions that retry.
+  - **Each test creates its own data** through the API or a seed endpoint, and doesn't depend on test order.
+  - **Log in once** and reuse the session (`storageState` in Playwright, `cy.session` in Cypress), and test the login UI in just one test.
+  - **Stub only third parties you can't control** (payment providers, email), via route interception or sandbox accounts.
+- **CI:** run on every PR against a preview deployment or a docker-compose stack; shard across machines; upload traces, videos and screenshots on failure; quarantine flaky tests with an owner and a deadline.
+
+#### Model answer
+"I treat end-to-end tests as a thin safety net for the journeys that would cost us money or trust if they broke: signing up, logging in, the core create flow, and checkout. Everything else is tested lower down, where tests are faster and failures are easier to diagnose. So I'd expect a few dozen E2E tests, not hundreds.
+
+Today I'd usually choose Playwright. It runs Chromium, Firefox and WebKit, so I get real Safari-engine coverage. Parallelism and sharding are built in and free. Each test gets an isolated browser context, which is cheap, and the Trace Viewer makes CI failures easy to debug, because I can step through DOM snapshots, network calls and console logs for every action. Cypress has a fantastic interactive runner and is great for component testing, and I'd happily stay with it on a team that already uses it, but its in-browser architecture has historically made multi-tab and cross-origin flows harder, and parallelism mostly goes through their paid cloud.
+
+For reliability, I follow a few rules. Locators use roles and accessible names, the same as Testing Library, so tests don't break when markup changes. There are no fixed waits: Playwright's locators auto-wait for elements to be visible, enabled and stable, and assertions like `toHaveText` retry. Each test creates its own data through an API call, so tests can run in parallel and in any order. Authentication happens once in a setup project that saves `storageState`, and other tests start already logged in.
+
+```ts
+test('customer can buy an item', async ({ page, request }) => {
+  const product = await createProduct(request, { name: 'Blue Mug', price: 12 });
+  await page.goto('/products/' + product.slug);
+  await page.getByRole('button', { name: 'Add to basket' }).click();
+  await page.getByRole('link', { name: /basket \(1\)/i }).click();
+  await page.getByRole('button', { name: 'Checkout' }).click();
+  await fillTestCard(page); // Stripe test mode iframe
+  await page.getByRole('button', { name: /pay £12/i }).click();
+  await expect(page.getByRole('heading', { name: /order confirmed/i })).toBeVisible();
+});
+```
+
+In CI, the suite runs against the PR's preview deployment, sharded across four machines, with one retry that records a trace. A test that passes only on retry is reported as flaky and goes to a quarantine list with an owner. Flakiness is a bug, either in the test or in the app, and often it's a real race condition users hit too."
+
+#### Another worked example
+**Diagnosing a flaky test.** A test that "sometimes can't find the Save button" failed 1 in 20 runs. The trace showed the click landed while a skeleton loader was still covering the form, because the test clicked as soon as the button existed in the DOM. Cypress's and Playwright's actionability checks usually prevent this, but the button was technically visible under a transparent overlay. Fixes, in order of preference:
+1. **Wait for the real signal**: `await expect(page.getByRole('progressbar')).toBeHidden()` before interacting.
+2. **Fix the app**: the overlay shouldn't intercept clicks after loading, and the button should be disabled while saving.
+3. Never: `await page.waitForTimeout(2000)`, which slows every run and still fails on a slow CI machine.
+
+The real lesson was that users on slow connections could also click Save before data loaded, so the "test bug" was an app bug.
+
+#### A third worked example
+**Fast authentication with a setup project (Playwright).**
+```ts
+// auth.setup.ts
+setup('authenticate', async ({ page }) => {
+  await page.goto('/login');
+  await page.getByLabel('Email').fill(process.env.E2E_USER!);
+  await page.getByLabel('Password').fill(process.env.E2E_PASS!);
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.waitForURL('/dashboard');
+  await page.context().storageState({ path: '.auth/user.json' });
+});
+// playwright.config.ts: projects: [{ name: 'setup', testMatch: /auth\.setup/ },
+//   { name: 'chromium', dependencies: ['setup'], use: { storageState: '.auth/user.json' } }]
+```
+Logging in through the UI once, instead of in every test, can cut minutes off a suite. Even faster: call the login API directly and save the cookies.
+
+#### Step-by-step framework
+1. **List the critical journeys** with product: what would be a P1 incident if it broke?
+2. **Choose the tool** based on browser needs, parallelism, team familiarity and debugging.
+3. **Build fixtures**: API helpers to create data, a logged-in state, test-mode third parties.
+4. **Write tests with user-facing locators** and web-first assertions, no sleeps.
+5. **Isolate tests** so they can run in parallel and in any order.
+6. **Run in CI** on every PR against a realistic environment, sharded, with traces on failure.
+7. **Track flakiness** as a metric; quarantine with owners, and fix root causes.
+8. **Keep the suite thin**: push edge cases down to component and integration tests.
+
+#### Strong versus weak answer
+| Weak | Strong |
+|---|---|
+| "We E2E test everything" | A few dozen critical journeys; edge cases tested lower down |
+| `cy.wait(3000)` / `waitForTimeout` | Auto-waiting locators and retrying assertions |
+| CSS selectors tied to markup | Role, label or test-id locators |
+| Tests depend on each other's data | Each test seeds its own data via the API |
+| Retries hide flakiness | Retries record traces, flaky tests are tracked and fixed |
+| Picks a tool by popularity | Compares architecture, browsers, parallelism and debugging |
+
+#### Useful phrases
+- "E2E tests are a smoke alarm, not a microscope."
+- "If a test needs a sleep, it's waiting for the wrong thing."
+- "Every flaky test is either a test bug or a real race condition our users can hit."
+- "Seed through the API, assert through the UI."
+
+#### Common pitfalls
+- Testing **everything through the UI**, so the suite takes an hour and nobody trusts it.
+- Logging in through the UI **in every test**.
+- **Shared test accounts** that tests mutate, causing order-dependent failures in parallel runs.
+- Running E2E **only nightly**, so breakages are found a day late with many suspect commits.
+- Testing against **real third-party services** (live payments, real email) instead of sandboxes or stubs.
+- Ignoring **test data cleanup**, so staging fills with junk and queries slow down.
+
+#### Follow-ups to expect (with sample answers)
+- **"How do you handle third-party iframes like Stripe?"** — "Use the provider's test mode and test cards. Playwright's `frameLocator` can fill the iframe. For most tests I stub the payment API at the network layer with `page.route`, and keep one test that goes through the real sandbox."
+- **"How do you test emails, like a password reset link?"** — "Send to a test inbox service such as Mailpit or MailSlurp, fetch the message via its API in the test, extract the link, and visit it."
+- **"Where should E2E tests run: staging or preview?"** — "Per-PR preview environments are best, because failures map to one change. A smaller smoke suite also runs against production after deploys."
+- **"How do you keep the suite fast?"** — "Fewer tests, parallel workers, sharding, API seeding, reused auth state, and blocking unneeded resources like analytics scripts with `page.route`."
+- **"Cypress or Playwright for component tests?"** — "Both work. For pure React component tests I'd often use Vitest with Testing Library, or Vitest browser mode, and save the browser tools for flows."
+
+#### What senior interviewers look for
+- A **risk-based** choice of what to cover, agreed with product.
+- **Operational maturity**: flakiness metrics, quarantine, traces, ownership.
+- A balanced, evidence-based **tool comparison**, not fandom.
+- Seeing flaky tests as **signals about the app**, not just noise.
+
+#### Practise it
+- Write a Playwright test for a login and one core flow, with auth reused via `storageState`.
+- Intentionally introduce a race (a delayed overlay) and fix the test the right way.
+- Checklist: critical journeys only · role locators · no sleeps · isolated data · reused auth · traces in CI · flakiness tracked.
+
+#### Variations you might be asked
+- "Your E2E suite takes 45 minutes and fails randomly. What do you do?"
+- "How would you test a multi-user, real-time feature like collaborative editing?"
+- "What's the difference between E2E, integration and contract testing?"
+
+## Visual regression and component testing with Storybook
+- id: fe-test-05
+- roles: frontend, fullstack
+- round: TESTING
+- difficulty: medium
+- levels:
+- tags: testing, Storybook, visual regression, Chromatic, component testing, design systems
+
+### Prompt
+How do you use Storybook beyond documentation? Explain how you would set up component testing and visual regression testing for a design system or a large React app, what tools you'd use, and how you'd avoid noisy, flaky visual diffs.
+
+### Answer
+#### What the interviewer is really testing
+- Seeing **stories as test cases**: each story is a rendered state you can check for visuals, interactions and accessibility.
+- Understanding **visual regression testing**: screenshot, compare to an approved baseline, review diffs.
+- Knowing the tools: **Chromatic, Playwright `toHaveScreenshot`, Percy, Loki**, and the Storybook test runner or Vitest addon.
+- Practical skill at **reducing noise**: fonts, animations, dates, random data, rendering differences across machines.
+- Fitting it into a **review workflow** so designers and engineers approve visual changes on PRs.
+
+#### Key points
+- **A story is a component in a specific state**: `Button/Primary`, `Button/Loading`, `DataTable/Empty`, `DataTable/Error`. Written once, it serves as documentation, a dev sandbox and a test case.
+- **Three kinds of checks on the same stories:**
+  1. **Smoke/render tests**: every story renders without throwing (the Storybook test runner or `@storybook/addon-vitest` does this automatically).
+  2. **Interaction tests**: a `play` function uses Testing Library and `userEvent` to click, type and assert inside the story; it runs in a real browser.
+  3. **Visual tests**: a screenshot of each story is compared to a baseline pixel by pixel (or perceptually).
+  4. Plus **accessibility checks** with `@storybook/addon-a11y` (axe) on every story.
+- **Visual regression catches what other tests can't**: CSS regressions, broken layouts, z-index bugs, theme token changes, dark mode issues, unexpected wrapping. A functional test won't notice a button turned white-on-white.
+- **Tools:**
+  - **Chromatic** (by the Storybook maintainers): cloud rendering in consistent browsers, a UI review workflow, baselines per branch, TurboSnap to only snapshot stories affected by changed files.
+  - **Playwright `expect(page).toHaveScreenshot()`**: free, self-hosted; baselines committed to the repo; must generate them in the same OS/Docker image as CI.
+  - **Percy, Applitools** (AI-based diffing), **Loki** (open source, Docker-based).
+- **Reducing noise:**
+  - Run in a **pinned environment** (same browser version, OS, fonts, device scale factor), usually Docker or a cloud service.
+  - **Disable animations** and transitions; Chromatic pauses CSS animations, and you can add a `prefers-reduced-motion` decorator.
+  - **Freeze time and randomness**: mock `Date`, seed faker, use fixed avatars.
+  - **Wait for fonts and images** to load (`document.fonts.ready`).
+  - **Mock the network** with MSW so data is deterministic.
+  - Use a **diff threshold** sensibly, and ignore regions for genuinely dynamic content.
+- **Workflow:** PR opens, snapshots are taken, changed stories are flagged, a reviewer (often a designer) accepts or rejects each change, accepted snapshots become the new baseline. Unreviewed changes block merge.
+
+#### Model answer
+"I think of Storybook as a catalogue of component states, and every story as a test case I get for free. If I write stories for `Default`, `Loading`, `Empty`, `Error`, `LongContent` and `DarkMode`, that's documentation for other engineers, a sandbox for building, and six things I can check automatically.
+
+On top of those stories I layer three kinds of tests. First, render checks: the Storybook test runner, or the newer Vitest addon, renders every story in a real browser and fails if anything throws or the console logs an error. Second, interaction tests: a `play` function on a story clicks and types with Testing Library, then asserts. For example, a `Combobox/KeyboardNavigation` story presses arrow down twice and Enter, and checks the right option is selected. Because it runs in a real browser, focus and layout behave exactly as they do for users, and when it fails I can open the story and watch the steps in the Interactions panel. Third, accessibility checks with the a11y addon running axe on every story.
+
+Then visual regression on top. Functional tests can't tell you that a padding token change shifted every card by 4 pixels, or that dark mode text became unreadable. Visual tests screenshot every story and compare it with the approved baseline. For a design system I'd use Chromatic: it renders in consistent cloud browsers, TurboSnap only re-tests stories affected by the changed files, and designers can approve changes directly on the PR. If budget is tight, Playwright's `toHaveScreenshot` against the built Storybook works well, as long as baselines are generated inside the same Docker image as CI, otherwise font rendering differences between a Mac and Linux create constant false diffs.
+
+The biggest risk with visual testing is noise. If diffs are flaky, people start clicking 'accept all' and the tool becomes useless. So I make stories deterministic: frozen dates, seeded fake data, MSW for network data, animations disabled, and waiting for fonts. The goal is that every diff someone sees is a real change they should look at."
+
+#### Another worked example
+**An interaction test in a story:**
+```tsx
+export const SubmitsValidForm: Story = {
+  args: { onSubmit: fn() },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.type(canvas.getByLabelText('Email'), 'ana@example.com');
+    await userEvent.type(canvas.getByLabelText('Password'), 'correct horse');
+    await userEvent.click(canvas.getByRole('button', { name: 'Sign in' }));
+    await expect(args.onSubmit).toHaveBeenCalledWith({
+      email: 'ana@example.com',
+      password: 'correct horse',
+    });
+  },
+};
+```
+This story is a test in CI, a visual snapshot of the filled-in state, and a live demo that shows other engineers how the component behaves. `fn()` creates a spy that also logs to the Actions panel.
+
+#### A third worked example
+**A token change caught by visual tests.** A design system team changed `--space-3` from 12px to 16px to fix one component. Unit tests all passed. Chromatic flagged 140 changed stories across 30 components, including a table header that now wrapped onto two lines at common widths. Because each diff was grouped by component, the designer reviewed them in about 15 minutes, accepted most, and the team introduced a new token for the one component instead of changing the shared one. Without visual tests, the table bug would have shipped to every product using the design system.
+
+#### Step-by-step framework
+1. **Write stories for every meaningful state**, including edge cases: long text, empty, error, RTL, dark mode, small viewport.
+2. **Make stories deterministic**: MSW for data, frozen time, seeded randomness, no animations.
+3. **Add render and a11y checks** for all stories in CI.
+4. **Add `play` functions** for key interactions in complex components.
+5. **Choose a visual tool**: Chromatic for scale and review UX, Playwright screenshots for a free self-hosted option.
+6. **Pin the rendering environment** and set baselines from CI, never from a developer laptop.
+7. **Make review part of the PR**: visual changes must be approved, ideally by design for design-system work.
+8. **Keep costs down** with TurboSnap or only snapshotting changed stories, and a few viewports, not all of them.
+
+#### Strong versus weak answer
+| Weak | Strong |
+|---|---|
+| Storybook is only documentation | Stories double as render, interaction, a11y and visual tests |
+| Screenshots of whole pages with live data | Deterministic component states with mocked data |
+| Baselines generated on a Mac, CI on Linux | Pinned Docker or cloud environment for all snapshots |
+| Team clicks "accept all" | Diffs are reviewed; noise is treated as a bug |
+| Snapshots every story at every viewport on every commit | TurboSnap or changed-only, with chosen key viewports |
+
+#### Useful phrases
+- "Every story is a test case I get for free."
+- "Visual tests catch the bugs that functional tests are blind to: CSS."
+- "A noisy visual suite is worse than none, because people learn to approve everything."
+- "Baselines come from CI, never from someone's laptop."
+
+#### Common pitfalls
+- Confusing **Jest DOM snapshot tests** (`toMatchSnapshot` of HTML) with visual regression; DOM snapshots are brittle and don't catch CSS problems.
+- **Non-deterministic stories**: `new Date()`, random avatars, live API calls.
+- Snapshotting **too many viewports and browsers**, making the suite slow and expensive.
+- Stories that only cover the **happy path**, so error and empty states are never seen.
+- No **ownership of review**, so diffs pile up and block merges.
+- Forgetting **fonts**: snapshots taken before web fonts load show the fallback font.
+
+#### Follow-ups to expect (with sample answers)
+- **"Why not just use DOM snapshot tests?"** — "They capture markup, not appearance. They break on any harmless markup change, people update them blindly, and they miss CSS regressions entirely, which is the main thing visual tests are for."
+- **"How do you handle components with animation?"** — "Disable animations in the test environment, or use a story parameter to pause at the final frame. Chromatic pauses CSS animations automatically."
+- **"How do you test responsive behaviour?"** — "Pick two or three key viewports per component, set them as story or Chromatic modes, rather than snapshotting every width."
+- **"What about cross-browser visual differences?"** — "Snapshot the browsers your users actually use. Expect small rendering differences between engines, so each browser gets its own baseline."
+- **"How does this fit with Testing Library unit tests?"** — "Logic and behaviour stay in fast Vitest tests. Stories cover appearance and real-browser interactions. Where it fits, Storybook's Vitest integration can run stories as tests, so you avoid duplicating setup."
+
+#### What senior interviewers look for
+- **Treating stories as shared infrastructure** for design, docs and testing.
+- A plan to keep visual tests **trustworthy**: determinism, pinned environments, review ownership.
+- **Cost awareness**: TurboSnap, viewport choices, what's worth snapshotting.
+- Collaboration with **design** on approving visual changes.
+
+#### Practise it
+- Add stories for all states of one component, with a `play` function and the a11y addon.
+- Set up Playwright `toHaveScreenshot` against a built Storybook inside Docker, and make a CSS change to see a diff.
+- Checklist: all states covered · deterministic data and time · animations off · fonts loaded · CI baselines · review owner.
+
+#### Variations you might be asked
+- "How would you stop a design system update from breaking product teams?"
+- "What's the difference between snapshot tests and visual regression tests?"
+- "How do you make sure dark mode doesn't regress?"
