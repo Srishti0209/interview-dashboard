@@ -18,6 +18,8 @@ interface CompanyRow {
   archetype: Archetype;
   ai_policy: AiPolicy;
   links: { label: string; url: string }[];
+  review_status: string;
+  deleted_at: number | null;
 }
 
 interface PlaybookRow {
@@ -25,6 +27,7 @@ interface PlaybookRow {
   role_family: RoleFamily;
   loop_structure: string;
   notes: string;
+  review_status: string;
 }
 
 interface CompanyStateRow {
@@ -43,11 +46,15 @@ export interface CompanyData {
 
 export async function fetchCompanyData(): Promise<CompanyData> {
   await waitForPendingWrites();
-  const [companies, playbooks, states] = await Promise.all([
-    fetchAll<CompanyRow>('companies', 'id, name, location, archetype, ai_policy, links', 'id'),
+  const [allCompanies, allPlaybooks, states] = await Promise.all([
+    fetchAll<CompanyRow>(
+      'companies',
+      'id, name, location, archetype, ai_policy, links, review_status, deleted_at',
+      'id',
+    ),
     fetchAll<PlaybookRow>(
       'company_playbooks',
-      'company_id, role_family, loop_structure, notes',
+      'company_id, role_family, loop_structure, notes, review_status',
       'company_id,role_family',
     ),
     fetchAll<CompanyStateRow>(
@@ -56,6 +63,9 @@ export async function fetchCompanyData(): Promise<CompanyData> {
       'company_id',
     ),
   ]);
+  // Admins can read drafts and binned companies; users never see them.
+  const companies = allCompanies.filter((c) => c.review_status === 'approved' && c.deleted_at === null);
+  const playbooks = allPlaybooks.filter((p) => p.review_status === 'approved');
   return { companies, playbooks, states };
 }
 

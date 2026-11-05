@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { RoundPill, DifficultyBadge } from '@/components/QuestionMeta';
+import { AdminNav } from '@/components/admin/AdminNav';
 import { ADMIN_QUESTIONS_KEY, fetchSharedQuestions } from '@/lib/admin';
 import { ROLE_FAMILIES, ROLE_FAMILY_LABEL, ROUND_LABEL, ROUND_TYPES } from '@/lib/constants';
 
@@ -31,17 +32,20 @@ export default function AdminQuestions() {
   const [round, setRound] = useState(ALL);
   const [status, setStatus] = useState(ALL);
   const [page, setPage] = useState(1);
+  const [tab, setTab] = useState<'bank' | 'bin'>('bank');
+  const binned = (questions ?? []).filter((x) => x.deletedAt !== null).length;
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return (questions ?? []).filter(
       (x) =>
+        (tab === 'bin') === (x.deletedAt !== null) &&
         (!q || x.title.toLowerCase().includes(q) || x.id.toLowerCase().includes(q) || x.tags.some((t) => t.toLowerCase().includes(q))) &&
         (role === ALL || x.roleFamilies.includes(role as never)) &&
         (round === ALL || x.roundType === round) &&
         (status === ALL || x.status === status),
     );
-  }, [questions, search, role, round, status]);
+  }, [questions, search, role, round, status, tab]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const current = Math.min(page, totalPages);
@@ -54,6 +58,7 @@ export default function AdminQuestions() {
 
   return (
     <div className="mx-auto max-w-5xl p-4 md:p-6">
+      <AdminNav />
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <div>
           <h1 className="text-xl font-semibold tracking-tight">Admin: question bank</h1>
@@ -67,6 +72,28 @@ export default function AdminQuestions() {
           </Link>
         </Button>
       </div>
+
+      <div className="mb-3 flex gap-1 border-b" role="tablist">
+        {([['bank', 'Questions'], ['bin', `Bin (${binned})`]] as const).map(([value, label]) => (
+          <button
+            key={value}
+            role="tab"
+            aria-selected={tab === value}
+            onClick={() => filterSetter((v) => setTab(v as 'bank' | 'bin'))(value)}
+            className={
+              '-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors ' +
+              (tab === value ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground')
+            }
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === 'bin' && (
+        <p className="mb-3 text-sm text-muted-foreground">
+          Hidden from users, with their answers kept. Open a question to restore it or delete it forever.
+        </p>
+      )}
 
       <div className="mb-4 flex flex-wrap gap-2">
         <div className="relative min-w-48 flex-1">
@@ -121,7 +148,7 @@ export default function AdminQuestions() {
             ))}
             {filtered.length === 0 && (
               <div className="rounded-xl border border-dashed p-10 text-center text-sm text-muted-foreground">
-                No questions match.
+                {tab === 'bin' ? 'The bin is empty.' : 'No questions match.'}
               </div>
             )}
           </div>

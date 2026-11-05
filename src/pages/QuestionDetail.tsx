@@ -19,6 +19,7 @@ import { MarkdownEditor } from '@/components/MarkdownEditor';
 import { SaveStatus } from '@/components/SaveStatus';
 import { RoundPill, DifficultyBadge } from '@/components/QuestionMeta';
 import { ReviewControls } from '@/components/questions/ReviewControls';
+import { ReportProblem } from '@/components/questions/ReportProblem';
 import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
@@ -148,6 +149,7 @@ export default function QuestionDetail() {
               )}
             />
           </Button>
+          {!isUser && <ReportProblem questionId={question.id} />}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

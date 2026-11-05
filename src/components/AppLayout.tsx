@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button';
 import { useUIStore, type Theme } from '@/store/ui';
 import { signOut } from '@/hooks/useSession';
 import { useProfile } from '@/hooks/useProfile';
+import { useOpenFeedbackCount } from '@/components/admin/AdminNav';
 import { SyncStatus } from '@/components/SyncStatus';
 import { LocalImportBanner } from '@/components/LocalImportBanner';
 
@@ -48,6 +49,7 @@ export function AppLayout() {
   const setCommandOpen = useUIStore((s) => s.setCommandOpen);
   const ThemeIcon = THEME_ICON[theme];
   const isAdmin = useProfile().data?.isAdmin === true;
+  const openFeedback = useOpenFeedbackCount(isAdmin);
   const cycleTheme = () =>
     setTheme(THEME_ORDER[(THEME_ORDER.indexOf(theme) + 1) % 3]);
 
@@ -129,6 +131,14 @@ export function AppLayout() {
             >
               <ShieldCheck className="size-4" />
               Admin
+              {!!openFeedback && (
+                <span
+                  className="ml-auto rounded-full bg-destructive px-1.5 text-[10px] leading-4 text-white"
+                  title={`${openFeedback} open feedback reports`}
+                >
+                  {openFeedback}
+                </span>
+              )}
             </NavLink>
           )}
         </nav>

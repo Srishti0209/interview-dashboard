@@ -27,18 +27,23 @@ const ROUND_ROLE_FAMILIES = {
 };
 
 // Questions edited in the admin panel (migration 0005) are never overwritten.
-async function adminEditedIds() {
-  const { data, error } = await supabase.from('questions').select('id').eq('admin_edited', true);
+// The same goes for companies and playbooks (migration 0006).
+async function adminEdited(table, key) {
+  const { data, error } = await supabase.from(table).select(key).eq('admin_edited', true);
   if (error) {
-    // Before migration 0005 there is no admin_edited column: nothing to protect.
+    // Before the migration there is no admin_edited column: nothing to protect.
     if (/admin_edited/.test(error.message)) return new Set();
-    throw new Error(`questions: ${error.message}`);
+    throw new Error(`${table}: ${error.message}`);
   }
-  return new Set(data.map((r) => r.id));
+  return new Set(data.map((r) => (table === 'company_playbooks' ? `${r.company_id}:${r.role_family}` : r.id)));
 }
-const protectedIds = await adminEditedIds();
+const protectedIds = await adminEdited('questions', 'id');
+const protectedCompanies = await adminEdited('companies', 'id');
+const protectedPlaybooks = await adminEdited('company_playbooks', 'company_id, role_family');
 const notAdminEdited = (q) => !protectedIds.has(q.id);
-if (protectedIds.size) console.log(`· skipping ${protectedIds.size} questions edited in the admin panel`);
+for (const [n, what] of [[protectedIds.size, 'questions'], [protectedCompanies.size, 'companies'], [protectedPlaybooks.size, 'playbooks']]) {
+  if (n) console.log(`· skipping ${n} ${what} edited in the admin panel`);
+}
 
 async function upsert(table, rows, onConflict) {
   for (let i = 0; i < rows.length; i += 200) {
@@ -52,7 +57,7 @@ async function upsert(table, rows, onConflict) {
 
 await upsert(
   'companies',
-  seed.companies.map((c) => ({
+  seed.companies.filter((c) => !protectedCompanies.has(c.id)).map((c) => ({
     id: c.id,
     name: c.name,
     location: c.location ?? '',
@@ -65,7 +70,7 @@ await upsert(
 
 await upsert(
   'company_playbooks',
-  seed.companies.map((c) => ({
+  seed.companies.filter((c) => !protectedPlaybooks.has(`${c.id}:frontend`)).map((c) => ({
     company_id: c.id,
     role_family: 'frontend',
     loop_structure: c.loopStructure ?? '',

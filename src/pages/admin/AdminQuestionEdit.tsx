@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, EyeOff, Loader2, Save, Trash2 } from 'lucide-react';
+import { ArchiveRestore, ArrowLeft, EyeOff, Loader2, RotateCcw, Save, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -14,12 +14,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Markdown } from '@/components/Markdown';
 import { MarkdownEditor } from '@/components/MarkdownEditor';
 import { TokenInput } from '@/components/TokenInput';
 import { useAllQuestions, useFacets } from '@/hooks/useQuestions';
+import { useSession } from '@/hooks/useSession';
 import {
-  deleteSharedQuestion,
+  deleteForever,
+  fetchQuestionVersions,
   fetchSharedQuestion,
+  moveToBin,
+  restoreFromBin,
+  restoreVersion,
   saveSharedQuestion,
   type AdminQuestion,
   type AdminQuestionInput,
@@ -118,7 +124,7 @@ function Editor({
   const navigate = useNavigate();
   const { tags: tagSuggestions, companies: companySuggestions } = useFacets(useAllQuestions());
   const [form, setForm] = useState<AdminQuestionInput>(question ?? EMPTY);
-  const [busy, setBusy] = useState<'save' | 'hide' | 'delete' | null>(null);
+  const [busy, setBusy] = useState<'save' | 'hide' | 'bin' | 'restore' | 'forever' | null>(null);
   const [error, setError] = useState('');
   const [touched, setTouched] = useState(false);
 
@@ -152,22 +158,32 @@ function Editor({
     }
   };
 
-  const remove = async () => {
+  /** Runs a bin action; `leave` goes back to the list afterwards. */
+  const binAction = async (
+    action: 'bin' | 'restore' | 'forever',
+    run: (id: string) => Promise<void>,
+    leave: boolean,
+  ) => {
     if (!question) return;
-    const ok = window.confirm(
-      `Delete "${question.title}" for everyone?\n\nThis also permanently deletes every user's answer, notes and review progress for this question. To hide it but keep their work, use "Move to draft" instead.`,
-    );
-    if (!ok) return;
-    setBusy('delete');
+    setBusy(action);
     setError('');
     try {
-      await deleteSharedQuestion(question.id);
-      navigate('/admin', { replace: true });
+      await run(question.id);
+      if (leave) navigate('/admin', { replace: true });
+      else setBusy(null);
     } catch (e) {
       setError((e as Error).message);
       setBusy(null);
     }
   };
+  const toBin = () =>
+    window.confirm(
+      `Move "${question?.title}" to the bin?\n\nIt disappears for users, but their answers and notes on it are kept. You can restore it from the Bin tab at any time.`,
+    ) && void binAction('bin', moveToBin, true);
+  const forever = () =>
+    window.confirm(
+      `Delete "${question?.title}" forever?\n\nThis also permanently deletes every user's answer, notes and review progress for this question. It can't be undone.`,
+    ) && void binAction('forever', deleteForever, true);
 
   const published = form.status === 'approved';
 
@@ -178,6 +194,21 @@ function Editor({
         <h1 className="text-xl font-semibold tracking-tight">{question ? 'Edit question' : 'New question'}</h1>
         {question && <p className="font-mono text-xs text-muted-foreground">{question.id}</p>}
       </div>
+
+      {question?.deletedAt && (
+        <div className="flex flex-wrap items-center gap-2 rounded-md border border-destructive/40 bg-destructive/5 p-3 text-sm" data-testid="in-bin">
+          <span className="flex-1">In the bin: hidden from users. Their answers on it are kept.</span>
+          <Button size="sm" variant="outline" disabled={busy !== null}
+            onClick={() => void binAction('restore', restoreFromBin, false)}>
+            {busy === 'restore' ? <Loader2 className="animate-spin" /> : <ArchiveRestore />}
+            Restore
+          </Button>
+          <Button size="sm" variant="ghost" className="text-destructive" disabled={busy !== null} onClick={forever}>
+            {busy === 'forever' ? <Loader2 className="animate-spin" /> : <Trash2 />}
+            Delete forever
+          </Button>
+        </div>
+      )}
 
       <Card className="space-y-4 p-5">
         <div className="space-y-1.5">
@@ -277,7 +308,7 @@ function Editor({
             Saved{published ? ' and live for users' : ' as a draft'}.
           </span>
         )}
-        {question && (
+        {question && !question.deletedAt && (
           <div className="ml-auto flex gap-2">
             {published && (
               <Button variant="outline" disabled={busy !== null}
@@ -286,14 +317,92 @@ function Editor({
                 Move to draft (hide)
               </Button>
             )}
-            <Button variant="ghost" className="text-destructive" disabled={busy !== null} onClick={() => void remove()}>
-              {busy === 'delete' ? <Loader2 className="animate-spin" /> : <Trash2 />}
-              Delete
+            <Button variant="ghost" className="text-destructive" disabled={busy !== null} onClick={toBin}>
+              {busy === 'bin' ? <Loader2 className="animate-spin" /> : <Trash2 />}
+              Move to bin
             </Button>
           </div>
         )}
       </div>
+
+      {question && <History questionId={question.id} onRestored={() => setSaved(question.id)} />}
     </div>
+  );
+}
+
+/** Earlier versions of the question, each restorable. */
+function History({ questionId, onRestored }: { questionId: string; onRestored: () => void }) {
+  const me = useSession()?.user.id;
+  const { data: versions, isLoading } = useQuery({
+    queryKey: ['admin-question-versions', questionId],
+    queryFn: () => fetchQuestionVersions(questionId),
+    staleTime: 0,
+  });
+  const [open, setOpen] = useState<number | null>(null);
+  const [busy, setBusy] = useState<number | null>(null);
+  const [error, setError] = useState('');
+
+  const restore = async (id: number, version: AdminQuestion) => {
+    if (!window.confirm('Restore this version? The current version is kept in the history.')) return;
+    setBusy(id);
+    setError('');
+    try {
+      await restoreVersion(questionId, version);
+      onRestored();
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  return (
+    <Card className="space-y-3 p-5" data-testid="history">
+      <div>
+        <h2 className="text-sm font-semibold">History</h2>
+        <p className="text-xs text-muted-foreground">
+          The question as it was before each change made in the admin panel.
+        </p>
+      </div>
+      {isLoading ? (
+        <Loader2 className="size-4 animate-spin text-muted-foreground" />
+      ) : !versions?.length ? (
+        <p className="text-sm text-muted-foreground">No earlier versions yet.</p>
+      ) : (
+        <ul className="divide-y">
+          {versions.map((v) => (
+            <li key={v.id} className="space-y-2 py-2" data-testid="version">
+              <div className="flex flex-wrap items-center gap-2 text-sm">
+                <span className="flex-1">
+                  {new Date(v.createdAt).toLocaleString()}
+                  <span className="text-muted-foreground">
+                    {' '}· changed by {v.changedBy === me ? 'you' : 'another admin'}
+                    {v.question.deletedAt ? ' · was in the bin' : v.question.status === 'draft' ? ' · was a draft' : ''}
+                  </span>
+                </span>
+                <Button size="sm" variant="ghost" className="h-7" onClick={() => setOpen(open === v.id ? null : v.id)}>
+                  {open === v.id ? 'Hide' : 'View'}
+                </Button>
+                <Button size="sm" variant="outline" className="h-7" disabled={busy !== null}
+                  onClick={() => void restore(v.id, v.question)}>
+                  {busy === v.id ? <Loader2 className="animate-spin" /> : <RotateCcw />}
+                  Restore
+                </Button>
+              </div>
+              {open === v.id && (
+                <div className="space-y-2 rounded-md border p-3">
+                  <p className="text-sm font-medium">{v.question.title}</p>
+                  <Markdown>{v.question.body}</Markdown>
+                  <hr />
+                  <Markdown>{v.question.answer || '_No model answer._'}</Markdown>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+      {error && <p className="text-sm text-destructive">{error}</p>}
+    </Card>
   );
 }
 

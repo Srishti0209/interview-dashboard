@@ -34,6 +34,11 @@ import JobDetail from '@/pages/JobDetail';
 import Privacy from '@/pages/Privacy';
 import AdminQuestions from '@/pages/admin/AdminQuestions';
 import AdminQuestionEdit from '@/pages/admin/AdminQuestionEdit';
+import AdminFeedback from '@/pages/admin/AdminFeedback';
+import AdminCompanies from '@/pages/admin/AdminCompanies';
+import AdminCompanyEdit from '@/pages/admin/AdminCompanyEdit';
+import AdminUsers from '@/pages/admin/AdminUsers';
+import AdminAi from '@/pages/admin/AdminAi';
 import { AdminOnly } from '@/components/auth/AdminOnly';
 
 // Heavy routes are code-split to keep the initial bundle small.
@@ -104,6 +109,11 @@ function InnerApp() {
           <Route path="account" element={<Account />} />
           <Route path="admin" element={<AdminOnly><AdminQuestions /></AdminOnly>} />
           <Route path="admin/questions/:id" element={<AdminOnly><AdminQuestionEdit /></AdminOnly>} />
+          <Route path="admin/feedback" element={<AdminOnly><AdminFeedback /></AdminOnly>} />
+          <Route path="admin/companies" element={<AdminOnly><AdminCompanies /></AdminOnly>} />
+          <Route path="admin/companies/:id" element={<AdminOnly><AdminCompanyEdit /></AdminOnly>} />
+          <Route path="admin/users" element={<AdminOnly><AdminUsers /></AdminOnly>} />
+          <Route path="admin/ai" element={<AdminOnly><AdminAi /></AdminOnly>} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

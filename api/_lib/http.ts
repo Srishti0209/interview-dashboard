@@ -3,6 +3,7 @@
 
 export type ErrorCode =
   | 'unauthorized'
+  | 'forbidden'
   | 'bad_request'
   | 'not_found'
   | 'no_key'

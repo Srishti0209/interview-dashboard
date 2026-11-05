@@ -105,7 +105,7 @@ export async function structured(
     .map((b) => (b.type === 'text' ? b.text : ''))
     .join('');
   try {
-    return { value: JSON.parse(text), usage: response.usage };
+    return { value: JSON.parse(text), usage: { ...response.usage, model: response.model } };
   } catch {
     throw new HttpError(502, 'bad_output', 'Claude returned an unexpected reply. Try again.');
   }
@@ -162,7 +162,7 @@ export function streamChat(
           }
         }
         const final = await stream.finalMessage();
-        await opts.onDone?.(final.usage);
+        await opts.onDone?.({ ...final.usage, model: final.model });
         controller.close();
       } catch (e) {
         controller.error(e);
