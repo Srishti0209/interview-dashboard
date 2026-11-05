@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Search,
@@ -8,6 +8,8 @@ import {
   Plus,
   SlidersHorizontal,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -36,6 +38,16 @@ const VIEW_OPTIONS: { value: QuestionView; icon: typeof List; label: string }[] 
     { value: 'deck', icon: GalleryVerticalEnd, label: 'Deck' },
   ];
 
+const PAGE_SIZE = 10;
+
+/** Page numbers to show, with null for a gap: 1 … 4 5 6 … 25 */
+function pageList(page: number, total: number): (number | null)[] {
+  const pages = [...new Set([1, page - 1, page, page + 1, total])]
+    .filter((p) => p >= 1 && p <= total)
+    .sort((a, b) => a - b);
+  return pages.flatMap((p, i) => (i > 0 && p - pages[i - 1] > 1 ? [null, p] : [p]));
+}
+
 export default function Questions() {
   const questions = useAllQuestions();
   const reviewStates = useReviewStates();
@@ -62,6 +74,40 @@ export default function Questions() {
     );
   }, [questions, filters, reviewStates, idsParam]);
 
+  // ?page=N, so Back from a question returns to the same page.
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const page = Math.min(totalPages, Math.max(1, Number(params.get('page')) || 1));
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const goToPage = (n: number) => {
+    setParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (n > 1) next.set('page', String(n));
+        else next.delete('page');
+        return next;
+      },
+      { replace: false },
+    );
+    setCursor(0);
+    window.scrollTo({ top: 0 });
+  };
+
+  // New filters start again at page 1 (but not on first render, so the
+  // page survives coming back from a question).
+  const lastFilters = useRef(filters);
+  useEffect(() => {
+    if (lastFilters.current === filters) return;
+    lastFilters.current = filters;
+    setParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        next.delete('page');
+        return next;
+      },
+      { replace: true },
+    );
+  }, [filters, setParams]);
+
   // J / K to move, Enter to open (list & card views).
   useEffect(() => {
     if (view === 'deck') return;
@@ -73,20 +119,20 @@ export default function Questions() {
         setCursor((c) => {
           const next =
             e.key === 'j'
-              ? Math.min(filtered.length - 1, c + 1)
+              ? Math.min(pageItems.length - 1, c + 1)
               : Math.max(0, c - 1);
           document
             .getElementById(`q-row-${next}`)
             ?.scrollIntoView({ block: 'nearest' });
           return next;
         });
-      } else if (e.key === 'Enter' && filtered[cursor]) {
-        navigate(`/questions/${filtered[cursor].id}`);
+      } else if (e.key === 'Enter' && pageItems[cursor]) {
+        navigate(`/questions/${pageItems[cursor].id}`);
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [view, filtered, cursor, navigate]);
+  }, [view, pageItems, cursor, navigate]);
 
   useEffect(() => setCursor(0), [filters, view]);
 
@@ -99,7 +145,8 @@ export default function Questions() {
         <FilterSidebar tags={tags} companies={companies} />
       </aside>
 
-      <div className="min-w-0 flex-1 p-4 md:p-6">
+      {/* Full height, so the pager sits at the bottom even on short pages. */}
+      <div className="flex min-h-[calc(100svh-3rem)] min-w-0 flex-1 flex-col p-4 pb-0 md:p-6 md:pb-0">
         <div className="mb-4 flex items-center justify-between gap-2">
           <div>
             <h1 className="text-xl font-semibold tracking-tight">
@@ -191,14 +238,16 @@ export default function Questions() {
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="rounded-xl border border-dashed p-12 text-center text-sm text-muted-foreground">
+          <div className="mb-6 rounded-xl border border-dashed p-12 text-center text-sm text-muted-foreground">
             No questions match your filters.
           </div>
         ) : view === 'deck' ? (
-          <StudyDeck questions={filtered} />
+          <div className="pb-6">
+            <StudyDeck questions={filtered} />
+          </div>
         ) : view === 'cards' ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {filtered.map((q, i) => (
+          <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {pageItems.map((q, i) => (
               <div key={q.id} id={`q-row-${i}`}>
                 <QuestionItem
                   question={q}
@@ -210,8 +259,8 @@ export default function Questions() {
             ))}
           </div>
         ) : (
-          <div className="space-y-2">
-            {filtered.map((q, i) => (
+          <div className="mb-4 space-y-2">
+            {pageItems.map((q, i) => (
               <div key={q.id} id={`q-row-${i}`}>
                 <QuestionItem
                   question={q}
@@ -222,6 +271,57 @@ export default function Questions() {
               </div>
             ))}
           </div>
+        )}
+
+        {!loading && view !== 'deck' && filtered.length > 0 && (
+          <nav
+            className="sticky bottom-0 -mx-4 mt-auto flex flex-wrap items-center justify-between gap-2 border-t bg-background px-4 py-3 md:-mx-6 md:px-6"
+            aria-label="Pagination"
+            data-testid="pagination"
+          >
+            <p className="text-sm text-muted-foreground">
+              {(page - 1) * PAGE_SIZE + 1}–{(page - 1) * PAGE_SIZE + pageItems.length} of{' '}
+              {filtered.length}
+            </p>
+            <div className="flex items-center gap-1">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page === 1}
+                onClick={() => goToPage(page - 1)}
+                aria-label="Previous page"
+              >
+                <ChevronLeft className="size-4" /> Prev
+              </Button>
+              {pageList(page, totalPages).map((n, i) =>
+                n === null ? (
+                  <span key={`gap-${i}`} className="px-1 text-sm text-muted-foreground">
+                    …
+                  </span>
+                ) : (
+                  <Button
+                    key={n}
+                    variant={n === page ? 'default' : 'ghost'}
+                    size="sm"
+                    className="min-w-8 px-2"
+                    onClick={() => goToPage(n)}
+                    aria-current={n === page ? 'page' : undefined}
+                  >
+                    {n}
+                  </Button>
+                ),
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page === totalPages}
+                onClick={() => goToPage(page + 1)}
+                aria-label="Next page"
+              >
+                Next <ChevronRight className="size-4" />
+              </Button>
+            </div>
+          </nav>
         )}
       </div>
 

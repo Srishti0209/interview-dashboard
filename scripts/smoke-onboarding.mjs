@@ -179,15 +179,12 @@ try {
     'profile saved (Tech Lead → Staff Backend Engineer)',
   );
   log(rs.length === 1 && rs[0].storage_path === null && p.active_resume_id === rs[0].id, 'pasted resume saved and active');
-  log(
-    (await page.getByText('Preparing for Staff Backend Engineer').count()) > 0,
-    'sidebar shows target role',
-  );
 
   // 3. Account page: change role
   await page.goto(BASE + '/account');
   await page.getByText('Pasted resume text').waitFor({ timeout: 15000 });
   log(true, 'account page shows active resume');
+  log(await page.getByRole('radio', { name: 'Staff Backend Engineer' }).isChecked(), 'account page shows target role');
   await page.getByRole('radio', { name: /^Product Owner/ }).click();
   log((await page.getByRole('radio', { name: 'Staff Product Owner' }).count()) === 0, 'Product Owner has no Staff level');
   log(
@@ -197,7 +194,9 @@ try {
   await page.getByRole('radio', { name: 'Senior Product Owner' }).click();
   await page.getByRole('button', { name: 'Save changes' }).click();
   await page.getByText('Saved — preparing for Senior Product Owner').waitFor();
-  log((await page.getByText('Preparing for Senior Product Owner', { exact: true }).count()) === 1, 'sidebar updates to new role immediately');
+  await page.reload();
+  await page.getByText('Pasted resume text').waitFor({ timeout: 15000 });
+  log(await page.getByRole('radio', { name: 'Senior Product Owner' }).isChecked(), 'new role shown after reload');
   p = await profile();
   log(p.target_role_family === 'product_owner' && p.target_level === 'senior', 'role change persisted');
 
