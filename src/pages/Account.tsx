@@ -11,6 +11,7 @@ import {
   coerceLevel,
 } from '@/components/profile/RolePicker';
 import { ResumeUpload } from '@/components/resume/ResumeUpload';
+import { GenerateFromResume } from '@/components/resume/GenerateFromResume';
 import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useActiveResume } from '@/hooks/useResume';
 import { useSession, signOut } from '@/hooks/useSession';
@@ -29,7 +30,7 @@ export default function Account() {
       <h1 className="text-xl font-semibold tracking-tight">Account</h1>
       <p className="text-sm text-muted-foreground">{email}</p>
 
-      <ProfileForm key={profile.id} profile={profile} />
+      <ProfileForm key={profile.id} profile={profile} email={email} />
       <ResumeCard />
 
       <Card className="mt-4 flex items-center gap-3 p-5">
@@ -48,7 +49,13 @@ export default function Account() {
   );
 }
 
-function ProfileForm({ profile }: { profile: Profile }) {
+function ProfileForm({
+  profile,
+  email,
+}: {
+  profile: Profile;
+  email: string | undefined;
+}) {
   const update = useUpdateProfile();
   const [displayName, setDisplayName] = useState(profile.displayName ?? '');
   const [currentPosition, setCurrentPosition] = useState(
@@ -93,6 +100,16 @@ function ProfileForm({ profile }: { profile: Profile }) {
             id="display-name"
             value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            type="email"
+            value={email ?? ''}
+            readOnly
+            disabled
           />
         </div>
         <div className="space-y-1.5">
@@ -160,6 +177,9 @@ function ResumeCard() {
   const { data: resume, isLoading } = useActiveResume();
   const [replacing, setReplacing] = useState(false);
   const [showText, setShowText] = useState(false);
+  // After replacing, offer drafts from the new resume (opt-in).
+  const [offerDrafts, setOfferDrafts] = useState(false);
+  const [confirmDrafts, setConfirmDrafts] = useState(false);
 
   const download = async (path: string) => {
     window.open(await resumeDownloadUrl(path), '_blank', 'noopener');
@@ -219,10 +239,46 @@ function ResumeCard() {
               {resume.extractedText}
             </pre>
           )}
+          {offerDrafts && (
+            <div
+              className="space-y-2 rounded-md border p-3"
+              data-testid="account-offer-drafts"
+            >
+              {confirmDrafts ? (
+                <GenerateFromResume resume={resume} />
+              ) : (
+                <>
+                  <p className="text-sm">
+                    Generate draft stories from this resume?
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    New drafts are added to your Story Bank. Your existing
+                    stories aren’t changed.
+                  </p>
+                  <div className="flex gap-2">
+                    <Button size="sm" onClick={() => setConfirmDrafts(true)}>
+                      Yes, draft stories
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setOfferDrafts(false)}
+                    >
+                      Not now
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </>
       ) : (
         <ResumeUpload
-          onSaved={() => setReplacing(false)}
+          onSaved={() => {
+            setOfferDrafts(true);
+            setConfirmDrafts(false);
+            setReplacing(false);
+          }}
           onCancel={replacing ? () => setReplacing(false) : undefined}
         />
       )}

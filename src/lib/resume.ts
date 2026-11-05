@@ -1,4 +1,7 @@
 import { supabase } from '@/lib/supabase';
+import { layoutPage, type PdfTextItem } from '@/lib/pdfLayout';
+import { resolveUnmapped, type DrawnGlyph } from '@/lib/pdfGlyphs';
+import type { PDFPageProxy } from 'pdfjs-dist';
 import type { Resume } from '@/types';
 
 export const RESUME_MAX_BYTES = 5 * 1024 * 1024;
@@ -37,25 +40,71 @@ async function extractPdf(file: File): Promise<string> {
   );
   pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
 
-  const doc = await pdfjs.getDocument({ data: await file.arrayBuffer() })
-    .promise;
+  const doc = await pdfjs.getDocument({
+    data: await file.arrayBuffer(),
+    // Gives each drawn glyph its code, so different unmapped glyphs can be
+    // told apart (see recoverUnmapped).
+    fontExtraProperties: true,
+  }).promise;
   const pages: string[] = [];
   for (let i = 1; i <= doc.numPages; i++) {
-    const content = await (await doc.getPage(i)).getTextContent();
-    const lines: string[] = [];
-    let line = '';
+    const page = await doc.getPage(i);
+    const content = await page.getTextContent();
+    const items: PdfTextItem[] = [];
     for (const item of content.items) {
       if (!('str' in item)) continue;
-      line += item.str;
-      if (item.hasEOL) {
-        lines.push(line);
-        line = '';
-      }
+      items.push({
+        str: item.str,
+        x: item.transform[4],
+        y: item.transform[5],
+        width: item.width,
+        height: item.height,
+        fontName: item.fontName,
+      });
     }
-    if (line) lines.push(line);
-    pages.push(lines.join('\n'));
+    await recoverUnmapped(page, items, pdfjs.OPS);
+    // Reading order from positions, not content order (two-column resumes).
+    pages.push(layoutPage(items, page.getViewport({ scale: 1 }).width));
   }
   return pages.join('\n\n');
+}
+
+/**
+ * Fills in glyphs the PDF gives no character for (NUL in the text), using the
+ * drawn glyphs' fonts, widths and context (see pdfGlyphs.ts). Only runs when
+ * a page has such glyphs; anything unresolved stays NUL and shows as �.
+ */
+async function recoverUnmapped(
+  page: PDFPageProxy,
+  items: PdfTextItem[],
+  OPS: { setFont: number; showText: number },
+): Promise<void> {
+  const missing = items.reduce((n, it) => n + it.str.split('\u0000').length - 1, 0);
+  if (!missing) return;
+
+  const ops = await page.getOperatorList();
+  const glyphs: DrawnGlyph[] = [];
+  let font = '';
+  for (let i = 0; i < ops.fnArray.length; i++) {
+    const args = ops.argsArray[i];
+    if (ops.fnArray[i] === OPS.setFont) font = args[0];
+    else if (ops.fnArray[i] === OPS.showText) {
+      for (const g of args[0]) {
+        if (g && typeof g === 'object' && 'unicode' in g) {
+          glyphs.push({ font, code: g.originalCharCode, unicode: g.unicode, width: g.width });
+        }
+      }
+    }
+  }
+  const fixes = resolveUnmapped(glyphs);
+  // Text items and drawn glyphs come from the same content stream, so the
+  // n-th NUL in the text is the n-th unmapped glyph. If the counts disagree,
+  // don't guess.
+  if (fixes.length !== missing) return;
+  let n = 0;
+  for (const it of items) {
+    it.str = it.str.replaceAll('\u0000', () => fixes[n++] ?? '\u0000');
+  }
 }
 
 async function extractDocx(file: File): Promise<string> {
@@ -86,6 +135,7 @@ interface ResumeRow {
   file_name: string | null;
   storage_path: string | null;
   extracted_text: string;
+  parsed: Record<string, unknown> | null;
   created_at: string;
 }
 
@@ -95,6 +145,7 @@ function fromRow(r: ResumeRow): Resume {
     fileName: r.file_name,
     storagePath: r.storage_path,
     extractedText: r.extracted_text,
+    parsed: r.parsed,
     createdAt: r.created_at,
   };
 }
@@ -127,7 +178,7 @@ export async function saveResume(
       file_name: file?.name ?? null,
       extracted_text: text,
     })
-    .select('id, file_name, storage_path, extracted_text, created_at')
+    .select('id, file_name, storage_path, extracted_text, parsed, created_at')
     .single();
   if (error) throw error;
 
@@ -143,7 +194,7 @@ export async function saveResume(
 export async function getResume(id: string): Promise<Resume> {
   const { data, error } = await supabase
     .from('resumes')
-    .select('id, file_name, storage_path, extracted_text, created_at')
+    .select('id, file_name, storage_path, extracted_text, parsed, created_at')
     .eq('id', id)
     .single();
   if (error) throw error;
@@ -158,3 +209,7 @@ export async function resumeDownloadUrl(storagePath: string): Promise<string> {
   if (error) throw error;
   return data.signedUrl;
 }
+
+/** Job descriptions use the same readers (PDF, DOCX, TXT). */
+export const extractDocumentText = extractResumeText;
+export const validateDocumentFile = validateResumeFile;

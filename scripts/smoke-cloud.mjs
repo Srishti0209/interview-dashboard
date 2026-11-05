@@ -59,7 +59,9 @@ try {
       tags: [], linkedQuestionIds: [], createdAt: now, updatedAt: now,
     });
     await db.stories.bulkPut([
-      ...seed.stories,
+      // Test-only ids: story ids are unique across users, and real accounts
+      // may already hold the seed ids.
+      ...seed.stories.map((st) => ({ ...st, id: `local-${st.id}` })),
       { id: 'local-story', title: 'Local story', situation: 's', task: 't', action: 'a', result: 'r', metrics: '', applicableTo: [], tags: [] },
     ]);
     await db.companies.put({

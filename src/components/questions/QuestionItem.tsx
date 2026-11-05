@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bookmark, PencilLine, User } from 'lucide-react';
+import { Bookmark, PencilLine, Sparkles, User } from 'lucide-react';
 import {
   RoundPill,
   DifficultyBadge,
@@ -43,6 +43,11 @@ export function QuestionItem({ question, review, variant, selected }: Props) {
       {question.source === 'user' && (
         <span title="Your question">
           <PencilLine className="size-3.5 text-sky-500" />
+        </span>
+      )}
+      {question.source === 'ai' && (
+        <span title="From your resume or a JD">
+          <Sparkles className="size-3.5 text-violet-500" />
         </span>
       )}
       {question.bookmarked && (

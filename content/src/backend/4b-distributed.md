@@ -131,6 +131,7 @@ For an order flow with several steps and compensations, I'd choose **orchestrati
 
 ## Message queues vs event streams (RabbitMQ vs Kafka)
 - id: be-dist-05
+- roles: backend, fullstack
 - round: DISTRIBUTED_SYSTEMS
 - difficulty: medium
 - levels:
@@ -619,6 +620,7 @@ kafka.publish(OrderPlaced) # 2. publish event
 
 ## Retries, backoff, timeouts and circuit breakers
 - id: be-dist-09
+- roles: backend, fullstack
 - round: DISTRIBUTED_SYSTEMS
 - difficulty: medium
 - levels:

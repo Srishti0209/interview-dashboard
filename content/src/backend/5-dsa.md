@@ -2,6 +2,7 @@
 
 ## Big-O and complexity analysis explained
 - id: be-dsa-01
+- roles: backend, fullstack
 - round: DSA_CODING
 - difficulty: easy
 - levels:
@@ -145,6 +146,7 @@ This shows a classic **time–space trade-off**: using O(n) extra memory reduces
 
 ## Hash maps: two-sum and frequency counting
 - id: be-dsa-02
+- roles: backend, fullstack
 - round: DSA_CODING
 - difficulty: easy
 - levels:
@@ -286,6 +288,7 @@ def subarray_sum(nums, k):
 
 ## Implement an LRU cache
 - id: be-dsa-03
+- roles: backend, fullstack
 - round: DSA_CODING
 - difficulty: medium
 - levels:
@@ -757,6 +760,7 @@ def insert(intervals, new):
 
 ## Sliding window: longest substring without repeats
 - id: be-dsa-06
+- roles: backend, fullstack
 - round: DSA_CODING
 - difficulty: medium
 - levels:
@@ -1244,6 +1248,7 @@ def levels(deps):
 
 ## Binary search and its variations
 - id: be-dsa-09
+- roles: backend, fullstack
 - round: DSA_CODING
 - difficulty: medium
 - levels:

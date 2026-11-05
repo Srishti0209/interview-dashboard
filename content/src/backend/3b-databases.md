@@ -135,6 +135,7 @@ I'd use **logical shards**: e.g. 1,024 logical shards mapped to 8 physical datab
 
 ## Caching strategies and cache invalidation
 - id: be-db-08
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:
@@ -268,6 +269,7 @@ Different TTLs per component kept the page fast while keeping critical data fres
 
 ## When and how to use Redis
 - id: be-db-09
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: easy
 - levels:
@@ -388,6 +390,7 @@ What is Redis good for beyond simple caching? What are its limitations, and how 
 
 ## Zero-downtime schema migrations
 - id: be-db-10
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: hard
 - levels:
@@ -533,6 +536,7 @@ The feature flag allowed instant rollback of the read path if mismatches appeare
 
 ## Optimistic vs pessimistic locking
 - id: be-db-11
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:

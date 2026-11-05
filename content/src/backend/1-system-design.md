@@ -2,6 +2,7 @@
 
 ## How do you approach a system design interview?
 - id: be-design-01
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: medium
 - levels:
@@ -142,6 +143,7 @@ Same structure, different system. The structure is what makes you look calm and 
 
 ## Back-of-the-envelope capacity estimation
 - id: be-design-02
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: medium
 - levels:
@@ -269,6 +271,7 @@ Estimate the storage, throughput and bandwidth needed for a photo-sharing servic
 
 ## Design a URL shortener
 - id: be-design-03
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: medium
 - levels:
@@ -568,6 +571,7 @@ Per-region limits are simplest (each region gets a share of the quota). Global e
 
 ## Design a news feed / timeline
 - id: be-design-05
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: hard
 - levels:

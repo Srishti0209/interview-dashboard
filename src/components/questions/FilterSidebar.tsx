@@ -11,6 +11,12 @@ import { useRoundTypes } from '@/hooks/useQuestions';
 import { useUIStore } from '@/store/ui';
 import type { RoundType, Difficulty, Source, Confidence } from '@/types';
 
+const SOURCE_LABEL: Record<Source, string> = {
+  seed: 'Seeded',
+  user: 'My questions',
+  ai: 'From resume / JD',
+};
+
 function FilterGroup({
   title,
   children,
@@ -138,12 +144,12 @@ export function FilterSidebar({
       </FilterGroup>
 
       <FilterGroup title="Source">
-        {(['seed', 'user'] as Source[]).map((s) => (
+        {(['seed', 'user', 'ai'] as Source[]).map((s) => (
           <CheckRow
             key={s}
             checked={filters.sources.includes(s)}
             onToggle={() => setFilters({ sources: toggle(filters.sources, s) })}
-            label={s === 'seed' ? 'Seeded' : 'My questions'}
+            label={SOURCE_LABEL[s]}
           />
         ))}
         <CheckRow

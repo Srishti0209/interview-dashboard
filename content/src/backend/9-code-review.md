@@ -141,6 +141,7 @@ What do you look for when reviewing a pull request? How do you give feedback, an
 
 ## Debugging a 500 error in production
 - id: be-review-02
+- roles: backend, fullstack
 - round: CODE_REVIEW_DEBUG
 - difficulty: medium
 - levels:
@@ -684,6 +685,7 @@ def calculate_price(cart, customer):
 
 ## Testing strategy: unit, integration, contract, end-to-end
 - id: be-review-06
+- roles: backend, fullstack
 - round: CODE_REVIEW_DEBUG
 - difficulty: medium
 - levels:

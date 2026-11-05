@@ -126,7 +126,7 @@ export default function NewQuestion() {
     );
   }
 
-  if (isEditMode && editing && editing.source !== 'user') {
+  if (isEditMode && editing && editing.source === 'seed') {
     return (
       <div className="mx-auto max-w-2xl p-6">
         <p className="text-sm text-muted-foreground">

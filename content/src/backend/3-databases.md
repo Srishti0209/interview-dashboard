@@ -2,6 +2,7 @@
 
 ## SQL vs NoSQL: how do you choose?
 - id: be-db-01
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:
@@ -118,6 +119,7 @@ How do you decide between a relational (SQL) database and a NoSQL database for a
 
 ## How indexes work, and when they hurt
 - id: be-db-02
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:
@@ -235,6 +237,7 @@ I verify with **`EXPLAIN ANALYZE`**: is it doing an index scan, how many rows ar
 
 ## Transactions, ACID and isolation levels
 - id: be-db-03
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: hard
 - levels:
@@ -355,6 +358,7 @@ Atomicity ensures both updates happen together; the conditional update prevents 
 
 ## Normalisation vs denormalisation
 - id: be-db-04
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:
@@ -475,6 +479,7 @@ My rule: **normalise by default, denormalise deliberately**, with a clear reason
 
 ## Diagnosing a slow query and the N+1 problem
 - id: be-db-05
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:

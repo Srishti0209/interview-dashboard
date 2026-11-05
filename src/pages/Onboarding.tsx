@@ -9,10 +9,11 @@ import {
   coerceLevel,
 } from '@/components/profile/RolePicker';
 import { ResumeUpload } from '@/components/resume/ResumeUpload';
+import { GenerateFromResume } from '@/components/resume/GenerateFromResume';
 import { useUpdateProfile } from '@/hooks/useProfile';
 import { CURRENT_ROLE_SUGGESTIONS, roleTitle } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import type { Profile, RoleFamily, RoleLevel } from '@/types';
+import type { Profile, Resume, RoleFamily, RoleLevel } from '@/types';
 
 const STEPS = ['Current role', 'Target role', 'Level', 'Resume'] as const;
 
@@ -27,6 +28,8 @@ export default function Onboarding({ profile }: { profile: Profile }) {
   );
   const [level, setLevel] = useState<RoleLevel | null>(profile.targetLevel);
   const update = useUpdateProfile();
+  const [resume, setResume] = useState<Resume | null>(null);
+  const [savingRole, setSavingRole] = useState(false);
 
   const finish = () =>
     update.mutate({
@@ -163,15 +166,42 @@ export default function Onboarding({ profile }: { profile: Profile }) {
                 from your account or the Story Bank.
               </p>
             </div>
-            <ResumeUpload
-              onSaved={finish}
-              onCancel={finish}
-              cancelLabel="Skip for now"
-            />
+            {resume ? (
+              <div className="space-y-4 rounded-lg border p-4">
+                <div>
+                  <p className="text-sm font-medium">Resume saved. Draft your story bank now?</p>
+                  <p className="text-xs text-muted-foreground">
+                    Optional. It keeps running while you look around, and you can also do it later
+                    from the Story Bank.
+                  </p>
+                </div>
+                <GenerateFromResume resume={resume} />
+                <Button onClick={finish} disabled={update.isPending}>
+                  Continue
+                </Button>
+              </div>
+            ) : (
+              <ResumeUpload
+                onSaved={(saved) => {
+                  // Save the chosen role first so drafts are written for it;
+                  // `onboarded` stays false until the user continues.
+                  setSavingRole(true);
+                  update.mutate(
+                    { currentPosition: currentPosition.trim(), targetRoleFamily: family, targetLevel: level },
+                    {
+                      onSuccess: () => setResume(saved),
+                      onSettled: () => setSavingRole(false),
+                    },
+                  );
+                }}
+                onCancel={finish}
+                cancelLabel="Skip for now"
+              />
+            )}
           </section>
         )}
 
-        {update.isPending && (
+        {update.isPending && !savingRole && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="size-4 animate-spin" />
             Setting up your prep for{' '}
@@ -200,7 +230,7 @@ export default function Onboarding({ profile }: { profile: Profile }) {
             </Button>
           </div>
         )}
-        {step === 3 && !update.isPending && (
+        {step === 3 && !update.isPending && !resume && (
           <Button variant="ghost" onClick={() => setStep(2)}>
             Back
           </Button>

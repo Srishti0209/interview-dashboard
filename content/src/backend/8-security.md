@@ -2,6 +2,7 @@
 
 ## OWASP Top 10 for backend engineers
 - id: be-sec-01
+- roles: backend, fullstack
 - round: SECURITY
 - difficulty: medium
 - levels:
@@ -134,6 +135,7 @@ What is the OWASP Top 10? Pick the most relevant risks for a backend engineer an
 
 ## Preventing SQL injection and validating input
 - id: be-sec-02
+- roles: backend, fullstack
 - round: SECURITY
 - difficulty: easy
 - levels:
@@ -289,6 +291,7 @@ class CreateOrder(BaseModel):
 
 ## Secrets management
 - id: be-sec-03
+- roles: backend, fullstack
 - round: SECURITY
 - difficulty: medium
 - levels:
@@ -421,6 +424,7 @@ How should a backend system manage secrets like database passwords, API keys and
 
 ## Designing authorisation: RBAC and ABAC
 - id: be-sec-04
+- roles: backend, fullstack
 - round: SECURITY
 - difficulty: medium
 - levels:

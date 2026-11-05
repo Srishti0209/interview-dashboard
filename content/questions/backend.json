@@ -2,7 +2,8 @@
   {
     "id": "be-design-01",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -20,7 +21,8 @@
   {
     "id": "be-design-02",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -38,7 +40,8 @@
   {
     "id": "be-design-03",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -76,7 +79,8 @@
   {
     "id": "be-design-05",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -509,7 +513,8 @@
   {
     "id": "be-design-06",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -528,7 +533,8 @@
   {
     "id": "be-design-07",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -589,7 +595,8 @@
   {
     "id": "be-design-10",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -690,7 +697,8 @@
   {
     "id": "be-design-15",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "BE_SYSTEM_DESIGN",
@@ -731,7 +739,8 @@
   {
     "id": "be-api-01",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -749,7 +758,8 @@
   {
     "id": "be-api-02",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -768,7 +778,8 @@
   {
     "id": "be-api-03",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -787,7 +798,8 @@
   {
     "id": "be-api-04",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -806,7 +818,8 @@
   {
     "id": "be-api-05",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -824,7 +837,8 @@
   {
     "id": "be-api-06",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -843,7 +857,8 @@
   {
     "id": "be-api-07",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -862,7 +877,8 @@
   {
     "id": "be-api-08",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -882,7 +898,8 @@
   {
     "id": "be-api-09",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -901,7 +918,8 @@
   {
     "id": "be-api-10",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -920,7 +938,8 @@
   {
     "id": "be-api-11",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -939,7 +958,8 @@
   {
     "id": "be-api-12",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "API_DESIGN",
@@ -958,7 +978,8 @@
   {
     "id": "be-db-01",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -977,7 +998,8 @@
   {
     "id": "be-db-02",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -996,7 +1018,8 @@
   {
     "id": "be-db-03",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1015,7 +1038,8 @@
   {
     "id": "be-db-04",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1034,7 +1058,8 @@
   {
     "id": "be-db-05",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1094,7 +1119,8 @@
   {
     "id": "be-db-08",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1113,7 +1139,8 @@
   {
     "id": "be-db-09",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1132,7 +1159,8 @@
   {
     "id": "be-db-10",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1151,7 +1179,8 @@
   {
     "id": "be-db-11",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1189,7 +1218,8 @@
   {
     "id": "be-db-13",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DATABASES_STORAGE",
@@ -1325,7 +1355,8 @@
   {
     "id": "be-dist-05",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DISTRIBUTED_SYSTEMS",
@@ -1401,7 +1432,8 @@
   {
     "id": "be-dist-09",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DISTRIBUTED_SYSTEMS",
@@ -1482,7 +1514,8 @@
   {
     "id": "be-dist-13",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DISTRIBUTED_SYSTEMS",
@@ -1520,7 +1553,8 @@
   {
     "id": "be-dsa-01",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DSA_CODING",
@@ -1539,7 +1573,8 @@
   {
     "id": "be-dsa-02",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DSA_CODING",
@@ -1558,7 +1593,8 @@
   {
     "id": "be-dsa-03",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DSA_CODING",
@@ -1616,7 +1652,8 @@
   {
     "id": "be-dsa-06",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DSA_CODING",
@@ -1675,7 +1712,8 @@
   {
     "id": "be-dsa-09",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "DSA_CODING",
@@ -1874,7 +1912,8 @@
   {
     "id": "be-conc-05",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "CONCURRENCY",
@@ -1955,7 +1994,8 @@
   {
     "id": "be-ops-01",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "RELIABILITY_OPERATIONS",
@@ -2016,7 +2056,8 @@
   {
     "id": "be-ops-04",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "RELIABILITY_OPERATIONS",
@@ -2058,7 +2099,8 @@
   {
     "id": "be-ops-06",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "RELIABILITY_OPERATIONS",
@@ -2097,7 +2139,8 @@
   {
     "id": "be-ops-08",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "RELIABILITY_OPERATIONS",
@@ -2201,7 +2244,8 @@
   {
     "id": "be-sec-01",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "SECURITY",
@@ -2220,7 +2264,8 @@
   {
     "id": "be-sec-02",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "SECURITY",
@@ -2239,7 +2284,8 @@
   {
     "id": "be-sec-03",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "SECURITY",
@@ -2259,7 +2305,8 @@
   {
     "id": "be-sec-04",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "SECURITY",
@@ -2359,7 +2406,8 @@
   {
     "id": "be-review-02",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "CODE_REVIEW_DEBUG",
@@ -2437,7 +2485,8 @@
   {
     "id": "be-review-06",
     "roleFamilies": [
-      "backend"
+      "backend",
+      "fullstack"
     ],
     "levels": [],
     "roundType": "CODE_REVIEW_DEBUG",

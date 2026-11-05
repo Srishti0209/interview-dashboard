@@ -5,10 +5,12 @@ import { NOTES_KEY, fetchNotes } from '@/lib/notes';
 import { STORIES_KEY, fetchStories } from '@/lib/stories';
 import { COMPANIES_KEY, fetchCompanyData, mergeCompanies } from '@/lib/companies';
 import { MOCK_SESSIONS_KEY, fetchMockSessions } from '@/lib/mock';
+import { JOBS_KEY, fetchJobs } from '@/lib/jobs';
 import { syncStudyDays } from '@/lib/streak';
 import { waitForPendingWrites } from '@/lib/sync';
 import type {
   Company,
+  JobDescription,
   MockSession,
   Note,
   Question,
@@ -31,19 +33,22 @@ export interface BackupFile {
     stories: unknown[];
     companies: unknown[];
     mockSessions: unknown[];
+    /** Jobs and their gap analyses; absent in backups made before Phase 6. */
+    jobs?: unknown[];
   };
   localStorage: Record<string, string>;
 }
 
 export async function exportAll(): Promise<BackupFile> {
   await waitForPendingWrites();
-  const [questionData, notes, stories, companyData, mockSessions] =
+  const [questionData, notes, stories, companyData, mockSessions, jobs] =
     await Promise.all([
       queryClient.fetchQuery({ queryKey: QUESTIONS_KEY, queryFn: fetchQuestionData }),
       queryClient.fetchQuery({ queryKey: NOTES_KEY, queryFn: fetchNotes }),
       queryClient.fetchQuery({ queryKey: STORIES_KEY, queryFn: fetchStories }),
       queryClient.fetchQuery({ queryKey: COMPANIES_KEY, queryFn: fetchCompanyData }),
       queryClient.fetchQuery({ queryKey: MOCK_SESSIONS_KEY, queryFn: fetchMockSessions }),
+      queryClient.fetchQuery({ queryKey: JOBS_KEY, queryFn: fetchJobs }),
     ]);
 
   const localStorageDump: Record<string, string> = {};
@@ -63,6 +68,7 @@ export async function exportAll(): Promise<BackupFile> {
       stories,
       companies: mergeCompanies(companyData, null),
       mockSessions,
+      jobs,
     },
     localStorage: localStorageDump,
   };
@@ -111,6 +117,7 @@ export interface ImportSummary {
   applications: number;
   mockSessions: number;
   ownQuestions: number;
+  jobs: number;
 }
 
 /**
@@ -140,6 +147,7 @@ export async function importAll(
   const stories = (data.tables.stories ?? []) as Story[];
   const companies = (data.tables.companies ?? []) as Company[];
   const mockSessions = (data.tables.mockSessions ?? []) as MockSession[];
+  const jobs = (data.tables.jobs ?? []) as JobDescription[];
 
   if (mode === 'replace') {
     for (const table of [
@@ -149,6 +157,7 @@ export async function importAll(
       'stories',
       'mock_sessions',
       'study_days',
+      'job_descriptions',
     ]) {
       await check(supabase.from(table).delete().eq('user_id', userId));
     }
@@ -156,7 +165,7 @@ export async function importAll(
   }
 
   // The user's own questions.
-  const own = questions.filter((q) => q.source === 'user');
+  const own = questions.filter((q) => q.source !== 'seed');
   await upsertChunks(
     'questions',
     own.map((q) => ({
@@ -168,7 +177,7 @@ export async function importAll(
       difficulty: q.difficulty,
       company: q.company ?? [],
       tags: q.tags ?? [],
-      source: 'user',
+      source: q.source,
       created_at: q.createdAt ?? Date.now(),
       updated_at: q.updatedAt ?? Date.now(),
     })),
@@ -243,7 +252,9 @@ export async function importAll(
       metrics: s.metrics ?? '',
       applicable_to: s.applicableTo ?? [],
       tags: s.tags ?? [],
-      source: 'user',
+      source: s.source ?? 'user',
+      is_draft: s.isDraft ?? false,
+      details: s.details ?? {},
       // keep the backup's order
       created_at: now + i,
       updated_at: now,
@@ -284,6 +295,25 @@ export async function importAll(
     'id',
   );
 
+  // Jobs keep their ids, so links in their gap analyses to the stories and
+  // own questions restored above still work.
+  await upsertChunks(
+    'job_descriptions',
+    jobs.map((j) => ({
+      id: j.id,
+      company: j.company ?? '',
+      title: j.title ?? '',
+      raw_text: j.rawText ?? '',
+      company_values: j.companyValues ?? '',
+      file_name: j.fileName ?? null,
+      interview_date: j.interviewDate ?? null,
+      parsed: j.parsed ?? null,
+      gaps: j.gaps ?? null,
+      created_at: j.createdAt ?? new Date().toISOString(),
+    })),
+    'id',
+  );
+
   // Device preferences + study days.
   for (const [k, v] of Object.entries(data.localStorage ?? {})) {
     if (LS_KEYS.includes(k)) localStorage.setItem(k, v);
@@ -311,6 +341,7 @@ export async function importAll(
     applications: applications.length,
     mockSessions: mockSessions.length,
     ownQuestions: own.length,
+    jobs: jobs.length,
   };
 }
 

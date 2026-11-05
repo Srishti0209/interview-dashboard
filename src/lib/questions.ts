@@ -35,7 +35,7 @@ interface QuestionRow {
   difficulty: Difficulty;
   company: string[];
   tags: string[];
-  source: Source | 'ai';
+  source: Source;
   role_families: RoleFamily[];
   created_at: number;
   updated_at: number;
@@ -65,7 +65,7 @@ const STATE_COLUMNS =
  * target role, plus every question they created themselves.
  */
 export function isForRole(q: Question, role: RoleFamily | null): boolean {
-  if (q.source === 'user' || !role || !q.roleFamilies?.length) return true;
+  if (q.source !== 'seed' || !role || !q.roleFamilies?.length) return true;
   return q.roleFamilies.includes(role);
 }
 
@@ -87,7 +87,7 @@ export async function fetchQuestionData(): Promise<QuestionData> {
       difficulty: r.difficulty,
       company: r.company,
       tags: r.tags,
-      source: r.source === 'ai' ? 'user' : r.source,
+      source: r.source,
       roleFamilies: r.role_families,
       personalAnswer: s?.personal_answer ?? undefined,
       personalNotes: s?.personal_notes ?? undefined,
@@ -215,8 +215,19 @@ export interface NewQuestionInput {
 }
 
 export async function createQuestion(input: NewQuestionInput): Promise<string> {
+  return createQuestions([input])[0];
+}
+
+/**
+ * Adds questions to the user's own bank in one write. `source` is 'ai' for
+ * questions generated from their resume or a JD.
+ */
+export function createQuestions(
+  inputs: NewQuestionInput[],
+  source: Exclude<Source, 'seed'> = 'user',
+): string[] {
   const now = Date.now();
-  const q: Question = {
+  const questions: Question[] = inputs.map((input, i) => ({
     id: uid(),
     roundType: input.roundType,
     title: input.title.trim(),
@@ -225,33 +236,32 @@ export async function createQuestion(input: NewQuestionInput): Promise<string> {
     difficulty: input.difficulty,
     company: input.company,
     tags: input.tags,
-    source: 'user',
-    createdAt: now,
+    source,
+    // keep the given order
+    createdAt: now + i,
     updatedAt: now,
-  };
-  setData((d) => ({ ...d, questions: [...d.questions, q] }));
+  }));
+  setData((d) => ({ ...d, questions: [...d.questions, ...questions] }));
   // owner_id defaults to the signed-in user.
   void enqueue({
     type: 'upsert',
     table: 'questions',
-    rows: [
-      {
-        id: q.id,
-        round_type: q.roundType,
-        title: q.title,
-        body: q.body,
-        answer: q.answer ?? null,
-        difficulty: q.difficulty,
-        company: q.company ?? [],
-        tags: q.tags,
-        source: 'user',
-        created_at: now,
-        updated_at: now,
-      },
-    ],
+    rows: questions.map((q) => ({
+      id: q.id,
+      round_type: q.roundType,
+      title: q.title,
+      body: q.body,
+      answer: q.answer ?? null,
+      difficulty: q.difficulty,
+      company: q.company ?? [],
+      tags: q.tags,
+      source,
+      created_at: q.createdAt,
+      updated_at: now,
+    })),
     onConflict: 'id',
   });
-  return q.id;
+  return questions.map((q) => q.id);
 }
 
 export async function deleteQuestion(id: string): Promise<void> {

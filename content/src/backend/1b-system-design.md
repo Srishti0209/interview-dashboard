@@ -2,6 +2,7 @@
 
 ## Design a chat / messaging system
 - id: be-design-06
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: hard
 - levels:
@@ -144,6 +145,7 @@ Each client stores the last sequence number it has seen per conversation. On rec
 
 ## Design a notification system
 - id: be-design-07
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: medium
 - levels:
@@ -598,6 +600,7 @@ Client (sync agent) ── metadata API ──► Metadata service ──► Met
 
 ## Design search autocomplete
 - id: be-design-10
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: medium
 - levels:

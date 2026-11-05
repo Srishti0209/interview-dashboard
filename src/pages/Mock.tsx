@@ -310,7 +310,7 @@ export default function Mock() {
     const round = rounds[current];
     const timeUp = remaining <= 0;
     return (
-      <div className="flex h-svh flex-col">
+      <div className="flex h-svh flex-col md:h-[calc(100svh-3rem)]">
         <div className="flex items-center justify-between border-b px-4 py-2">
           <div className="flex items-center gap-3 text-sm">
             <span className="font-medium">

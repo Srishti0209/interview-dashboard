@@ -364,6 +364,7 @@ Why can't you rely on wall-clock timestamps to order events across machines? Wha
 
 ## Monolith vs microservices (engineer's view)
 - id: be-dist-13
+- roles: backend, fullstack
 - round: DISTRIBUTED_SYSTEMS
 - difficulty: medium
 - levels:

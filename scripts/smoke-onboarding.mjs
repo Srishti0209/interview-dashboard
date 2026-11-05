@@ -157,6 +157,18 @@ try {
   await page.getByLabel('Resume text').fill(LONG_TEXT);
   await page.getByRole('button', { name: 'Save resume' }).click();
 
+  // Phase 6: after the resume, onboarding offers story drafts (optional).
+  await page.getByText('Resume saved. Draft your story bank now?').waitFor({ timeout: 15000 });
+  const offered = await page
+    .getByRole('button', { name: /Generate draft stories|Copy prompt/ })
+    .first()
+    .waitFor({ timeout: 10000 })
+    .then(() => true, () => false);
+  log(offered, 'resume step offers to draft stories');
+  const mid = await profile();
+  log(!mid.onboarded && mid.target_role_family === 'backend', 'role saved before drafting; still onboarding until Continue');
+  await page.getByRole('button', { name: 'Continue', exact: true }).click();
+
   await page.getByRole('heading', { name: 'Dashboard' }).waitFor({ timeout: 15000 });
   log(true, 'finishing onboarding opens the dashboard');
 

@@ -2,9 +2,12 @@ import { queryClient } from '@/lib/queryClient';
 import { fetchAll } from '@/lib/remote';
 import { enqueue, waitForPendingWrites } from '@/lib/sync';
 import { uid } from '@/lib/utils';
-import type { Story } from '@/types';
+import type { Story, StoryDetails } from '@/types';
 
 export const STORIES_KEY = ['stories'] as const;
+
+/** Title of a story started from scratch in the Story Builder. */
+export const UNTITLED_STORY = 'Untitled story';
 
 interface StoryRow {
   id: string;
@@ -16,11 +19,15 @@ interface StoryRow {
   metrics: string;
   applicable_to: string[];
   tags: string[];
+  source: 'ai' | 'user';
+  is_draft: boolean;
+  resume_id: string | null;
+  details: StoryDetails | null;
   created_at: number;
 }
 
 const STORY_COLUMNS =
-  'id, title, situation, task, action, result, metrics, applicable_to, tags, created_at';
+  'id, title, situation, task, action, result, metrics, applicable_to, tags, source, is_draft, resume_id, details, created_at';
 
 export async function fetchStories(): Promise<Story[]> {
   await waitForPendingWrites();
@@ -37,6 +44,10 @@ export async function fetchStories(): Promise<Story[]> {
       metrics: r.metrics,
       applicableTo: r.applicable_to,
       tags: r.tags,
+      source: r.source,
+      isDraft: r.is_draft,
+      resumeId: r.resume_id,
+      details: r.details ?? {},
     }));
 }
 
@@ -54,6 +65,10 @@ function toRow(story: Partial<Story>): Record<string, unknown> {
   if ('metrics' in story) row.metrics = story.metrics;
   if ('applicableTo' in story) row.applicable_to = story.applicableTo;
   if ('tags' in story) row.tags = story.tags;
+  if ('source' in story) row.source = story.source;
+  if ('isDraft' in story) row.is_draft = story.isDraft;
+  if ('resumeId' in story) row.resume_id = story.resumeId;
+  if ('details' in story) row.details = story.details ?? {};
   return row;
 }
 
@@ -71,16 +86,26 @@ export const emptyStory: StoryInput = {
 };
 
 export async function createStory(input: StoryInput): Promise<string> {
-  const id = uid();
+  return createStories([input])[0];
+}
+
+/** Adds stories in one write, keeping the given order. */
+export function createStories(inputs: StoryInput[]): string[] {
   const now = Date.now();
-  setStories((s) => [...s, { id, ...input }]);
+  const stories = inputs.map((input) => ({ id: uid(), ...input }));
+  setStories((s) => [...s, ...stories]);
   void enqueue({
     type: 'upsert',
     table: 'stories',
-    rows: [{ id, ...toRow(input), created_at: now, updated_at: now }],
+    rows: stories.map(({ id, ...input }, i) => ({
+      id,
+      ...toRow(input),
+      created_at: now + i,
+      updated_at: now,
+    })),
     onConflict: 'id',
   });
-  return id;
+  return stories.map((s) => s.id);
 }
 
 export async function updateStory(

@@ -8,6 +8,8 @@ import {
   extractResumeText,
   validateResumeFile,
 } from '@/lib/resume';
+import { UNREADABLE } from '@/lib/pdfLayout';
+import { FixWithClaude } from '@/components/resume/FixWithClaude';
 import { cn } from '@/lib/utils';
 import type { Resume } from '@/types';
 
@@ -92,6 +94,7 @@ export function ResumeUpload({ onSaved, onCancel, cancelLabel }: Props) {
   };
 
   const tooShort = text.trim().length < RESUME_MIN_CHARS;
+  const unreadable = text.split(UNREADABLE).length - 1;
 
   if (step === 'extracting') {
     return (
@@ -121,6 +124,25 @@ export function ResumeUpload({ onSaved, onCancel, cancelLabel }: Props) {
               : 'Copy the text from your resume and paste it here.'}
           </p>
         </div>
+        {unreadable > 0 && (
+          <div
+            className="flex gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs"
+            data-testid="unreadable-warning"
+          >
+            <AlertTriangle className="size-4 shrink-0 text-amber-600" />
+            <div className="min-w-0 flex-1">
+              <p>
+                {unreadable === 1 ? '1 character' : `${unreadable} characters`} in this PDF
+                couldn’t be read and {unreadable === 1 ? 'shows' : 'show'} as {UNREADABLE}. These
+                are often symbols like “+” or “-” (e.g. “7{UNREADABLE} years” is probably “7+
+                years”). Let Claude read the PDF to fix them, or fix them below by hand.
+              </p>
+              {file && (
+                <FixWithClaude file={file} text={text} onFixed={setText} />
+              )}
+            </div>
+          </div>
+        )}
         <Textarea
           aria-label="Resume text"
           value={text}

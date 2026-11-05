@@ -25,7 +25,11 @@ await page.goto(BASE, { waitUntil: 'networkidle' });
 await page.waitForSelector('text=Dashboard', { timeout: 15000 });
 
 // ---------- 1. autosave across question switch ----------
-const qs = (await questionsWithState()).filter((q) => q.source === 'seed');
+// ⌘K searches the target role's bank, so pick questions the smoke user
+// (target role: frontend) can find there.
+const qs = (await questionsWithState()).filter(
+  (q) => q.source === 'seed' && q.role_families.includes('frontend'),
+);
 const [A, B] = qs;
 await page.goto(`${BASE}/questions/${A.id}`, { waitUntil: 'networkidle' });
 await page.waitForSelector(`h1:has-text("${A.title}")`);

@@ -549,6 +549,7 @@ Services/hosts → Agents (batch, compress, buffer locally)
 
 ## Design an e-commerce checkout and inventory system
 - id: be-design-15
+- roles: backend, fullstack
 - round: BE_SYSTEM_DESIGN
 - difficulty: hard
 - levels:

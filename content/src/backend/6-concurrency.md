@@ -590,6 +590,7 @@ ExecutorService pool = new ThreadPoolExecutor(
 
 ## Event loop vs threads (Node.js vs Java/Go)
 - id: be-conc-05
+- roles: backend, fullstack
 - round: CONCURRENCY
 - difficulty: medium
 - levels:

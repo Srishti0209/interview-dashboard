@@ -98,6 +98,7 @@ export async function resetSmokeData() {
     'mock_sessions',
     'study_days',
     'revisions',
+    'job_descriptions',
   ]) {
     await rest(`${table}?user_id=eq.${user.id}`, { method: 'DELETE' });
   }
@@ -109,7 +110,9 @@ export async function resetSmokeData() {
     method: 'POST',
     body: JSON.stringify(
       seed.stories.map((st, i) => ({
-        id: st.id,
+        // Story ids are unique across all users, so the test account gets
+        // its own copies rather than the seed ids other accounts may hold.
+        id: `${user.id.slice(0, 8)}-${st.id}`,
         title: st.title,
         situation: st.situation,
         task: st.task,
@@ -139,7 +142,7 @@ export async function eventually(read, check, timeoutMs = 8000) {
 /** The account's question bank merged with the smoke user's personal fields. */
 export async function questionsWithState() {
   const [qs, states] = await Promise.all([
-    rest('questions?select=id,title,source,answer,owner_id&order=id'),
+    rest('questions?select=id,title,source,answer,owner_id,role_families&order=id'),
     rest('user_question_state?select=*'),
   ]);
   const byId = new Map(states.map((st) => [st.question_id, st]));

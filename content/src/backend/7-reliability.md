@@ -2,6 +2,7 @@
 
 ## Observability: logs, metrics and traces
 - id: be-ops-01
+- roles: backend, fullstack
 - round: RELIABILITY_OPERATIONS
 - difficulty: medium
 - levels:
@@ -387,6 +388,7 @@ Action items: enforce canary for config changes (prevent), add config schema val
 
 ## Deployment strategies: blue-green, canary, rolling
 - id: be-ops-04
+- roles: backend, fullstack
 - round: RELIABILITY_OPERATIONS
 - difficulty: medium
 - levels:
@@ -671,6 +673,7 @@ spec:
 
 ## Designing a CI/CD pipeline
 - id: be-ops-06
+- roles: backend, fullstack
 - round: RELIABILITY_OPERATIONS
 - difficulty: medium
 - levels:
@@ -949,6 +952,7 @@ export default function () {
 
 ## Debugging a production latency spike
 - id: be-ops-08
+- roles: backend, fullstack
 - round: RELIABILITY_OPERATIONS
 - difficulty: medium
 - levels:

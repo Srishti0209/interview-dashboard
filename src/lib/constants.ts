@@ -40,6 +40,18 @@ export const ROUND_TYPES: RoundType[] = [
   'BROWSER_WEB_PLATFORM',
   'STATE_DATA_FETCHING',
   'TESTING',
+  'FULLSTACK_SYSTEM_DESIGN',
+  'FULLSTACK_FEATURE_BUILD',
+  'FULLSTACK_ARCHITECTURE',
+  'ML_LLM_FUNDAMENTALS',
+  'PROMPT_ENGINEERING',
+  'LLM_SYSTEMS_RAG',
+  'AGENTS_TOOLS',
+  'EVALS_SAFETY',
+  'FINE_TUNING',
+  'LLM_OPS_SERVING',
+  'AI_SYSTEM_DESIGN',
+  'AI_CODING',
 ];
 
 export const ROUND_LABEL: Record<RoundType, string> = {
@@ -74,6 +86,18 @@ export const ROUND_LABEL: Record<RoundType, string> = {
   BROWSER_WEB_PLATFORM: 'Browser & Web Platform',
   STATE_DATA_FETCHING: 'State & Data Fetching',
   TESTING: 'Testing',
+  FULLSTACK_SYSTEM_DESIGN: 'Full Stack System Design',
+  FULLSTACK_FEATURE_BUILD: 'Full Stack Feature Build',
+  FULLSTACK_ARCHITECTURE: 'Full Stack Architecture',
+  ML_LLM_FUNDAMENTALS: 'ML & LLM Fundamentals',
+  PROMPT_ENGINEERING: 'Prompt Engineering',
+  LLM_SYSTEMS_RAG: 'LLM Systems & RAG',
+  AGENTS_TOOLS: 'Agents & Tools',
+  EVALS_SAFETY: 'Evals & Safety',
+  FINE_TUNING: 'Fine-Tuning',
+  LLM_OPS_SERVING: 'LLM Ops & Serving',
+  AI_SYSTEM_DESIGN: 'AI System Design',
+  AI_CODING: 'AI Coding',
 };
 
 // Tailwind utility classes per round type (used for pills). Light + dark.
@@ -139,7 +163,30 @@ export const ROUND_COLOR: Record<RoundType, string> = {
   STATE_DATA_FETCHING:
     'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-500/15 dark:text-fuchsia-300',
   TESTING:
-    'bg-stone-200 text-stone-700 dark:bg-stone-500/20 dark:text-stone-300',
+    'bg-stone-200 text-stone-700 dark:bg-stone-500/20 dark:text-stone-300',  FULLSTACK_SYSTEM_DESIGN:
+    'bg-blue-100 text-blue-900 dark:bg-blue-500/20 dark:text-blue-200',
+  FULLSTACK_FEATURE_BUILD:
+    'bg-emerald-100 text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-200',
+  FULLSTACK_ARCHITECTURE:
+    'bg-rose-100 text-rose-800 dark:bg-rose-500/15 dark:text-rose-300',
+  ML_LLM_FUNDAMENTALS:
+    'bg-indigo-100 text-indigo-900 dark:bg-indigo-500/20 dark:text-indigo-200',
+  PROMPT_ENGINEERING:
+    'bg-yellow-100 text-yellow-900 dark:bg-yellow-500/20 dark:text-yellow-200',
+  LLM_SYSTEMS_RAG:
+    'bg-cyan-100 text-cyan-900 dark:bg-cyan-500/20 dark:text-cyan-200',
+  AGENTS_TOOLS:
+    'bg-purple-100 text-purple-800 dark:bg-purple-500/15 dark:text-purple-300',
+  EVALS_SAFETY:
+    'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300',
+  FINE_TUNING:
+    'bg-green-100 text-green-800 dark:bg-green-500/15 dark:text-green-300',
+  LLM_OPS_SERVING:
+    'bg-zinc-200 text-zinc-700 dark:bg-zinc-500/20 dark:text-zinc-300',
+  AI_SYSTEM_DESIGN:
+    'bg-violet-100 text-violet-900 dark:bg-violet-500/20 dark:text-violet-200',
+  AI_CODING:
+    'bg-fuchsia-100 text-fuchsia-900 dark:bg-fuchsia-500/20 dark:text-fuchsia-200',
 };
 
 export const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Search,
   List,
@@ -48,13 +48,19 @@ export default function Questions() {
   const [mobileFilters, setMobileFilters] = useState(false);
   const [cursor, setCursor] = useState(0);
   const navigate = useNavigate();
+  // ?ids=a,b,c (e.g. "Practise these" on a job) shows just those questions.
+  const [params, setParams] = useSearchParams();
+  const idsParam = params.get('ids');
+  const pinnedLabel = params.get('label');
 
   const filtered = useMemo(() => {
     if (!questions) return [];
-    return filterQuestions(questions, filters, reviewStates).sort((a, b) =>
+    const ids = idsParam ? new Set(idsParam.split(',')) : null;
+    const pool = ids ? questions.filter((q) => ids.has(q.id)) : questions;
+    return filterQuestions(pool, filters, reviewStates).sort((a, b) =>
       a.title.localeCompare(b.title),
     );
-  }, [questions, filters, reviewStates]);
+  }, [questions, filters, reviewStates, idsParam]);
 
   // J / K to move, Enter to open (list & card views).
   useEffect(() => {
@@ -89,7 +95,7 @@ export default function Questions() {
   return (
     <div className="flex">
       {/* Desktop sidebar */}
-      <aside className="hidden w-64 shrink-0 overflow-y-auto border-r p-4 lg:sticky lg:top-0 lg:block lg:h-svh">
+      <aside className="hidden w-64 shrink-0 overflow-y-auto border-r p-4 lg:sticky lg:top-12 lg:block lg:h-[calc(100svh-3rem)]">
         <FilterSidebar tags={tags} companies={companies} />
       </aside>
 
@@ -110,6 +116,21 @@ export default function Questions() {
             </Link>
           </Button>
         </div>
+
+        {idsParam && (
+          <div
+            className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-md border bg-accent/40 px-3 py-2 text-sm"
+            data-testid="pinned-questions"
+          >
+            <span>
+              Showing {filtered.length} question{filtered.length === 1 ? '' : 's'}
+              {pinnedLabel ? ` for ${pinnedLabel}` : ''}
+            </span>
+            <Button size="sm" variant="ghost" className="h-7" onClick={() => setParams({})}>
+              Show all questions
+            </Button>
+          </div>
+        )}
 
         {/* Toolbar */}
         <div className="mb-4 flex flex-wrap items-center gap-2">

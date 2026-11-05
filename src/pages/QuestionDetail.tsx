@@ -49,7 +49,7 @@ export default function QuestionDetail() {
   const linkedNotes = useLinkedNotes(id);
   const hideAnswers = useUIStore((s) => s.hideAnswers);
 
-  const isUser = question?.source === 'user';
+  const isUser = !!question && question.source !== 'seed';
   const hasModel = !!question?.answer?.trim();
   const hasPersonal = !!question?.personalAnswer?.trim();
 
@@ -209,9 +209,9 @@ export default function QuestionDetail() {
             {c}
           </Badge>
         ))}
-        {question.source === 'user' && (
+        {question.source !== 'seed' && (
           <Badge variant="muted" className="font-normal">
-            My question
+            {question.source === 'ai' ? 'From resume / JD' : 'My question'}
           </Badge>
         )}
       </div>

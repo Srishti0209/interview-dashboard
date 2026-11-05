@@ -2,6 +2,7 @@
 
 ## REST principles and resource design
 - id: be-api-01
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: easy
 - levels:
@@ -141,6 +142,7 @@ Modelling 'loan' as its own resource, rather than an action on a book, makes his
 
 ## Design the API for an orders service
 - id: be-api-02
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -315,6 +317,7 @@ Consistent format:
 
 ## Pagination: offset, cursor and keyset
 - id: be-api-03
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -454,6 +457,7 @@ LIMIT 21;   -- fetch one extra to know if there's a next page
 
 ## Idempotency keys and safe retries
 - id: be-api-04
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -584,6 +588,7 @@ A client calls your "create payment" endpoint, the network times out, and the cl
 
 ## API versioning and backward compatibility
 - id: be-api-05
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -715,6 +720,7 @@ Consumer-driven contract tests (e.g. Pact) catch breaking changes before deploy.
 
 ## REST vs GraphQL vs gRPC
 - id: be-api-06
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:

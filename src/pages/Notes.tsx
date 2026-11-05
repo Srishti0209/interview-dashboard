@@ -79,7 +79,7 @@ export default function Notes() {
   };
 
   return (
-    <div className="flex h-svh">
+    <div className="flex h-svh md:h-[calc(100svh-3rem)]">
       {/* Sidebar */}
       <aside className="flex w-64 shrink-0 flex-col border-r">
         <div className="flex items-center gap-2 border-b p-3">

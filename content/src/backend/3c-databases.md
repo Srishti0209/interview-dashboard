@@ -2,6 +2,7 @@
 
 ## Data modelling exercise: a social app
 - id: be-db-13
+- roles: backend, fullstack
 - round: DATABASES_STORAGE
 - difficulty: medium
 - levels:

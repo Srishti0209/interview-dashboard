@@ -2,6 +2,7 @@
 
 ## Error handling and HTTP status codes
 - id: be-api-07
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: easy
 - levels:
@@ -145,6 +146,7 @@ This saves round trips and gives a better user experience in forms."
 
 ## Authentication and authorisation: OAuth 2.0, JWT and sessions
 - id: be-api-08
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: hard
 - levels:
@@ -263,6 +265,7 @@ This is why access tokens should be short-lived."
 
 ## Rate limiting and quotas at the API layer
 - id: be-api-09
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -402,6 +405,7 @@ Include rate-limit headers on **successful** responses too, so clients can pace 
 
 ## Designing reliable webhooks
 - id: be-api-10
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -556,6 +560,7 @@ Webhook-Signature: v1=5d41402abc4b2a76b9719d911017c592...
 
 ## Long-running operations and async APIs
 - id: be-api-11
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:
@@ -707,6 +712,7 @@ API → Jobs table (status) → Queue → Workers → Object storage (results)
 
 ## API documentation, contracts and contract testing
 - id: be-api-12
+- roles: backend, fullstack
 - round: API_DESIGN
 - difficulty: medium
 - levels:

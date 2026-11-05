@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import { AppLayout } from '@/components/AppLayout';
 import { AppBootstrap } from '@/components/AppBootstrap';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { defaultShouldDehydrateQuery } from '@tanstack/react-query';
 import { AuthGate } from '@/components/auth/AuthGate';
 import { ProfileGate } from '@/components/auth/ProfileGate';
 import {
@@ -26,6 +27,10 @@ import CompanyDetail from '@/pages/CompanyDetail';
 import SettingsPage from '@/pages/SettingsPage';
 import Account from '@/pages/Account';
 import NotFound from '@/pages/NotFound';
+import StoryDetail from '@/pages/StoryDetail';
+import StoryBuilder from '@/pages/StoryBuilder';
+import JobDescriptions from '@/pages/JobDescriptions';
+import JobDetail from '@/pages/JobDetail';
 
 // Heavy routes are code-split to keep the initial bundle small.
 const Notes = lazy(() => import('@/pages/Notes'));
@@ -77,8 +82,12 @@ function InnerApp() {
             }
           />
           <Route path="stories" element={<Stories />} />
+          <Route path="stories/:id" element={<StoryDetail />} />
+          <Route path="stories/:id/build" element={<StoryBuilder />} />
           <Route path="companies" element={<Companies />} />
           <Route path="companies/:id" element={<CompanyDetail />} />
+          <Route path="jobs" element={<JobDescriptions />} />
+          <Route path="jobs/:id" element={<JobDetail />} />
           <Route
             path="mock"
             element={
@@ -103,8 +112,12 @@ export default function App() {
       persistOptions={{
         persister: queryPersister,
         maxAge: PERSIST_MAX_AGE,
-        // Queued writes are kept in the sync outbox, not the cache.
-        dehydrateOptions: { shouldDehydrateMutation: () => false },
+        dehydrateOptions: {
+          // Queued writes are kept in the sync outbox, not the cache.
+          shouldDehydrateMutation: () => false,
+          // AI availability is always checked live, never restored from disk.
+          shouldDehydrateQuery: (q) => defaultShouldDehydrateQuery(q) && q.queryKey[0] !== 'ai-status',
+        },
       }}
     >
       <AuthGate>
