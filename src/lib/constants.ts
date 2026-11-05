@@ -4,6 +4,8 @@ import type {
   Archetype,
   AiPolicy,
   ApplicationStatus,
+  RoleFamily,
+  RoleLevel,
 } from '@/types';
 
 export const ROUND_TYPES: RoundType[] = [
@@ -19,6 +21,37 @@ export const ROUND_TYPES: RoundType[] = [
   'CODE_REVIEW_DEBUG',
   'BACKEND_ADJACENT',
   'ARCHITECTURE_TECH_LEAD',
+  'PRODUCT_SENSE',
+  'PRIORITIZATION_ROADMAP',
+  'STAKEHOLDER_AGILE',
+  'METRICS_ANALYTICS',
+  'TECHNICAL_FLUENCY',
+  'DSA_CODING',
+  'BE_SYSTEM_DESIGN',
+  'API_DESIGN',
+  'DATABASES_STORAGE',
+  'DISTRIBUTED_SYSTEMS',
+  'CONCURRENCY',
+  'RELIABILITY_OPERATIONS',
+  'SECURITY',
+  'TYPESCRIPT',
+  'HTML_CSS',
+  'ACCESSIBILITY',
+  'BROWSER_WEB_PLATFORM',
+  'STATE_DATA_FETCHING',
+  'TESTING',
+  'FULLSTACK_SYSTEM_DESIGN',
+  'FULLSTACK_FEATURE_BUILD',
+  'FULLSTACK_ARCHITECTURE',
+  'ML_LLM_FUNDAMENTALS',
+  'PROMPT_ENGINEERING',
+  'LLM_SYSTEMS_RAG',
+  'AGENTS_TOOLS',
+  'EVALS_SAFETY',
+  'FINE_TUNING',
+  'LLM_OPS_SERVING',
+  'AI_SYSTEM_DESIGN',
+  'AI_CODING',
 ];
 
 export const ROUND_LABEL: Record<RoundType, string> = {
@@ -34,6 +67,37 @@ export const ROUND_LABEL: Record<RoundType, string> = {
   CODE_REVIEW_DEBUG: 'Code Review & Debug',
   BACKEND_ADJACENT: 'Backend-Adjacent',
   ARCHITECTURE_TECH_LEAD: 'Architecture / Tech Lead',
+  PRODUCT_SENSE: 'Product Sense',
+  PRIORITIZATION_ROADMAP: 'Prioritisation & Roadmap',
+  STAKEHOLDER_AGILE: 'Stakeholders & Agile Delivery',
+  METRICS_ANALYTICS: 'Metrics & Analytics',
+  TECHNICAL_FLUENCY: 'Technical Fluency',
+  DSA_CODING: 'Data Structures & Algorithms',
+  BE_SYSTEM_DESIGN: 'Backend System Design',
+  API_DESIGN: 'API Design',
+  DATABASES_STORAGE: 'Databases & Storage',
+  DISTRIBUTED_SYSTEMS: 'Distributed Systems',
+  CONCURRENCY: 'Concurrency',
+  RELIABILITY_OPERATIONS: 'Reliability & Operations',
+  SECURITY: 'Security',
+  TYPESCRIPT: 'TypeScript',
+  HTML_CSS: 'HTML & CSS',
+  ACCESSIBILITY: 'Accessibility',
+  BROWSER_WEB_PLATFORM: 'Browser & Web Platform',
+  STATE_DATA_FETCHING: 'State & Data Fetching',
+  TESTING: 'Testing',
+  FULLSTACK_SYSTEM_DESIGN: 'Full Stack System Design',
+  FULLSTACK_FEATURE_BUILD: 'Full Stack Feature Build',
+  FULLSTACK_ARCHITECTURE: 'Full Stack Architecture',
+  ML_LLM_FUNDAMENTALS: 'ML & LLM Fundamentals',
+  PROMPT_ENGINEERING: 'Prompt Engineering',
+  LLM_SYSTEMS_RAG: 'LLM Systems & RAG',
+  AGENTS_TOOLS: 'Agents & Tools',
+  EVALS_SAFETY: 'Evals & Safety',
+  FINE_TUNING: 'Fine-Tuning',
+  LLM_OPS_SERVING: 'LLM Ops & Serving',
+  AI_SYSTEM_DESIGN: 'AI System Design',
+  AI_CODING: 'AI Coding',
 };
 
 // Tailwind utility classes per round type (used for pills). Light + dark.
@@ -62,6 +126,67 @@ export const ROUND_COLOR: Record<RoundType, string> = {
     'bg-lime-100 text-lime-700 dark:bg-lime-500/15 dark:text-lime-300',
   ARCHITECTURE_TECH_LEAD:
     'bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300',
+  PRODUCT_SENSE:
+    'bg-cyan-100 text-cyan-700 dark:bg-cyan-500/15 dark:text-cyan-300',
+  PRIORITIZATION_ROADMAP:
+    'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/15 dark:text-yellow-300',
+  STAKEHOLDER_AGILE:
+    'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-300',
+  METRICS_ANALYTICS:
+    'bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-300',
+  TECHNICAL_FLUENCY:
+    'bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300',
+  DSA_CODING:
+    'bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300',
+  BE_SYSTEM_DESIGN:
+    'bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300',
+  API_DESIGN:
+    'bg-violet-100 text-violet-800 dark:bg-violet-500/15 dark:text-violet-300',
+  DATABASES_STORAGE:
+    'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300',
+  DISTRIBUTED_SYSTEMS:
+    'bg-indigo-100 text-indigo-800 dark:bg-indigo-500/15 dark:text-indigo-300',
+  CONCURRENCY:
+    'bg-orange-100 text-orange-800 dark:bg-orange-500/15 dark:text-orange-300',
+  RELIABILITY_OPERATIONS:
+    'bg-teal-100 text-teal-800 dark:bg-teal-500/15 dark:text-teal-300',
+  SECURITY:
+    'bg-red-100 text-red-800 dark:bg-red-500/15 dark:text-red-300',
+  TYPESCRIPT:
+    'bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300',
+  HTML_CSS:
+    'bg-pink-100 text-pink-800 dark:bg-pink-500/15 dark:text-pink-300',
+  ACCESSIBILITY:
+    'bg-lime-100 text-lime-800 dark:bg-lime-500/15 dark:text-lime-300',
+  BROWSER_WEB_PLATFORM:
+    'bg-cyan-100 text-cyan-800 dark:bg-cyan-500/15 dark:text-cyan-300',
+  STATE_DATA_FETCHING:
+    'bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-500/15 dark:text-fuchsia-300',
+  TESTING:
+    'bg-stone-200 text-stone-700 dark:bg-stone-500/20 dark:text-stone-300',  FULLSTACK_SYSTEM_DESIGN:
+    'bg-blue-100 text-blue-900 dark:bg-blue-500/20 dark:text-blue-200',
+  FULLSTACK_FEATURE_BUILD:
+    'bg-emerald-100 text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-200',
+  FULLSTACK_ARCHITECTURE:
+    'bg-rose-100 text-rose-800 dark:bg-rose-500/15 dark:text-rose-300',
+  ML_LLM_FUNDAMENTALS:
+    'bg-indigo-100 text-indigo-900 dark:bg-indigo-500/20 dark:text-indigo-200',
+  PROMPT_ENGINEERING:
+    'bg-yellow-100 text-yellow-900 dark:bg-yellow-500/20 dark:text-yellow-200',
+  LLM_SYSTEMS_RAG:
+    'bg-cyan-100 text-cyan-900 dark:bg-cyan-500/20 dark:text-cyan-200',
+  AGENTS_TOOLS:
+    'bg-purple-100 text-purple-800 dark:bg-purple-500/15 dark:text-purple-300',
+  EVALS_SAFETY:
+    'bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-300',
+  FINE_TUNING:
+    'bg-green-100 text-green-800 dark:bg-green-500/15 dark:text-green-300',
+  LLM_OPS_SERVING:
+    'bg-zinc-200 text-zinc-700 dark:bg-zinc-500/20 dark:text-zinc-300',
+  AI_SYSTEM_DESIGN:
+    'bg-violet-100 text-violet-900 dark:bg-violet-500/20 dark:text-violet-200',
+  AI_CODING:
+    'bg-fuchsia-100 text-fuchsia-900 dark:bg-fuchsia-500/20 dark:text-fuchsia-200',
 };
 
 export const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];
@@ -128,3 +253,62 @@ export const APPLICATION_STATUS_COLOR: Record<ApplicationStatus, string> = {
   rejected: 'bg-rose-100 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300',
   declined: 'bg-zinc-100 text-zinc-500 dark:bg-zinc-700/40 dark:text-zinc-400',
 };
+
+// ---------------------------------------------------------------------------
+// Target roles
+// ---------------------------------------------------------------------------
+export const ROLE_FAMILIES: RoleFamily[] = [
+  'product_owner',
+  'backend',
+  'frontend',
+  'fullstack',
+  'ai',
+];
+
+export const ROLE_FAMILY_LABEL: Record<RoleFamily, string> = {
+  product_owner: 'Product Owner',
+  backend: 'Backend Engineer',
+  frontend: 'Frontend Engineer',
+  fullstack: 'Full Stack Engineer',
+  ai: 'AI Engineer',
+};
+
+export const ROLE_FAMILY_BLURB: Record<RoleFamily, string> = {
+  product_owner: 'Product sense, prioritisation, stakeholders, metrics',
+  backend: 'APIs, databases, distributed systems, system design',
+  frontend: 'JS, React, UI architecture, performance',
+  fullstack: 'Frontend and backend, end-to-end system design',
+  ai: 'LLM systems, RAG, evals, AI product engineering',
+};
+
+/** Product Owner tracks stop at Senior; engineering tracks go to Staff. */
+export const ROLE_LEVELS: Record<RoleFamily, RoleLevel[]> = {
+  product_owner: ['mid', 'senior'],
+  backend: ['mid', 'senior', 'staff'],
+  frontend: ['mid', 'senior', 'staff'],
+  fullstack: ['mid', 'senior', 'staff'],
+  ai: ['mid', 'senior', 'staff'],
+};
+
+/** e.g. roleTitle('backend', 'staff') → "Staff Backend Engineer". */
+export function roleTitle(family: RoleFamily, level: RoleLevel): string {
+  const base = ROLE_FAMILY_LABEL[family];
+  if (level === 'senior') return `Senior ${base}`;
+  if (level === 'staff') return `Staff ${base}`;
+  return base;
+}
+
+export const CURRENT_ROLE_SUGGESTIONS = [
+  'Software Engineer',
+  'Senior Software Engineer',
+  'Frontend Engineer',
+  'Backend Engineer',
+  'Full Stack Engineer',
+  'Tech Lead',
+  'Engineering Manager',
+  'Product Owner',
+  'Product Manager',
+  'Business Analyst',
+  'Data Scientist',
+  'Student / Graduate',
+];

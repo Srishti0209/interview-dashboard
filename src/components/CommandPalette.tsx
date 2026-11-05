@@ -12,6 +12,7 @@ import {
   Plus,
   FilePlus2,
   Search,
+  UserRound,
 } from 'lucide-react';
 import { useUIStore } from '@/store/ui';
 import { useAllQuestions } from '@/hooks/useQuestions';
@@ -110,6 +111,9 @@ export function CommandPalette() {
             </Item>
             <Item onSelect={() => go('/settings')} icon={Settings}>
               Settings
+            </Item>
+            <Item onSelect={() => go('/account')} icon={UserRound}>
+              Account
             </Item>
           </Command.Group>
 

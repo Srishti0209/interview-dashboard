@@ -62,7 +62,8 @@ export function StoryDialog({
     if (!draft.title.trim()) return;
     setSaving(true);
     try {
-      if (story) await updateStory(story.id, draft);
+      // Saving an AI draft by hand counts as reviewing it.
+      if (story) await updateStory(story.id, { ...draft, isDraft: false });
       else await createStory(draft);
       onOpenChange(false);
     } finally {

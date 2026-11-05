@@ -14,12 +14,16 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import {
-  ROUND_TYPES,
   ROUND_LABEL,
   DIFFICULTIES,
 } from '@/lib/constants';
 import { createQuestion, updateQuestion } from '@/lib/questions';
-import { useAllQuestions, useFacets, useQuestion } from '@/hooks/useQuestions';
+import {
+  useAllQuestions,
+  useFacets,
+  useQuestion,
+  useRoundTypes,
+} from '@/hooks/useQuestions';
 import type { RoundType, Difficulty } from '@/types';
 
 export default function NewQuestion() {
@@ -35,7 +39,14 @@ export default function NewQuestion() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [answer, setAnswer] = useState('');
-  const [roundType, setRoundType] = useState<RoundType>('JS_FUNDAMENTALS');
+  const bankRounds = useRoundTypes();
+  const [roundType, setRoundType] = useState<RoundType>(() =>
+    bankRounds.includes('JS_FUNDAMENTALS')
+      ? 'JS_FUNDAMENTALS'
+      : (bankRounds[0] ?? 'BEHAVIORAL_BAR_RAISER'),
+  );
+  // Rounds relevant to the user's role, plus the current one when editing.
+  const roundOptions = useRoundTypes([roundType]);
   const [difficulty, setDifficulty] = useState<Difficulty>('medium');
   const [company, setCompany] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
@@ -115,7 +126,7 @@ export default function NewQuestion() {
     );
   }
 
-  if (isEditMode && editing && editing.source !== 'user') {
+  if (isEditMode && editing && editing.source === 'seed') {
     return (
       <div className="mx-auto max-w-2xl p-6">
         <p className="text-sm text-muted-foreground">
@@ -190,7 +201,7 @@ export default function NewQuestion() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {ROUND_TYPES.map((r) => (
+                {roundOptions.map((r) => (
                   <SelectItem key={r} value={r}>
                     {ROUND_LABEL[r]}
                   </SelectItem>

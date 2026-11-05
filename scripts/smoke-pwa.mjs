@@ -1,11 +1,12 @@
 // PWA verification against the production build (vite preview):
 // SW registers, manifest is valid, app works offline after first load.
 import { chromium } from 'playwright';
+import { newSignedInContext, questionsWithState, SMOKE_PROFILE } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5183';
 const errors = [];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext();
+const ctx = await newSignedInContext(browser);
 const page = await ctx.newPage();
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
@@ -40,9 +41,42 @@ const swReady = await page.evaluate(async () => {
 log(swReady, 'service worker registered and active');
 
 // seed data present (criteria #1)
+// Same rule as isForRole: the target role's questions plus the user's own.
+const role = SMOKE_PROFILE.target_role_family;
+const expected = (await questionsWithState()).filter(
+  (q) => q.source !== 'seed' || !q.role_families.length || q.role_families.includes(role),
+).length;
 await page.goto(`${BASE}/questions`, { waitUntil: 'networkidle' });
-await page.waitForSelector('text=/of 161 questions/', { timeout: 10000 });
+await page.waitForSelector(`text=/of ${expected} questions/`, { timeout: 10000 });
 log(true, 'question bank seeded in production build');
+
+// The signed-in profile and question bank must be cached on the device
+// (IndexedDB, idb-keyval's default store) before going offline.
+await page.waitForFunction(
+  () =>
+    new Promise((resolve) => {
+      const req = indexedDB.open('keyval-store');
+      req.onerror = () => resolve(false);
+      req.onsuccess = () => {
+        try {
+          const get = req.result
+            .transaction('keyval')
+            .objectStore('keyval')
+            .get('interview-prep-cache');
+          get.onsuccess = () => {
+            const v = String(get.result ?? '');
+            resolve(v.includes('"profile"') && v.includes('"questions"'));
+          };
+          get.onerror = () => resolve(false);
+        } catch {
+          resolve(false);
+        }
+      };
+    }),
+  null,
+  { timeout: 15000 },
+);
+log(true, 'account data cached for offline use');
 
 // OFFLINE: cut the network and reload — must still boot (offline-first)
 await ctx.setOffline(true);

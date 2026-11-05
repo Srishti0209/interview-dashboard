@@ -24,8 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ROUND_TYPES, ROUND_LABEL } from '@/lib/constants';
-import { useAllQuestions } from '@/hooks/useQuestions';
+import { ROUND_LABEL } from '@/lib/constants';
+import { useAllQuestions, useRoundTypes } from '@/hooks/useQuestions';
 import { useCompanies } from '@/hooks/useCompanies';
 import { useMockSessions } from '@/hooks/useMockSessions';
 import {
@@ -46,17 +46,32 @@ interface RoundResult {
   notes: string;
 }
 
+const PREFERRED_MOCK_ROUNDS: RoundType[] = [
+  'MACHINE_CODING',
+  'FE_SYSTEM_DESIGN_COMPONENT',
+  'BEHAVIORAL_BAR_RAISER',
+];
+
+/** Three rounds from the user's bank, preferring the classic loop mix. */
+function defaultMockRounds(available: RoundType[]): RoundType[] {
+  const picked = PREFERRED_MOCK_ROUNDS.filter((r) => available.includes(r));
+  for (const r of available) {
+    if (picked.length >= 3) break;
+    if (!picked.includes(r)) picked.push(r);
+  }
+  return picked;
+}
+
 export default function Mock() {
   const questions = useAllQuestions();
   const companies = useCompanies();
   const sessions = useMockSessions();
 
   const [phase, setPhase] = useState<Phase>('setup');
-  const [selectedRounds, setSelectedRounds] = useState<RoundType[]>([
-    'MACHINE_CODING',
-    'FE_SYSTEM_DESIGN_COMPONENT',
-    'BEHAVIORAL_BAR_RAISER',
-  ]);
+  const availableRounds = useRoundTypes();
+  const [selectedRounds, setSelectedRounds] = useState<RoundType[]>(() =>
+    defaultMockRounds(availableRounds),
+  );
   const [duration, setDuration] = useState(60);
   const [companyId, setCompanyId] = useState<string>('none');
 
@@ -176,7 +191,7 @@ export default function Mock() {
             One question will be drawn per selected round.
           </p>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {ROUND_TYPES.map((r) => (
+            {availableRounds.map((r) => (
               <label
                 key={r}
                 className="flex cursor-pointer items-center gap-2 rounded-md border p-2 text-sm hover:bg-accent/40"
@@ -295,7 +310,7 @@ export default function Mock() {
     const round = rounds[current];
     const timeUp = remaining <= 0;
     return (
-      <div className="flex h-svh flex-col">
+      <div className="flex h-svh flex-col md:h-[calc(100svh-3rem)]">
         <div className="flex items-center justify-between border-b px-4 py-2">
           <div className="flex items-center gap-3 text-sm">
             <span className="font-medium">

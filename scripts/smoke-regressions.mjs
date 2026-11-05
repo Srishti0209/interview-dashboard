@@ -4,12 +4,13 @@
 //  2. "Hide model answers" setting persists and hides the model answer
 //  3. opening + leaving a note without edits does not bump its updatedAt
 import { chromium } from 'playwright';
+import { newSignedInContext, questionsWithState, notes, eventually } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext();
+const ctx = await newSignedInContext(browser);
 const page = await ctx.newPage();
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
 
@@ -18,27 +19,17 @@ function log(ok, msg) {
   if (!ok) process.exitCode = 1;
 }
 
-// Read rows straight from IndexedDB.
-const dbAll = (table) =>
-  page.evaluate(
-    (table) =>
-      new Promise((resolve, reject) => {
-        const req = indexedDB.open('InterviewPrep');
-        req.onerror = () => reject(req.error);
-        req.onsuccess = () => {
-          const r = req.result.transaction(table).objectStore(table).getAll();
-          r.onsuccess = () => resolve(r.result);
-          r.onerror = () => reject(r.error);
-        };
-      }),
-    table,
-  );
+// Rows are read from the account via the REST API (writes sync asynchronously).
 
 await page.goto(BASE, { waitUntil: 'networkidle' });
 await page.waitForSelector('text=Dashboard', { timeout: 15000 });
 
 // ---------- 1. autosave across question switch ----------
-const qs = (await dbAll('questions')).filter((q) => q.source === 'seed');
+// ⌘K searches the target role's bank, so pick questions the smoke user
+// (target role: frontend) can find there.
+const qs = (await questionsWithState()).filter(
+  (q) => q.source === 'seed' && q.role_families.includes('frontend'),
+);
 const [A, B] = qs;
 await page.goto(`${BASE}/questions/${A.id}`, { waitUntil: 'networkidle' });
 await page.waitForSelector(`h1:has-text("${A.title}")`);
@@ -64,7 +55,14 @@ await page.keyboard.press('Meta+n');
 await page.waitForURL(/my-questions/);
 await page.waitForTimeout(500);
 
-const after = new Map((await dbAll('questions')).map((q) => [q.id, q]));
+const after = new Map(
+  (
+    await eventually(questionsWithState, (all) =>
+      all.some((q) => q.id === A.id && q.personalAnswer) &&
+      all.some((q) => q.id === B.id && q.personalAnswer),
+    )
+  ).map((q) => [q.id, q]),
+);
 log(after.get(A.id).personalAnswer === 'ANSWER-FOR-A', `A saved its own answer ("${after.get(A.id).personalAnswer}")`);
 log(after.get(B.id).personalAnswer === 'ANSWER-FOR-B', `B saved its own answer ("${after.get(B.id).personalAnswer}")`);
 
@@ -87,11 +85,14 @@ await page.keyboard.press('Meta+Shift+n');
 await page.waitForURL(/\/notes\/.+/);
 await page.waitForTimeout(300);
 const noteId = page.url().split('/notes/')[1];
-const before = (await dbAll('notes')).find((n) => n.id === noteId).updatedAt;
+const before = (
+  await eventually(notes, (all) => all.some((n) => n.id === noteId))
+).find((n) => n.id === noteId).updatedAt;
 await page.waitForTimeout(50);
 await page.locator('a[href="/questions"]').first().click();
 await page.waitForTimeout(500);
-const afterTs = (await dbAll('notes')).find((n) => n.id === noteId).updatedAt;
+await page.waitForTimeout(1000);
+const afterTs = (await notes()).find((n) => n.id === noteId).updatedAt;
 log(before === afterTs, 'untouched note keeps its updatedAt');
 
 // Edited title still flushes on leave.
@@ -99,7 +100,9 @@ await page.goto(`${BASE}/notes/${noteId}`, { waitUntil: 'networkidle' });
 await page.fill('input[placeholder="Untitled note"]', 'Renamed');
 await page.locator('a[href="/questions"]').first().click();
 await page.waitForTimeout(500);
-const renamed = (await dbAll('notes')).find((n) => n.id === noteId).title;
+const renamed = (
+  await eventually(notes, (all) => all.find((n) => n.id === noteId)?.title === 'Renamed')
+).find((n) => n.id === noteId).title;
 log(renamed === 'Renamed', `edited title flushed on leave ("${renamed}")`);
 
 log(errors.length === 0, `no page errors${errors.length ? ': ' + errors.join(' | ') : ''}`);

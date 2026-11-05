@@ -1,4 +1,6 @@
 import { startOfDay } from 'date-fns';
+import { supabase } from '@/lib/supabase';
+import { enqueue } from '@/lib/sync';
 
 const KEY = 'studyLog';
 
@@ -11,17 +13,45 @@ function readLog(): string[] {
   }
 }
 
+function writeLog(days: string[]): void {
+  localStorage.setItem(KEY, JSON.stringify(days));
+}
+
 function dayKey(ts: number): string {
   return startOfDay(ts).toISOString().slice(0, 10);
 }
 
+/**
+ * Records today as a study day locally (so the streak updates instantly and
+ * works offline) and in the account (so it follows the user across devices).
+ */
 export function logStudyDay(ts = Date.now()): void {
   const log = readLog();
   const key = dayKey(ts);
   if (!log.includes(key)) {
     log.push(key);
-    localStorage.setItem(KEY, JSON.stringify(log));
+    writeLog(log);
+    void enqueue({
+      type: 'upsert',
+      table: 'study_days',
+      rows: [{ day: key }],
+      onConflict: 'user_id,day',
+      ignoreDuplicates: true,
+    });
   }
+}
+
+/** Merges the account's study days into the local log (on app start). */
+export async function syncStudyDays(): Promise<void> {
+  const { data, error } = await supabase.from('study_days').select('day');
+  if (error) throw error;
+  const days = new Set([...readLog(), ...data.map((r) => String(r.day))]);
+  writeLog([...days].sort());
+}
+
+/** Forgets the local log (on sign-out). */
+export function clearStudyLog(): void {
+  localStorage.removeItem(KEY);
 }
 
 /** Consecutive-day streak ending today (or yesterday). */

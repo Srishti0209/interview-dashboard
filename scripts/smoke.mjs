@@ -2,12 +2,13 @@
 // Verifies: app boots, seeding populates the bank, list renders,
 // detail page tabs work, and a personal answer persists across reload.
 import { chromium } from 'playwright';
+import { newSignedInContext, questionsWithState, SMOKE_PROFILE } from './lib/auth.mjs';
 
 const BASE = process.env.SMOKE_URL || 'http://localhost:5182';
 const errors = [];
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const ctx = await browser.newContext();
+const ctx = await newSignedInContext(browser);
 const page = await ctx.newPage();
 page.on('console', (m) => {
   if (m.type() === 'error') errors.push(m.text());
@@ -24,11 +25,15 @@ await page.goto(BASE, { waitUntil: 'networkidle' });
 await page.waitForSelector('text=Dashboard', { timeout: 15000 });
 log(true, 'app booted to Dashboard');
 
-// 2. Questions list seeded
+// 2. Questions list shows the target role's bank (same rule as isForRole)
+const role = SMOKE_PROFILE.target_role_family;
+const expected = (await questionsWithState()).filter(
+  (q) => q.source !== 'seed' || !q.role_families.length || q.role_families.includes(role),
+).length;
 await page.goto(`${BASE}/questions`, { waitUntil: 'networkidle' });
-await page.waitForSelector('text=/of 161 questions/', { timeout: 15000 });
+await page.waitForSelector(`text=/of ${expected} questions/`, { timeout: 15000 });
 const countText = await page.textContent('p:has-text("questions")');
-log(/161/.test(countText || ''), `question bank shows count: "${countText?.trim()}"`);
+log(new RegExp(`of ${expected} `).test(countText || ''), `question bank shows count: "${countText?.trim()}"`);
 
 // 3. Search filters
 await page.fill('input[placeholder*="Search"]', 'React');

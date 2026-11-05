@@ -4,12 +4,18 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
-  ROUND_TYPES,
   ROUND_LABEL,
   DIFFICULTIES,
 } from '@/lib/constants';
+import { useRoundTypes } from '@/hooks/useQuestions';
 import { useUIStore } from '@/store/ui';
 import type { RoundType, Difficulty, Source, Confidence } from '@/types';
+
+const SOURCE_LABEL: Record<Source, string> = {
+  seed: 'Seeded',
+  user: 'My questions',
+  ai: 'From resume / JD',
+};
 
 function FilterGroup({
   title,
@@ -69,6 +75,9 @@ export function FilterSidebar({
   const filters = useUIStore((s) => s.filters);
   const setFilters = useUIStore((s) => s.setFilters);
   const resetFilters = useUIStore((s) => s.resetFilters);
+  // Only rounds in the user's bank (plus any still selected, so an old
+  // selection can't silently hide everything after a role change).
+  const roundTypes = useRoundTypes(filters.roundTypes);
 
   const activeCount =
     filters.roundTypes.length +
@@ -96,7 +105,7 @@ export function FilterSidebar({
       </div>
 
       <FilterGroup title="Round type">
-        {ROUND_TYPES.map((r: RoundType) => (
+        {roundTypes.map((r: RoundType) => (
           <CheckRow
             key={r}
             checked={filters.roundTypes.includes(r)}
@@ -135,12 +144,12 @@ export function FilterSidebar({
       </FilterGroup>
 
       <FilterGroup title="Source">
-        {(['seed', 'user'] as Source[]).map((s) => (
+        {(['seed', 'user', 'ai'] as Source[]).map((s) => (
           <CheckRow
             key={s}
             checked={filters.sources.includes(s)}
             onToggle={() => setFilters({ sources: toggle(filters.sources, s) })}
-            label={s === 'seed' ? 'Seeded' : 'My questions'}
+            label={SOURCE_LABEL[s]}
           />
         ))}
         <CheckRow
