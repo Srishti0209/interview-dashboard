@@ -18,3 +18,21 @@ export const supabase = createClient(
     },
   },
 );
+
+/**
+ * Whether Google sign-in is switched on in the Supabase project
+ * (Authentication → Sign In / Providers), read from the public auth settings.
+ */
+export async function googleSignInEnabled(): Promise<boolean> {
+  if (!supabaseConfigured) return false;
+  try {
+    const res = await fetch(`${url}/auth/v1/settings`, {
+      headers: { apikey: anonKey! },
+    });
+    if (!res.ok) return false;
+    const settings = (await res.json()) as { external?: { google?: boolean } };
+    return settings.external?.google === true;
+  } catch {
+    return false;
+  }
+}

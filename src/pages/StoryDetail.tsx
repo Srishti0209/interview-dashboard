@@ -169,8 +169,11 @@ function Detail({ story }: { story: Story }) {
               <Button size="sm" variant="outline" onClick={startEdit}>
                 <Pencil /> Edit
               </Button>
-              <Button size="sm" onClick={() => navigate(`/stories/${story.id}/build`)}>
-                <MessagesSquare /> {inProgress ? 'Continue building' : rich ? 'Improve with Builder' : 'Deepen with Builder'}
+              <Button
+                size="sm"
+                onClick={() => navigate(`/stories/${story.id}/build${rich && d.gaps?.length ? '?gaps=1' : ''}`)}
+              >
+                <MessagesSquare /> {inProgress ? 'Continue building' : rich ? 'Deepen more' : 'Deepen with Builder'}
               </Button>
             </>
           )}

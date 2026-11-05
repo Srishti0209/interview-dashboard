@@ -31,6 +31,7 @@ import StoryDetail from '@/pages/StoryDetail';
 import StoryBuilder from '@/pages/StoryBuilder';
 import JobDescriptions from '@/pages/JobDescriptions';
 import JobDetail from '@/pages/JobDetail';
+import Privacy from '@/pages/Privacy';
 
 // Heavy routes are code-split to keep the initial bundle small.
 const Notes = lazy(() => import('@/pages/Notes'));
@@ -106,6 +107,9 @@ function InnerApp() {
 }
 
 export default function App() {
+  // Public, so Google's consent screen (and anyone) can read it signed out.
+  if (window.location.pathname === '/privacy') return <Privacy />;
+
   return (
     <PersistQueryClientProvider
       client={queryClient}

@@ -64,13 +64,27 @@ function Builder({ story }: { story: Story }) {
   // its question, written locally, no AI call.
   const jump = Number(params.get('stage'));
   const jumpTo = jump >= 1 && jump <= STAGES.length ? jump : null;
+  // ?gaps=1 ("Deepen more" on a written-up story) asks about its listed gaps,
+  // also written locally.
+  const gaps = params.get('gaps') === '1' ? (story.details?.gaps ?? []) : [];
   const [turns, setTurns] = useState<ChatTurn[]>(() => {
     const base: ChatTurn[] = saved?.turns?.length
       ? saved.turns
       : [{ role: 'assistant', content: openingMessage(title, competency ?? undefined) }];
-    return jumpTo
-      ? [...base, { role: 'assistant', content: `Let’s strengthen this part of the story. ${STAGES[jumpTo - 1].ask}` }]
-      : base;
+    if (jumpTo) {
+      return [...base, { role: 'assistant', content: `Let’s strengthen this part of the story. ${STAGES[jumpTo - 1].ask}` }];
+    }
+    if (gaps.length) {
+      const list = gaps.map((g) => `- ${g}`).join('\n');
+      return [
+        ...base,
+        {
+          role: 'assistant',
+          content: `Let’s fill in what the story is still missing:\n\n${list}\n\nStart with whichever you remember best. When you’re done, write it up again to update the story.`,
+        },
+      ];
+    }
+    return base;
   });
   const [stage, setStage] = useState(jumpTo ?? saved?.stage ?? 1);
   const [viewStage, setViewStage] = useState<number | null>(null);
@@ -85,16 +99,18 @@ function Builder({ story }: { story: Story }) {
     bottom.current?.scrollIntoView({ block: 'end' });
   }, [turns, streaming]);
 
-  // Save a jump once and drop ?stage, so a reload doesn't add it again.
+  // Save a jump (or gaps prompt) once and drop the param, so a reload
+  // doesn't add it again.
   const jumped = useRef(false);
   useEffect(() => {
-    if (!jumpTo || jumped.current) return;
+    if ((!jumpTo && !gaps.length) || jumped.current) return;
     jumped.current = true;
-    void saveBuilderState(story, { stage: jumpTo, turns, seed: competency ?? undefined });
+    void saveBuilderState(story, { stage, turns, seed: competency ?? undefined });
     const next = new URLSearchParams(params);
     next.delete('stage');
+    next.delete('gaps');
     setParams(next, { replace: true });
-  }, [jumpTo, story, turns, competency, params, setParams]);
+  }, [jumpTo, gaps.length, stage, story, turns, competency, params, setParams]);
 
   const seed = storySeed(story, competency ?? undefined);
   const busy = streaming !== null || writing;

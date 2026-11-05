@@ -15,6 +15,7 @@ import { GenerateFromResume } from '@/components/resume/GenerateFromResume';
 import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useActiveResume } from '@/hooks/useResume';
 import { useSession, signOut } from '@/hooks/useSession';
+import { PasswordForm } from '@/components/auth/PasswordForm';
 import { resumeDownloadUrl } from '@/lib/resume';
 import { CURRENT_ROLE_SUGGESTIONS, roleTitle } from '@/lib/constants';
 import type { Profile, RoleFamily, RoleLevel } from '@/types';
@@ -22,6 +23,8 @@ import type { Profile, RoleFamily, RoleLevel } from '@/types';
 export default function Account() {
   const { data: profile } = useProfile();
   const email = useSession()?.user.email;
+  // Held here, because a successful save re-creates ProfileForm (see key).
+  const [saved, setSaved] = useState(false);
 
   if (!profile) return null;
 
@@ -30,8 +33,26 @@ export default function Account() {
       <h1 className="text-xl font-semibold tracking-tight">Account</h1>
       <p className="text-sm text-muted-foreground">{email}</p>
 
-      <ProfileForm key={profile.id} profile={profile} email={email} />
+      {/* Keyed on the saved values, so fresher server data replaces what the
+          form showed from the device cache. */}
+      <ProfileForm
+        key={[
+          profile.id,
+          profile.displayName,
+          profile.currentPosition,
+          profile.targetRoleFamily,
+          profile.targetLevel,
+        ].join('|')}
+        profile={profile}
+        email={email}
+        saved={saved}
+        onSaved={() => {
+          setSaved(true);
+          setTimeout(() => setSaved(false), 2500);
+        }}
+      />
       <ResumeCard />
+      <PasswordCard />
 
       <Card className="mt-4 flex items-center gap-3 p-5">
         <div className="min-w-0 flex-1">
@@ -49,12 +70,31 @@ export default function Account() {
   );
 }
 
+function PasswordCard() {
+  return (
+    <Card className="mt-4 space-y-4 p-5">
+      <div>
+        <h2 className="text-sm font-semibold">Password</h2>
+        <p className="text-xs text-muted-foreground">
+          Set a password to sign in without waiting for an email link. Setting a
+          new one replaces any old password.
+        </p>
+      </div>
+      <PasswordForm />
+    </Card>
+  );
+}
+
 function ProfileForm({
   profile,
   email,
+  saved,
+  onSaved,
 }: {
   profile: Profile;
   email: string | undefined;
+  saved: boolean;
+  onSaved: () => void;
 }) {
   const update = useUpdateProfile();
   const [displayName, setDisplayName] = useState(profile.displayName ?? '');
@@ -65,7 +105,6 @@ function ProfileForm({
     profile.targetRoleFamily,
   );
   const [level, setLevel] = useState<RoleLevel | null>(profile.targetLevel);
-  const [saved, setSaved] = useState(false);
 
   const dirty =
     displayName !== (profile.displayName ?? '') ||
@@ -82,12 +121,7 @@ function ProfileForm({
         targetRoleFamily: family,
         targetLevel: level,
       },
-      {
-        onSuccess: () => {
-          setSaved(true);
-          setTimeout(() => setSaved(false), 2500);
-        },
-      },
+      { onSuccess: onSaved },
     );
 
   return (

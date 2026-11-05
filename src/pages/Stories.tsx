@@ -44,55 +44,60 @@ function StoryCard({
     ['Metrics', story.metrics],
   ];
   const gaps = story.details?.gaps ?? [];
+  // Written up by the Story Builder at least once.
+  const deepened = !!story.details?.beats?.length;
   return (
     <Card className="p-4" data-testid="story-card">
-      <div className="flex items-start justify-between gap-2">
-        <div>
-          {story.isDraft && (
-            <Badge variant="outline" className="mb-1 gap-1 border-violet-500/40 font-normal text-violet-700 dark:text-violet-300">
-              <Sparkles className="size-3" /> AI draft
-            </Badge>
-          )}
-          <h3 className="inline font-semibold leading-snug">
-            <Link to={`/stories/${story.id}`} className="hover:underline">
-              {story.title}
-            </Link>
-          </h3>
-          {typeof story.details?.score === 'number' && (
-            <Badge className="ml-2 align-middle font-normal">{story.details.score}/10</Badge>
-          )}
-        </div>
-        <div className="flex shrink-0 gap-0.5">
-          {!story.details?.beats?.length && (
-            <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" asChild title="Deepen with the Story Builder">
-              <Link to={`/stories/${story.id}/build`}>
-                <MessagesSquare className="size-3.5" /> Deepen
-              </Link>
-            </Button>
-          )}
-          {story.isDraft && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-7 px-2 text-xs"
-              title="Keep this draft as a story"
-              onClick={() => void updateStory(story.id, { isDraft: false })}
-            >
-              <Check className="size-3.5" /> Keep
-            </Button>
-          )}
-          <Button variant="ghost" size="icon" className="size-7" onClick={onEdit}>
-            <Pencil className="size-3.5" />
-          </Button>
+      {story.isDraft && (
+        <Badge variant="outline" className="mb-2 gap-1 border-violet-500/40 font-normal text-violet-700 dark:text-violet-300">
+          <Sparkles className="size-3" /> AI draft
+        </Badge>
+      )}
+      <div className="flex items-start gap-2">
+        <h3 className="font-semibold leading-snug">
+          <Link to={`/stories/${story.id}`} className="hover:underline">
+            {story.title}
+          </Link>
+        </h3>
+        {typeof story.details?.score === 'number' && (
+          <Badge className="shrink-0 font-normal">{story.details.score}/10</Badge>
+        )}
+      </div>
+      {/* -ml-2 lines the ghost buttons' labels up with the title. */}
+      <div className="-ml-2 mt-1.5 flex flex-wrap items-center gap-0.5">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-7 px-2 text-xs"
+          asChild
+          title={deepened ? 'Fill in the gaps with the Story Builder' : 'Deepen with the Story Builder'}
+        >
+          <Link to={`/stories/${story.id}/build${deepened && gaps.length ? '?gaps=1' : ''}`}>
+            <MessagesSquare className="size-3.5" /> {deepened ? 'Deepen more' : 'Deepen'}
+          </Link>
+        </Button>
+        {story.isDraft && (
           <Button
             variant="ghost"
-            size="icon"
-            className="size-7"
-            onClick={onDelete}
+            size="sm"
+            className="h-7 px-2 text-xs"
+            title="Keep this draft as a story"
+            onClick={() => void updateStory(story.id, { isDraft: false })}
           >
-            <Trash2 className="size-3.5 text-destructive" />
+            <Check className="size-3.5" /> Keep
           </Button>
-        </div>
+        )}
+        <Button variant="ghost" size="icon" className="size-7" onClick={onEdit}>
+          <Pencil className="size-3.5" />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-7"
+          onClick={onDelete}
+        >
+          <Trash2 className="size-3.5 text-destructive" />
+        </Button>
       </div>
 
       <div className="mt-3 space-y-1.5 text-sm">
