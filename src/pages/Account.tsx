@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import { Check, Download, FileText, Loader2, LogOut } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -53,6 +54,19 @@ export default function Account() {
       />
       <ResumeCard />
       <PasswordCard />
+      {profile.isAdmin && (
+        <Card className="mt-4 flex items-center gap-3 p-5">
+          <div className="min-w-0 flex-1">
+            <h2 className="text-sm font-semibold">Admin</h2>
+            <p className="text-xs text-muted-foreground">
+              Edit the shared question bank everyone sees.
+            </p>
+          </div>
+          <Button variant="outline" asChild>
+            <Link to="/admin">Open admin panel</Link>
+          </Button>
+        </Card>
+      )}
 
       <Card className="mt-4 flex items-center gap-3 p-5">
         <div className="min-w-0 flex-1">

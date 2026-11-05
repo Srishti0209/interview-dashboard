@@ -275,7 +275,7 @@ export default function Questions() {
 
         {!loading && view !== 'deck' && filtered.length > 0 && (
           <nav
-            className="sticky bottom-0 -mx-4 mt-auto flex flex-wrap items-center justify-between gap-2 border-t bg-background px-4 py-3 md:-mx-6 md:px-6"
+            className="sticky bottom-[calc(3.5rem+env(safe-area-inset-bottom))] -mx-4 mt-auto md:bottom-0 flex flex-wrap items-center justify-between gap-2 border-t bg-background px-4 py-3 md:-mx-6 md:px-6"
             aria-label="Pagination"
             data-testid="pagination"
           >

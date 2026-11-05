@@ -8,11 +8,12 @@ interface ProfileRow {
   target_role_family: RoleFamily | null;
   target_level: RoleLevel | null;
   onboarded: boolean;
+  is_admin: boolean;
   active_resume_id: string | null;
 }
 
 const COLUMNS =
-  'id, display_name, current_position, target_role_family, target_level, onboarded, active_resume_id';
+  'id, display_name, current_position, target_role_family, target_level, onboarded, is_admin, active_resume_id';
 
 function fromRow(r: ProfileRow): Profile {
   return {
@@ -22,6 +23,7 @@ function fromRow(r: ProfileRow): Profile {
     targetRoleFamily: r.target_role_family,
     targetLevel: r.target_level,
     onboarded: r.onboarded,
+    isAdmin: r.is_admin,
     activeResumeId: r.active_resume_id,
   };
 }

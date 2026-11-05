@@ -236,6 +236,8 @@ export interface Profile {
   targetRoleFamily: RoleFamily | null;
   targetLevel: RoleLevel | null;
   onboarded: boolean;
+  /** Can edit the shared question bank (set in the database only). */
+  isAdmin: boolean;
   activeResumeId: string | null;
 }
 

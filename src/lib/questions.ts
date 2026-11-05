@@ -37,6 +37,7 @@ interface QuestionRow {
   tags: string[];
   source: Source;
   role_families: RoleFamily[];
+  review_status: 'draft' | 'approved' | 'rejected';
   created_at: number;
   updated_at: number;
 }
@@ -56,7 +57,7 @@ interface StateRow {
 }
 
 const QUESTION_COLUMNS =
-  'id, round_type, title, body, answer, difficulty, company, tags, source, role_families, created_at, updated_at';
+  'id, round_type, title, body, answer, difficulty, company, tags, source, role_families, review_status, created_at, updated_at';
 const STATE_COLUMNS =
   'question_id, personal_answer, personal_notes, bookmarked, confidence, last_reviewed, next_due, interval_days, ease_factor, review_count, updated_at';
 
@@ -76,7 +77,9 @@ export async function fetchQuestionData(): Promise<QuestionData> {
     fetchAll<StateRow>('user_question_state', STATE_COLUMNS, 'question_id'),
   ]);
   const byId = new Map(states.map((s) => [s.question_id, s]));
-  const questions = rows.map((r): Question => {
+  // Admins can read unpublished shared questions; they stay out of the bank.
+  const visible = rows.filter((r) => r.source !== 'seed' || r.review_status === 'approved');
+  const questions = visible.map((r): Question => {
     const s = byId.get(r.id);
     return {
       id: r.id,

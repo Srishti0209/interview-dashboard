@@ -10,12 +10,13 @@ export async function fetchAll<T>(
   table: string,
   columns: string,
   order: string,
+  filter?: { isNull: string },
 ): Promise<T[]> {
   const rows: T[] = [];
   for (let from = 0; ; from += PAGE) {
-    const { data, error } = await supabase
-      .from(table)
-      .select(columns)
+    let query = supabase.from(table).select(columns);
+    if (filter) query = query.is(filter.isNull, null);
+    const { data, error } = await query
       .order(order)
       .range(from, from + PAGE - 1);
     if (error) throw error;

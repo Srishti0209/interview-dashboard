@@ -26,6 +26,20 @@ const ROUND_ROLE_FAMILIES = {
   AI_PRODUCT_ENGINEERING: ['fullstack', 'ai'],
 };
 
+// Questions edited in the admin panel (migration 0005) are never overwritten.
+async function adminEditedIds() {
+  const { data, error } = await supabase.from('questions').select('id').eq('admin_edited', true);
+  if (error) {
+    // Before migration 0005 there is no admin_edited column: nothing to protect.
+    if (/admin_edited/.test(error.message)) return new Set();
+    throw new Error(`questions: ${error.message}`);
+  }
+  return new Set(data.map((r) => r.id));
+}
+const protectedIds = await adminEditedIds();
+const notAdminEdited = (q) => !protectedIds.has(q.id);
+if (protectedIds.size) console.log(`· skipping ${protectedIds.size} questions edited in the admin panel`);
+
 async function upsert(table, rows, onConflict) {
   for (let i = 0; i < rows.length; i += 200) {
     const { error } = await supabase
@@ -63,7 +77,7 @@ await upsert(
 
 await upsert(
   'questions',
-  seed.questions.map((q) => ({
+  seed.questions.filter(notAdminEdited).map((q) => ({
     id: q.id,
     owner_id: null,
     role_families:
@@ -94,7 +108,7 @@ const roleQuestions = existsSync('content/questions')
 if (roleQuestions.length) {
   await upsert(
     'questions',
-    roleQuestions.map((q) => ({
+    roleQuestions.filter(notAdminEdited).map((q) => ({
       id: q.id,
       owner_id: null,
       role_families: q.roleFamilies,

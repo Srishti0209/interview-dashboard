@@ -32,6 +32,9 @@ import StoryBuilder from '@/pages/StoryBuilder';
 import JobDescriptions from '@/pages/JobDescriptions';
 import JobDetail from '@/pages/JobDetail';
 import Privacy from '@/pages/Privacy';
+import AdminQuestions from '@/pages/admin/AdminQuestions';
+import AdminQuestionEdit from '@/pages/admin/AdminQuestionEdit';
+import { AdminOnly } from '@/components/auth/AdminOnly';
 
 // Heavy routes are code-split to keep the initial bundle small.
 const Notes = lazy(() => import('@/pages/Notes'));
@@ -99,6 +102,8 @@ function InnerApp() {
           />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="account" element={<Account />} />
+          <Route path="admin" element={<AdminOnly><AdminQuestions /></AdminOnly>} />
+          <Route path="admin/questions/:id" element={<AdminOnly><AdminQuestionEdit /></AdminOnly>} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
